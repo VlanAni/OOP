@@ -13,7 +13,7 @@ public class HeapSort {
      *
      * @param array - user's array.
      */
-    static void sortArr(int[] array) {
+    public static void sortArr(int[] array) {
         if (array == null) {
             return;
         }
