@@ -65,4 +65,27 @@ class BckJckTesting {
 
         assert (state.size == 0);
     }
+
+    @Test
+    void testingLeader() {
+        Participant player = new Participant();
+        BlackJackLeader.ask(player);
+        Deck deck = new Deck();
+        Card card = player.takeCard(deck);
+        BlackJackLeader.nameCard(card);
+        BlackJackLeader.ask(player);
+        player.openLastCard();
+        BlackJackLeader.nameCard(card);
+        BlackJackLeader.ask(player);
+    }
+
+    @Test
+    void partStateTesting() {
+        PartState state = new PartState();
+        Card card = new Card(CardTypes.KING, Suit.H);
+        state.addNewCard(card);
+        state.updateSum();
+
+        assert (state.sum == 10);
+    }
 }
