@@ -1,24 +1,23 @@
 import java.util.Scanner;
 
 /**
- * Emulating Blackjack game
- * BlackJackMain - the main class
- * Classes which it uses:
- * Card - game card class
- * CardTypes and Suit - enum classes for cards' params
- * Deck - game deck
- * Participant - person who play
- * PartState - player's data
+ * Emulating Blackjack game.
+ * BlackJackMain - the main class.
+ * Card - game card class.
+ * CardTypes and Suit - enum classes for cards' params.
+ * Deck - game deck.
+ * Participant - person who play.
+ * PartState - player's data.
  */
 public class BlackJackMain {
 
     public static void main(String[] args) {
-        Scanner usrIn = new Scanner(System.in);
-        int roundsAmount;
         System.out.println("Hello! It's BlackJack game");
         System.out.println("First step: please, enter rounds' amount");
         System.out.println("If your input is zero, the program stop. Otherwise, we will start");
         System.out.print("Rounds' amount: ");
+        Scanner usrIn = new Scanner(System.in);
+        int roundsAmount;
         roundsAmount = usrIn.nextInt();
         if (roundsAmount == 0) {
             System.out.println("The game finished...");
@@ -32,17 +31,13 @@ public class BlackJackMain {
         for (int round = 1; round <= roundsAmount; round++) {
             System.out.printf("===Round [%d] started===\n", round);
             System.out.println("Participants are getting ready...");
-            {
-                player.prepare();
-                dealer.prepare();
-                deck.prepareDeck();
-            }
+            player.prepare();
+            dealer.prepare();
+            deck.prepareDeck();
             System.out.println("Now dealer taking cards...");
-            {
-                dealer.takeCard(deck);
-                dealer.openLastCard();
-                dealer.takeCard(deck);
-            }
+            dealer.takeCard(deck);
+            dealer.openLastCard();
+            dealer.takeCard(deck);
             System.out.println("Dealer took cards. Now he is going to give you two cards");
             for (int i = 1; i <= 2; i++) {
                 player.takeCard(deck);
@@ -85,7 +80,7 @@ public class BlackJackMain {
             System.out.println("Diler opened closed card");
             dealer.openLastCard();
             BlackJackLeader.ask(dealer);
-            for (int dSum = dealer.sayCardsSum(); dSum < 17; dSum = dealer.sayCardsSum()) {
+            for (int delSum = dealer.sayCardsSum(); delSum < 17; delSum = dealer.sayCardsSum()) {
                 takenCard = dealer.takeCard(deck);
                 dealer.openLastCard();
                 System.out.print("Dealer took card: ");

@@ -5,7 +5,8 @@ class BckJckTesting {
     @Test
     void testDeck() {
         Deck deck = new Deck();
-        Card lastCard = deck.getDeckCards().getLast();
+        int deckSize = deck.getDeckCards().size();
+        Card lastCard = deck.getDeckCards().get(deckSize - 1);
 
         assert (lastCard == deck.extractCard());
     }
@@ -14,7 +15,8 @@ class BckJckTesting {
     void testParticipant() {
         Participant player = new Participant();
         Deck deck = new Deck();
-        Card lastCard = deck.getDeckCards().getLast();
+        int deckSize = deck.getDeckCards().size();
+        Card lastCard = deck.getDeckCards().get(deckSize - 1);
 
         assert (player.takeCard(deck) == lastCard);
     }
@@ -23,11 +25,12 @@ class BckJckTesting {
     void testParticipantSum() {
         Participant player = new Participant();
         Deck deck = new Deck();
-        Card lastCard = deck.getDeckCards().getLast();
+        int deckSize = deck.getDeckCards().size();
+        Card lastCard = deck.getDeckCards().get(deckSize - 1);
         player.takeCard(deck);
         player.openLastCard();
 
-        assert(lastCard.type.getValue() == player.sayCardsSum());
+        assert (lastCard.type.getValue() == player.sayCardsSum());
     }
 
     @Test
