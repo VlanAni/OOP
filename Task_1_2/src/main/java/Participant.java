@@ -8,10 +8,6 @@ class Participant {
         this.state = new PartState();
     }
 
-    void giveCardsBack() {
-        this.state.resetState();
-    }
-
     Card takeCard(Deck gameDeck) {
         Card newCard = gameDeck.extractCard();
         this.state.addNewCard(newCard);

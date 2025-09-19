@@ -43,4 +43,26 @@ class BckJckTesting {
         BlackJackLeader.nameCard(card);
         BlackJackLeader.ask(player);
     }
+
+    @Test
+    void preparingTest() {
+        Participant player = new Participant();
+        Deck deck = new Deck();
+        player.takeCard(deck);
+        player.openLastCard();
+        player.prepare();
+        int playerSum = player.sayCardsSum();
+
+        assert (playerSum == 0);
+    }
+
+    @Test
+    void preparingTest1() {
+        PartState state = new PartState();
+        Card card = new Card(CardTypes.ACE, Suit.H);
+        state.addNewCard(card);
+        state.resetState();
+
+        assert (state.size == 0);
+    }
 }
