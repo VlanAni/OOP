@@ -93,7 +93,7 @@ class BckJckTesting {
     void testingLeader1() {
         Card[] cards = new Card[12];
         for (int i = 0; i < 12; i++) {
-            switch(i) {
+            switch (i) {
                 case 0:
                     cards[i] = new Card(CardTypes.TWO, Suit.H);
                     break;
@@ -130,6 +130,8 @@ class BckJckTesting {
                 case 11:
                     cards[i] = new Card(CardTypes.KING, Suit.H);
                     break;
+                default:
+                    break; 
             }
             cards[i].isOpen = true;
             BlackJackLeader.nameCard(cards[i]);

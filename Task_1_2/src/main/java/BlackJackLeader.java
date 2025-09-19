@@ -63,6 +63,8 @@ class BlackJackLeader {
             case ACE:
                 cardType = "Ace";
                 break;
+            default:
+                break;
         }
         System.out.printf("[Suit: %s | Type: %s]\n", suit, cardType);
     }
