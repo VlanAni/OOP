@@ -1,4 +1,4 @@
-package heapsort;
+import heapsort.HeapSort;
 
 public class Main {
 

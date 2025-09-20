@@ -1,7 +1,6 @@
 import java.util.Arrays;
 
 import heapsort.HeapSort;
-import heapsort.Main;
 import org.junit.jupiter.api.Test;
 
 /**
