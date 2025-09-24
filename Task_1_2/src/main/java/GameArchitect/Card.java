@@ -1,4 +1,6 @@
-class Card {
+package GameArchitect;
+
+public class Card {
     CardTypes type;
     Suit suit;
     boolean isOpen;

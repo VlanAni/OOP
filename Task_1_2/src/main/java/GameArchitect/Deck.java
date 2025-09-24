@@ -1,16 +1,18 @@
+package GameArchitect;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Deck {
+public class Deck {
 
     private ArrayList<Card> cards;
 
-    Deck() {
+    public Deck() {
         this.cards = new ArrayList<Card>();
         prepareDeck();
     }
 
-    void prepareDeck() {
+    public void prepareDeck() {
         this.cards.clear();
         for (Suit suit : Suit.values()) {
             for (CardTypes cardType : CardTypes.values()) {
@@ -21,14 +23,14 @@ class Deck {
         Collections.shuffle(this.cards);
     }
 
-    Card extractCard() {
+    public Card extractCard() {
         int length = this.cards.size();
         Card takenCard = this.cards.get(length - 1);
         this.cards.remove(length - 1);
         return takenCard;
     }
 
-    ArrayList<Card> getDeckCards() {
+    public ArrayList<Card> getDeckCards() {
         return this.cards;
     }
 }

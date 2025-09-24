@@ -1,3 +1,5 @@
+package GameArchitect;
+
 enum Suit {
     H("Hearts"),
     D("Diamonds"),

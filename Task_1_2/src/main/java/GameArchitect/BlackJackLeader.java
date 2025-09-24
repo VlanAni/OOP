@@ -1,11 +1,13 @@
+package GameArchitect;
+
 import java.util.ArrayList;
 
-class BlackJackLeader {
+public class BlackJackLeader {
 
     private BlackJackLeader() {
     }
 
-    static void ask(Participant player) {
+    public static void ask(Participant player) {
         int sum = player.sayCardsSum();
         ArrayList<Card> cards = player.showCards();
         System.out.printf("Sum of opened cards: %d\n", sum);
@@ -16,7 +18,7 @@ class BlackJackLeader {
         System.out.println("That's all...");
     }
 
-    static void nameCard(Card card) {
+    public static void nameCard(Card card) {
         if (!card.isOpen) {
             System.out.println("[not opened card]");
             return;
@@ -24,43 +26,43 @@ class BlackJackLeader {
         String suit = card.suit.getValue();
         String cardType = "";
         switch (card.type) {
-            case TWO:
+            case CardTypes.TWO:
                 cardType = "Two";
                 break;
-            case THREE:
+            case CardTypes.THREE:
                 cardType = "Three";
                 break;
-            case FOUR:
+            case CardTypes.FOUR:
                 cardType = "Four";
                 break;
-            case FIVE:
+            case CardTypes.FIVE:
                 cardType = "Five";
                 break;
-            case SIX:
+            case CardTypes.SIX:
                 cardType = "Six";
                 break;
-            case SEVEN:
+            case CardTypes.SEVEN:
                 cardType = "Seven";
                 break;
-            case EIGHT:
+            case CardTypes.EIGHT:
                 cardType = "Eight";
                 break;
-            case NINE:
+            case CardTypes.NINE:
                 cardType = "Nine";
                 break;
-            case TEN:
+            case CardTypes.TEN:
                 cardType = "Ten";
                 break;
-            case JACK:
+            case CardTypes.JACK:
                 cardType = "Jack";
                 break;
-            case QUEEN:
+            case CardTypes.QUEEN:
                 cardType = "Queen";
                 break;
-            case KING:
+            case CardTypes.KING:
                 cardType = "King";
                 break;
-            case ACE:
+            case CardTypes.ACE:
                 cardType = "Ace";
                 break;
             default:

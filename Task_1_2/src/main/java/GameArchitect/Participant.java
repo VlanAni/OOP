@@ -1,32 +1,34 @@
+package GameArchitect;
+
 import java.util.ArrayList;
 
-class Participant {
+public class Participant {
 
     private PartState state;
 
-    Participant() {
+    public Participant() {
         this.state = new PartState();
     }
 
-    Card takeCard(Deck gameDeck) {
+    public Card takeCard(Deck gameDeck) {
         Card newCard = gameDeck.extractCard();
         this.state.addNewCard(newCard);
         return newCard;
     }
 
-    void openLastCard() {
+    public void openLastCard() {
         this.state.updateSum();
     }
 
-    void prepare() {
+    public void prepare() {
         this.state.resetState();
     }
 
-    ArrayList<Card> showCards() {
+    public ArrayList<Card> showCards() {
         return this.state.playerCards;
     }
 
-    int sayCardsSum() {
+    public int sayCardsSum() {
         return this.state.sum;
     }
 }

@@ -1,3 +1,10 @@
+package Game;
+
+import GameArchitect.BlackJackLeader;
+import GameArchitect.Card;
+import GameArchitect.Deck;
+import GameArchitect.Participant;
+
 import java.util.Scanner;
 
 /**
