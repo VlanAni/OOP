@@ -1,4 +1,4 @@
-package vaGames.gameArchitect;
+package vagames.gamearchitect;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,10 @@ public class BlackJackLeader {
     private BlackJackLeader() {
     }
 
+    /**
+     * Print participant's state.
+     * @param player - pesron who is being asked.
+     */
     public static void ask(Participant player) {
         int sum = player.sayCardsSum();
         ArrayList<Card> cards = player.showCards();
@@ -21,6 +25,10 @@ public class BlackJackLeader {
         System.out.println("That's all...");
     }
 
+    /**
+     * Print card's information.
+     * @param card - card to name.
+     */
     public static void nameCard(Card card) {
         if (!card.isOpen) {
             System.out.println("[not opened card]");

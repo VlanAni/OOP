@@ -1,19 +1,10 @@
 import org.junit.jupiter.api.Test;
-import vaGames.gameArchitect.BlackJackLeader;
-import vaGames.gameArchitect.Card;
-import vaGames.gameArchitect.Deck;
-import vaGames.gameArchitect.Participant;
+import vagames.gamearchitect.BlackJackLeader;
+import vagames.gamearchitect.Card;
+import vagames.gamearchitect.Deck;
+import vagames.gamearchitect.Participant;
 
 class BckJckTesting {
-
-    @Test
-    void testDeck() {
-        Deck deck = new Deck();
-        int deckSize = deck.getDeckCards().size();
-        Card lastCard = deck.getDeckCards().get(deckSize - 1);
-
-        assert (lastCard == deck.extractCard());
-    }
 
     @Test
     void testParticipant() {

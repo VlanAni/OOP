@@ -1,4 +1,4 @@
-package vaGames.gameArchitect;
+package vagames.gamearchitect;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,11 +10,17 @@ public class Deck {
 
     private ArrayList<Card> cards;
 
+    /**
+     * Creating deck.
+     */
     public Deck() {
         this.cards = new ArrayList<Card>();
         prepareDeck();
     }
 
+    /**
+     * Make deck full and it's cards' order random.
+     */
     public void prepareDeck() {
         this.cards.clear();
         for (Suit suit : Suit.values()) {
@@ -26,7 +32,7 @@ public class Deck {
         Collections.shuffle(this.cards);
     }
 
-    public Card extractCard() {
+    Card extractCard() {
         int length = this.cards.size();
         Card takenCard = this.cards.get(length - 1);
         this.cards.remove(length - 1);

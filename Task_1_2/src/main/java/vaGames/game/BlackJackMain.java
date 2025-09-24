@@ -1,10 +1,9 @@
-package vaGames.game;
+package vagames.game;
 
-import vaGames.gameArchitect.BlackJackLeader;
-import vaGames.gameArchitect.Card;
-import vaGames.gameArchitect.Deck;
-import vaGames.gameArchitect.Participant;
-
+import vagames.gamearchitect.BlackJackLeader;
+import vagames.gamearchitect.Card;
+import vagames.gamearchitect.Deck;
+import vagames.gamearchitect.Participant;
 import java.util.Scanner;
 
 /**

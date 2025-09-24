@@ -1,4 +1,4 @@
-package vaGames.gameArchitect;
+package vagames.gamearchitect;
 
 import java.util.ArrayList;
 
