@@ -20,7 +20,7 @@ public class BlackJackLeader {
         System.out.printf("Sum of opened cards: %d\n", sum);
         System.out.println("All cards:");
         for (Card card : cards) {
-                nameCard(card);
+            nameCard(card);
         }
         System.out.println("That's all...");
     }

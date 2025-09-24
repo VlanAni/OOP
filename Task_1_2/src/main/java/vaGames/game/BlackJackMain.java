@@ -1,10 +1,10 @@
 package vagames.game;
 
+import java.util.Scanner;
 import vagames.gamearchitect.BlackJackLeader;
 import vagames.gamearchitect.Card;
 import vagames.gamearchitect.Deck;
 import vagames.gamearchitect.Participant;
-import java.util.Scanner;
 
 /**
  * Emulating Blackjack game.
@@ -115,12 +115,10 @@ public class BlackJackMain {
             if (player.sayCardsSum() > dealer.sayCardsSum()) {
                 System.out.println("You're the winner!");
                 playerWins++;
-            }
-            else if (player.sayCardsSum() < dealer.sayCardsSum()) {
+            } else if (player.sayCardsSum() < dealer.sayCardsSum()) {
                 System.out.println("Dealer is the winner!");
                 dealerWins++;
-            }
-            else {
+            } else {
                 System.out.println("No winners!");
             }
         }
@@ -128,11 +126,9 @@ public class BlackJackMain {
         System.out.printf("Yours: %d Dealer's: %d\n", playerWins, dealerWins);
         if (dealerWins == playerWins) {
             System.out.println("You an dealer have the same foutune");
-        }
-        else if (playerWins > dealerWins) {
+        } else if (playerWins > dealerWins) {
             System.out.println("You are the total winner");
-        }
-        else {
+        } else {
             System.out.println("Dealer is the total winner");
         }
     }

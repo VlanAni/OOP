@@ -19,6 +19,7 @@ public class Participant {
 
     /**
      * Take card from deck.
+     *
      * @param gameDeck - deck to take card from.
      * @return - taken card.
      */
