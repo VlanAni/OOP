@@ -62,11 +62,11 @@ class BckJckTesting {
     }
 
     @Test
-    void TotalTest() {
+    void totalTest() {
         Participant player = new Participant();
         BlackJackLeader.ask(player);
         Deck deck = new Deck();
-        while(deck.getDeckCards().size() > 0) {
+        while (deck.getDeckCards().size() > 0) {
             player.takeCard(deck);
             BlackJackLeader.ask(player);
             player.openLastCard();

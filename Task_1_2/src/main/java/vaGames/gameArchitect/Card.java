@@ -1,5 +1,9 @@
 package vaGames.gameArchitect;
 
+/**
+ * Card - game card.
+ * It can be read by other classes.
+ */
 public class Card {
     CardTypes type;
     Suit suit;

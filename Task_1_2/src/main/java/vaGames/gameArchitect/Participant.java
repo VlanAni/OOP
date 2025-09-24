@@ -2,6 +2,10 @@ package vaGames.gameArchitect;
 
 import java.util.ArrayList;
 
+/**
+ * Participant - person who plays.
+ * It can be player or dealer.
+ */
 public class Participant {
 
     private PartState state;

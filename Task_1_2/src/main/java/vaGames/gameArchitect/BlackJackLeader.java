@@ -2,6 +2,9 @@ package vaGames.gameArchitect;
 
 import java.util.ArrayList;
 
+/**
+ * BlackJackLeader - person who asks participants.
+ */
 public class BlackJackLeader {
 
     private BlackJackLeader() {

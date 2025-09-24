@@ -3,6 +3,9 @@ package vaGames.gameArchitect;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Deck stores all game cards.
+ */
 public class Deck {
 
     private ArrayList<Card> cards;
