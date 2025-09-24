@@ -1,4 +1,4 @@
-package GameArchitect;
+package vaGames.gameArchitect;
 
 import java.util.ArrayList;
 
@@ -26,43 +26,43 @@ public class BlackJackLeader {
         String suit = card.suit.getValue();
         String cardType = "";
         switch (card.type) {
-            case CardTypes.TWO:
+            case TWO:
                 cardType = "Two";
                 break;
-            case CardTypes.THREE:
+            case THREE:
                 cardType = "Three";
                 break;
-            case CardTypes.FOUR:
+            case FOUR:
                 cardType = "Four";
                 break;
-            case CardTypes.FIVE:
+            case FIVE:
                 cardType = "Five";
                 break;
-            case CardTypes.SIX:
+            case SIX:
                 cardType = "Six";
                 break;
-            case CardTypes.SEVEN:
+            case SEVEN:
                 cardType = "Seven";
                 break;
-            case CardTypes.EIGHT:
+            case EIGHT:
                 cardType = "Eight";
                 break;
-            case CardTypes.NINE:
+            case NINE:
                 cardType = "Nine";
                 break;
-            case CardTypes.TEN:
+            case TEN:
                 cardType = "Ten";
                 break;
-            case CardTypes.JACK:
+            case JACK:
                 cardType = "Jack";
                 break;
-            case CardTypes.QUEEN:
+            case QUEEN:
                 cardType = "Queen";
                 break;
-            case CardTypes.KING:
+            case KING:
                 cardType = "King";
                 break;
-            case CardTypes.ACE:
+            case ACE:
                 cardType = "Ace";
                 break;
             default:

@@ -1,9 +1,9 @@
-package Game;
+package vaGames.game;
 
-import GameArchitect.BlackJackLeader;
-import GameArchitect.Card;
-import GameArchitect.Deck;
-import GameArchitect.Participant;
+import vaGames.gameArchitect.BlackJackLeader;
+import vaGames.gameArchitect.Card;
+import vaGames.gameArchitect.Deck;
+import vaGames.gameArchitect.Participant;
 
 import java.util.Scanner;
 
@@ -35,7 +35,7 @@ public class BlackJackMain {
         Deck deck = new Deck();
         int playerWins = 0;
         int dealerWins = 0;
-        for (int round = 1; round <= roundsAmount; round++) {
+        for (int round = 1; roundsAmount > 0 & round <= roundsAmount; round++) {
             System.out.printf("===Round [%d] started===\n", round);
             System.out.println("Participants are getting ready...");
             player.prepare();

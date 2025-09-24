@@ -1,5 +1,8 @@
-import GameArchitect.*;
 import org.junit.jupiter.api.Test;
+import vaGames.gameArchitect.BlackJackLeader;
+import vaGames.gameArchitect.Card;
+import vaGames.gameArchitect.Deck;
+import vaGames.gameArchitect.Participant;
 
 class BckJckTesting {
 

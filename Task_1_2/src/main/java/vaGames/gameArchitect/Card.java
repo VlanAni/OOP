@@ -1,4 +1,4 @@
-package GameArchitect;
+package vaGames.gameArchitect;
 
 public class Card {
     CardTypes type;
