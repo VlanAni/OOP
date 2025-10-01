@@ -1,14 +1,14 @@
 import org.junit.jupiter.api.Test;
-import vagames.gamearchitect.BlackJackLeader;
-import vagames.gamearchitect.Card;
-import vagames.gamearchitect.Deck;
-import vagames.gamearchitect.Participant;
+import blackjack.gameenvironment.BlackJackLeader;
+import blackjack.gameenvironment.Card;
+import blackjack.gameenvironment.Deck;
+import blackjack.gameenvironment.Player;
 
 class BckJckTesting {
 
     @Test
     void testParticipant() {
-        Participant player = new Participant();
+        Player player = new Player();
         Deck deck = new Deck();
         int deckSize = deck.getDeckCards().size();
         Card lastCard = deck.getDeckCards().get(deckSize - 1);
@@ -18,7 +18,7 @@ class BckJckTesting {
 
     @Test
     void testBlackJackLeader() {
-        Participant player = new Participant();
+        Player player = new Player();
         Deck deck = new Deck();
         Card card = player.takeCard(deck);
         BlackJackLeader.nameCard(card);
@@ -29,7 +29,7 @@ class BckJckTesting {
 
     @Test
     void preparingTest() {
-        Participant player = new Participant();
+        Player player = new Player();
         Deck deck = new Deck();
         player.takeCard(deck);
         player.openLastCard();
@@ -41,7 +41,7 @@ class BckJckTesting {
 
     @Test
     void testingLeader() {
-        Participant player = new Participant();
+        Player player = new Player();
         BlackJackLeader.ask(player);
         Deck deck = new Deck();
         Card card = player.takeCard(deck);
@@ -54,7 +54,7 @@ class BckJckTesting {
 
     @Test
     void totalTest() {
-        Participant player = new Participant();
+        Player player = new Player();
         BlackJackLeader.ask(player);
         Deck deck = new Deck();
         while (deck.getDeckCards().size() > 0) {

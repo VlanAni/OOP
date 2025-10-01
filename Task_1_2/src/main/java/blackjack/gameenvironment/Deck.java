@@ -1,4 +1,4 @@
-package vagames.gamearchitect;
+package blackjack.gameenvironment;
 
 import java.util.ArrayList;
 import java.util.Collections;

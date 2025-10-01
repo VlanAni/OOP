@@ -1,4 +1,4 @@
-package vagames.gamearchitect;
+package blackjack.gameenvironment;
 
 import java.util.ArrayList;
 
@@ -27,14 +27,14 @@ class PartState {
 
     void updateSum() {
         Card card = this.playerCards.get(this.playerCards.size() - 1);
-        card.isOpen = true;
+        card.Open();
         this.playerCards.set(this.size - 1, card);
-        if (card.type.equals(CardTypes.ACE)) {
+        if (card.getCardType().equals(CardTypes.ACE)) {
             this.sum += 11;
             this.strongAceAmount++;
         }
         else {
-            this.sum += card.type.getValue();
+            this.sum += card.getCardType().getValue();
         }
         while (this.strongAceAmount > 0 && this.sum > 21) {
             this.sum -= 10;

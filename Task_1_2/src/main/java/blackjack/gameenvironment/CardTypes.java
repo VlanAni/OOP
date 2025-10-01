@@ -1,4 +1,4 @@
-package vagames.gamearchitect;
+package blackjack.gameenvironment;
 
 enum CardTypes {
 
