@@ -1,2 +1,3 @@
-vagames.game
-vagames.gamearchitect
+blackjack.constructor
+blackjack.gameenvironment
+blackjack.loader
