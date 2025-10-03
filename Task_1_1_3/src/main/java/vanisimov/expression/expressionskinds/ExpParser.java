@@ -1,6 +1,5 @@
 package vanisimov.expression.expressionskinds;
 
-import vanisimov.expression.customio.InOut;
 import java.util.ArrayList;
 
 class ExpParser {
@@ -46,12 +45,10 @@ class ExpParser {
                     atomSize = 1;
                     isAtom = true;
                     atomBeg = i;
-                }
-                else {
+                } else {
                     atomSize++;
                 }
-            }
-            else {
+            } else {
                 if (isAtom) {
                     this.tokens.add(st.substring(atomBeg, atomBeg + atomSize));
                     isAtom = false;
@@ -70,12 +67,10 @@ class ExpParser {
         if (s == '(') {
             this.parsePoint++;
             arg1 = this.parseHelper();
-        }
-        else if (Character.isDigit(s) || (s == '-' && token.length() > 1)) {
+        } else if (Character.isDigit(s) || (s == '-' && token.length() > 1)) {
             arg1 = new Number(Integer.parseInt(token));
             this.parsePoint++;
-        }
-        else {
+        } else {
             arg1 = new Variable(token);
             this.parsePoint++;
         }

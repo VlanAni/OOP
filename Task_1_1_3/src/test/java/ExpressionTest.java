@@ -28,12 +28,12 @@ class ExpressionTest {
     void varTest() {
         InOut.print("==Testing variable==\n");
         Variable var = new Variable("vovchik");
-        Expression varDer = var.derivative("y");
-        Expression varDer1 = var.derivative("vovchik");
         var.printExp();
         InOut.newStr();
+        Expression varDer = var.derivative("y");
         varDer.printExp();
         InOut.newStr();
+        Expression varDer1 = var.derivative("vovchik");
         varDer1.printExp();
         InOut.newStr();
     }
