@@ -64,7 +64,9 @@ public class Dealer extends Participant {
      * @return - arrayList of cards.
      */
     @Override
-    public ArrayList<Card> showCards() {return this.dealerState.playerCards;}
+    public ArrayList<Card> showCards() {
+        return this.dealerState.playerCards;
+    }
 
     /**
      * same.

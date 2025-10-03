@@ -1,8 +1,8 @@
-import org.junit.jupiter.api.Test;
 import blackjack.gameenvironment.BlackJackLeader;
 import blackjack.gameenvironment.Card;
 import blackjack.gameenvironment.Deck;
 import blackjack.gameenvironment.Player;
+import org.junit.jupiter.api.Test;
 
 class BckJckTesting {
 

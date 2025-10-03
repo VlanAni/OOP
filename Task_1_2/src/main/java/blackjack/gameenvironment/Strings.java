@@ -8,8 +8,8 @@ public class Strings {
     /* greetings, start of the game */
     public static final String greeting = "Hello! It's BlackJack game";
     public static final String fstStep = "First step: please, enter rounds' amount";
-    public static final String inInstr = "If your input is zero, the program stop. " +
-            "Otherwise, we will start";
+    public static final String inInstr = "If your input is zero, the program stop. "
+            + "Otherwise, we will start";
     public static final String roundsAmount = "Rounds' amount: ";
     public static final String gameTermd = "The game is terminated";
 
@@ -17,8 +17,8 @@ public class Strings {
     public static final String roundStart = "===Round [%d] started===\n";
     public static final String partsReady = "Participants are getting ready...";
     public static final String dealPrepar = "Now dealer taking cards...";
-    public static final String dealerActs = "Dealer took cards. " +
-            "Now he is going to give you two cards";
+    public static final String dealerActs = "Dealer took cards. "
+            + "Now he is going to give you two cards";
 
     /* participants' states */
     public static final String dealerState = "==Dealer's cards now==";

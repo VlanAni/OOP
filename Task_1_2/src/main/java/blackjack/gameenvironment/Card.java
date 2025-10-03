@@ -27,5 +27,7 @@ public class Card {
         return this.isOpen;
     }
 
-    void Open() {this.isOpen = true;}
+    void open() {
+        this.isOpen = true;
+    }
 }

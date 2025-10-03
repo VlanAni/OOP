@@ -13,6 +13,7 @@ public class BlackJackLeader {
 
     /**
      * Print participant's state.
+     *
      * @param player - pesron who is being asked.
      */
     public static void ask(Player player) {
@@ -39,6 +40,7 @@ public class BlackJackLeader {
 
     /**
      * Print card's information.
+     *
      * @param card - card to name.
      */
     public static void nameCard(Card card) {

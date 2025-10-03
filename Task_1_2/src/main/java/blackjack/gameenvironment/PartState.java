@@ -27,7 +27,7 @@ class PartState {
 
     void updateSum() {
         Card card = this.playerCards.get(this.playerCards.size() - 1);
-        card.Open();
+        card.open();
         this.playerCards.set(this.size - 1, card);
         if (card.getCardType().equals(CardTypes.ACE)) {
             this.sum += 11;
