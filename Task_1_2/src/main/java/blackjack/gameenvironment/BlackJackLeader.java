@@ -1,7 +1,7 @@
 package blackjack.gameenvironment;
 
-import java.util.ArrayList;
 import blackjack.customio.InOut;
+import java.util.ArrayList;
 
 /**
  * BlackJackLeader - person who asks participants.

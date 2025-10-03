@@ -1,7 +1,6 @@
 package blackjack.gameenvironment;
 
 import blackjack.customio.InOut;
-
 import java.util.ArrayList;
 
 public class Dealer extends Participant {
@@ -35,7 +34,7 @@ public class Dealer extends Participant {
      *
      *
      * @param gameDeck - deck.
-     * @return
+     * @return - taken card.
      */
     @Override
     public Card takeCard(Deck gameDeck) {
