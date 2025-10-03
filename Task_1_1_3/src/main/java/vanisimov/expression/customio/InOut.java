@@ -9,7 +9,8 @@ public class InOut {
 
     private static Scanner stdIn;
 
-    private InOut() {}
+    private InOut() {
+    }
 
     /**
      * printf.
@@ -40,24 +41,32 @@ public class InOut {
     /**
      * Open scanner with the standard input.
      */
-    public static void openInput() {InOut.stdIn = new Scanner(System.in);}
+    public static void openInput() {
+        InOut.stdIn = new Scanner(System.in);
+    }
 
     /**
      * Read int value.
      *
      * @return - value that has been read.
      */
-    public static int readInt() {return InOut.stdIn.nextInt();}
+    public static int readInt() {
+        return InOut.stdIn.nextInt();
+    }
 
     /**
      * Read a string.
      *
      * @return - string that has been string.
      */
-    public static String readStr() {return InOut.stdIn.nextLine();}
+    public static String readStr() {
+        return InOut.stdIn.nextLine();
+    }
 
     /**
      * Closing a scanner.
      */
-    public static void closeInput() {InOut.stdIn.close();}
+    public static void closeInput() {
+        InOut.stdIn.close();
+    }
 }

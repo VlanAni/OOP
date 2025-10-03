@@ -1,12 +1,12 @@
 import org.junit.jupiter.api.Test;
-import vanisimov.expression.expressionskinds.Number;
-import vanisimov.expression.expressionskinds.Expression;
-import vanisimov.expression.expressionskinds.Variable;
 import vanisimov.expression.customio.InOut;
 import vanisimov.expression.expressionskinds.Add;
-import vanisimov.expression.expressionskinds.Sub;
-import vanisimov.expression.expressionskinds.Mul;
 import vanisimov.expression.expressionskinds.Div;
+import vanisimov.expression.expressionskinds.Expression;
+import vanisimov.expression.expressionskinds.Mul;
+import vanisimov.expression.expressionskinds.Number;
+import vanisimov.expression.expressionskinds.Sub;
+import vanisimov.expression.expressionskinds.Variable;
 
 class ExpressionTest {
 
