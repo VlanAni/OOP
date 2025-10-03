@@ -1,11 +1,11 @@
 package blackjack.constructor;
 
+import blackjack.customio.InOut;
 import blackjack.gameenvironment.BlackJackLeader;
 import blackjack.gameenvironment.Deck;
-import blackjack.gameenvironment.Player;
 import blackjack.gameenvironment.Dealer;
-import blackjack.gameenvironment.InOut;
 import blackjack.gameenvironment.Strings;
+import blackjack.gameenvironment.Player;
 
 /**
  * Class that manages the game.

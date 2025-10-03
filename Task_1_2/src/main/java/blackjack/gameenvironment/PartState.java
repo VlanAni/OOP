@@ -32,8 +32,7 @@ class PartState {
         if (card.getCardType().equals(CardTypes.ACE)) {
             this.sum += 11;
             this.strongAceAmount++;
-        }
-        else {
+        } else {
             this.sum += card.getCardType().getValue();
         }
         while (this.strongAceAmount > 0 && this.sum > 21) {

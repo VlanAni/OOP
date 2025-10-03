@@ -1,13 +1,22 @@
 package blackjack.gameenvironment;
 
+import blackjack.customio.InOut;
+
 import java.util.ArrayList;
 
-public class Dealer {
+public class Dealer extends Participant {
 
     private PartState dealerState;
 
-    public Dealer() {this.dealerState = new PartState();}
+    public Dealer() {
+        this.dealerState = new PartState();
+    }
 
+    /**
+     * Doing a step according to dealer's rools.
+     *
+     * @param deck - game deck.
+     */
     public void step(Deck deck) {
         Card takenCard;
         for (int delSum = this.dealerState.sum; delSum < 17; delSum = this.dealerState.sum) {
@@ -22,6 +31,13 @@ public class Dealer {
         }
     }
 
+    /**
+     *
+     *
+     * @param gameDeck - deck.
+     * @return
+     */
+    @Override
     public Card takeCard(Deck gameDeck) {
         Card newCard = gameDeck.extractCard();
         this.dealerState.addNewCard(newCard);
@@ -31,6 +47,7 @@ public class Dealer {
     /**
      * Open last taken card and update sum of opened card.
      */
+    @Override
     public void openLastCard() {
         this.dealerState.updateSum();
     }
@@ -38,6 +55,7 @@ public class Dealer {
     /**
      * Give cards back and update state.
      */
+    @Override
     public void prepare() {
         this.dealerState.resetState();
     }
@@ -45,8 +63,15 @@ public class Dealer {
     /**
      * @return - arrayList of cards.
      */
+    @Override
     public ArrayList<Card> showCards() {return this.dealerState.playerCards;}
 
+    /**
+     * same.
+     *
+     * @return - points' sum.
+     */
+    @Override
     public int sayCardsSum() {
         return this.dealerState.sum;
     }
