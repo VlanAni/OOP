@@ -3,7 +3,6 @@ package blackjack.gameenvironment;
 import java.util.ArrayList;
 
 abstract class Participant {
-
     /**
      * Take closed card from the deck.
      *

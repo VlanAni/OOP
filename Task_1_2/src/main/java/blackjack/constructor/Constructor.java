@@ -5,7 +5,6 @@ import blackjack.gameenvironment.BlackJackLeader;
 import blackjack.gameenvironment.Dealer;
 import blackjack.gameenvironment.Deck;
 import blackjack.gameenvironment.Player;
-import blackjack.gameenvironment.Strings;
 
 /**
  * Class that manages the game.

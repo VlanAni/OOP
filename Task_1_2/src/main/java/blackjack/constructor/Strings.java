@@ -1,4 +1,4 @@
-package blackjack.gameenvironment;
+package blackjack.constructor;
 
 /**
  * String constants.
