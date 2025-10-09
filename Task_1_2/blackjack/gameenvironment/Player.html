@@ -77,8 +77,6 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Player</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Participant - person who plays.
- It can be player or dealer.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,10 +88,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Player</a>()</code></div>
-<div class="col-last even-row-color">
-<div class="block">Creating perticipant.</div>
-</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(blackjack.customio.InOut)" class="member-name-link">Player</a><wbr>(<a href="../customio/InOut.html" title="class in blackjack.customio">InOut</a>&nbsp;inout)</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -121,21 +117,20 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sayCardsSum()" class="member-name-link">sayCardsSum</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">same.</div>
+<div class="block">Return points.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Card.html" title="class in blackjack.gameenvironment">Card</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showCards()" class="member-name-link">showCards</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#step(blackjack.gameenvironment.Deck,blackjack.customio.InOut)" class="member-name-link">step</a><wbr>(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;deck,
- <a href="../customio/InOut.html" title="class in blackjack.customio">InOut</a>&nbsp;inout)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#step(blackjack.gameenvironment.Deck)" class="member-name-link">step</a><wbr>(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;deck)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Doing a step according to player's rools.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Card.html" title="class in blackjack.gameenvironment">Card</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#takeCard(blackjack.gameenvironment.Deck)" class="member-name-link">takeCard</a><wbr>(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;gameDeck)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Take card from deck.</div>
+<div class="block">Take closed card from the deck.</div>
 </div>
 </div>
 </div>
@@ -155,10 +150,9 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;()">
+<section class="detail" id="&lt;init&gt;(blackjack.customio.InOut)">
 <h3>Player</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Player</span>()</div>
-<div class="block">Creating perticipant.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Player</span><wbr><span class="parameters">(<a href="../customio/InOut.html" title="class in blackjack.customio">InOut</a>&nbsp;inout)</span></div>
 </section>
 </li>
 </ul>
@@ -170,28 +164,13 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="step(blackjack.gameenvironment.Deck,blackjack.customio.InOut)">
+<section class="detail" id="step(blackjack.gameenvironment.Deck)">
 <h3>step</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">step</span><wbr><span class="parameters">(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;deck,
- <a href="../customio/InOut.html" title="class in blackjack.customio">InOut</a>&nbsp;inout)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">step</span><wbr><span class="parameters">(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;deck)</span></div>
 <div class="block">Doing a step according to player's rools.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>deck</code> - - game deck</dd>
-<dd><code>inout</code> - - user's choice</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="takeCard(blackjack.gameenvironment.Deck)">
-<h3>takeCard</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.html" title="class in blackjack.gameenvironment">Card</a></span>&nbsp;<span class="element-name">takeCard</span><wbr><span class="parameters">(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;gameDeck)</span></div>
-<div class="block">Take card from deck.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>gameDeck</code> - - deck to take card from.</dd>
-<dt>Returns:</dt>
-<dd>- taken card.</dd>
 </dl>
 </section>
 </li>
@@ -200,6 +179,19 @@ loadScripts(document, 'script');</script>
 <h3>openLastCard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">openLastCard</span>()</div>
 <div class="block">Open last taken card and update sum of opened card.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="takeCard(blackjack.gameenvironment.Deck)">
+<h3>takeCard</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.html" title="class in blackjack.gameenvironment">Card</a></span>&nbsp;<span class="element-name">takeCard</span><wbr><span class="parameters">(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;gameDeck)</span></div>
+<div class="block">Take closed card from the deck.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>gameDeck</code> - - deck.</dd>
+<dt>Returns:</dt>
+<dd>- participant's cards.</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -223,10 +215,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sayCardsSum()">
 <h3>sayCardsSum</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">sayCardsSum</span>()</div>
-<div class="block">same.</div>
+<div class="block">Return points.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>- cards' sum.</dd>
+<dd>- sum of participant's points.</dd>
 </dl>
 </section>
 </li>

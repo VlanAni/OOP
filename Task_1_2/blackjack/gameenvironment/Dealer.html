@@ -117,7 +117,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sayCardsSum()" class="member-name-link">sayCardsSum</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">same.</div>
+<div class="block">Return points.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Card.html" title="class in blackjack.gameenvironment">Card</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showCards()" class="member-name-link">showCards</a>()</code></div>
@@ -175,6 +175,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="openLastCard()">
+<h3>openLastCard</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">openLastCard</span>()</div>
+<div class="block">Open last taken card and update sum of opened card.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="takeCard(blackjack.gameenvironment.Deck)">
 <h3>takeCard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.html" title="class in blackjack.gameenvironment">Card</a></span>&nbsp;<span class="element-name">takeCard</span><wbr><span class="parameters">(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;gameDeck)</span></div>
@@ -183,15 +190,8 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>gameDeck</code> - - deck.</dd>
 <dt>Returns:</dt>
-<dd>- taken card.</dd>
+<dd>- participant's cards.</dd>
 </dl>
-</section>
-</li>
-<li>
-<section class="detail" id="openLastCard()">
-<h3>openLastCard</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">openLastCard</span>()</div>
-<div class="block">Open last taken card and update sum of opened card.</div>
 </section>
 </li>
 <li>
@@ -215,10 +215,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sayCardsSum()">
 <h3>sayCardsSum</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">sayCardsSum</span>()</div>
-<div class="block">same.</div>
+<div class="block">Return points.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>- points' sum.</dd>
+<dd>- sum of participant's points.</dd>
 </dl>
 </section>
 </li>
