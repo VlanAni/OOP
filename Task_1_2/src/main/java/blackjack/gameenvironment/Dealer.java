@@ -2,14 +2,15 @@ package blackjack.gameenvironment;
 
 import blackjack.constructor.Strings;
 import blackjack.customio.InOut;
+
 import java.util.ArrayList;
 
 public class Dealer extends Participant {
 
-    private PartState dealerState;
+    private PartState state;
 
     public Dealer() {
-        this.dealerState = new PartState();
+        this.state = new PartState();
     }
 
     /**
@@ -17,64 +18,40 @@ public class Dealer extends Participant {
      *
      * @param deck - game deck.
      */
+    @Override
     public void step(Deck deck) {
         Card takenCard;
-        for (int delSum = this.dealerState.sum; delSum < 17; delSum = this.dealerState.sum) {
+        for (int delSum = this.state.sum; delSum < 17; delSum = this.state.sum) {
             takenCard = this.takeCard(deck);
             this.openLastCard();
             InOut.print(Strings.dlrTookCard);
             BlackJackLeader.nameCard(takenCard);
-            InOut.printfInt(Strings.dlrsSum, this.dealerState.sum);
-            if (this.dealerState.sum >= 21) {
+            InOut.printfInt(Strings.dlrsSum, this.state.sum);
+            if (this.state.sum >= 21) {
                 break;
             }
         }
     }
 
-    /**
-     *
-     *
-     * @param gameDeck - deck.
-     * @return - taken card.
-     */
-    @Override
+    public void openLastCard() {
+        this.state.updateSum();
+    }
+
     public Card takeCard(Deck gameDeck) {
         Card newCard = gameDeck.extractCard();
-        this.dealerState.addNewCard(newCard);
+        this.state.addNewCard(newCard);
         return newCard;
     }
 
-    /**
-     * Open last taken card and update sum of opened card.
-     */
-    @Override
-    public void openLastCard() {
-        this.dealerState.updateSum();
-    }
-
-    /**
-     * Give cards back and update state.
-     */
-    @Override
     public void prepare() {
-        this.dealerState.resetState();
+        this.state.resetState();
     }
 
-    /**
-     * @return - arrayList of cards.
-     */
-    @Override
     public ArrayList<Card> showCards() {
-        return this.dealerState.playerCards;
+        return this.state.playerCards;
     }
 
-    /**
-     * same.
-     *
-     * @return - points' sum.
-     */
-    @Override
     public int sayCardsSum() {
-        return this.dealerState.sum;
+        return this.state.sum;
     }
 }

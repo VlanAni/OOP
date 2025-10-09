@@ -19,7 +19,8 @@ public class Constructor {
     private static Deck deck;
     private static InOut inout;
 
-    private Constructor() {}
+    private Constructor() {
+    }
 
     /**
      * Implement game logic.
@@ -57,7 +58,7 @@ public class Constructor {
             InOut.println(Strings.playersStep);
             InOut.println(Strings.steps);
 
-            Constructor.player.step(Constructor.deck, Constructor.inout);
+            Constructor.player.step(Constructor.deck);
 
             if (player.sayCardsSum() == 21) {
                 InOut.println(Strings.plrBckJck);
@@ -117,7 +118,7 @@ public class Constructor {
     }
 
     private static void initGame() {
-        Constructor.player = new Player();
+        Constructor.player = new Player(Constructor.inout);
         Constructor.dealer = new Dealer();
         Constructor.deck = new Deck();
         Constructor.playerWin = 0;

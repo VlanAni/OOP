@@ -1,14 +1,17 @@
+import blackjack.customio.InOut;
 import blackjack.gameenvironment.BlackJackLeader;
 import blackjack.gameenvironment.Card;
 import blackjack.gameenvironment.Deck;
+import blackjack.gameenvironment.Dealer;
 import blackjack.gameenvironment.Player;
 import org.junit.jupiter.api.Test;
 
-class BckJckTesting {
+class Testing {
 
     @Test
     void testParticipant() {
-        Player player = new Player();
+        InOut inout = new InOut();
+        Player player = new Player(inout);
         Deck deck = new Deck();
         int deckSize = deck.getDeckCards().size();
         Card lastCard = deck.getDeckCards().get(deckSize - 1);
@@ -18,7 +21,8 @@ class BckJckTesting {
 
     @Test
     void testBlackJackLeader() {
-        Player player = new Player();
+        InOut inout = new InOut();
+        Player player = new Player(inout);
         Deck deck = new Deck();
         Card card = player.takeCard(deck);
         BlackJackLeader.nameCard(card);
@@ -29,7 +33,8 @@ class BckJckTesting {
 
     @Test
     void preparingTest() {
-        Player player = new Player();
+        InOut inout = new InOut();
+        Player player = new Player(inout);
         Deck deck = new Deck();
         player.takeCard(deck);
         player.openLastCard();
@@ -41,7 +46,8 @@ class BckJckTesting {
 
     @Test
     void testingLeader() {
-        Player player = new Player();
+        InOut inout = new InOut();
+        Player player = new Player(inout);
         BlackJackLeader.ask(player);
         Deck deck = new Deck();
         Card card = player.takeCard(deck);
@@ -53,8 +59,23 @@ class BckJckTesting {
     }
 
     @Test
+    void testingDealer() {
+        InOut.println("==Testing dealer==");
+        Dealer dealer = new Dealer();
+        Deck deck = new Deck();
+        dealer.takeCard(deck);
+        dealer.openLastCard();
+        dealer.takeCard(deck);
+        dealer.openLastCard();
+        BlackJackLeader.ask(dealer);
+        dealer.step(deck);
+        BlackJackLeader.ask(dealer); 
+    }
+
+    @Test
     void totalTest() {
-        Player player = new Player();
+        InOut inout = new InOut();
+        Player player = new Player(inout);
         BlackJackLeader.ask(player);
         Deck deck = new Deck();
         while (deck.getDeckCards().size() > 0) {
