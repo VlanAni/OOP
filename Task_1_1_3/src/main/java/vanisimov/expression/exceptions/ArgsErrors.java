@@ -1,9 +1,11 @@
 package vanisimov.expression.exceptions;
 
+import java.io.IOException;
+
 /**
  * Implementing runtime exceptions for args.
  */
-public class ArgsErrors extends RuntimeException {
+public class ArgsErrors extends IOException {
 
     /**
      * Creating an exception.
@@ -13,5 +15,4 @@ public class ArgsErrors extends RuntimeException {
     public ArgsErrors(String message) {
         super(message);
     }
-
 }

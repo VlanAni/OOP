@@ -1,5 +1,7 @@
 package vanisimov.expression.expressionskinds;
 
+import vanisimov.expression.exceptions.ArgsErrors;
+
 /**
  * Expression.
  */
@@ -24,7 +26,7 @@ public abstract class Expression {
      * @param values - values of variables.
      * @return - value of an expression.
      */
-    public abstract int eval(String values);
+    public abstract int eval(String values) throws ArgsErrors;
 
     /**
      * Parse string expression.
