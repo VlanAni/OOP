@@ -1,6 +1,6 @@
 package vanisimov.expression.expressionskinds;
 
-import vanisimov.expression.customio.Stdio;
+import vanisimov.expression.customio.StdIO;
 import vanisimov.expression.exceptions.ArgsErrors;
 
 /**
@@ -27,11 +27,11 @@ public class Add extends Expression {
      */
     @Override
     public void printExp() {
-        Stdio.print("(");
+        StdIO.print("(");
         this.firstOp.printExp();
-        Stdio.print(" + ");
+        StdIO.print(" + ");
         this.secondOp.printExp();
-        Stdio.print(")");
+        StdIO.print(")");
     }
 
     /**
