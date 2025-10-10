@@ -5,11 +5,11 @@ import java.util.Scanner;
 /**
  * Implementing custom io-system.
  */
-public class StdIO {
+public class Stdio {
 
     private static Scanner stdIn;
 
-    private StdIO() {
+    private Stdio() {
     }
 
     /**
@@ -42,7 +42,7 @@ public class StdIO {
      * Open scanner with the standard input.
      */
     public static void openStdin() {
-        StdIO.stdIn = new Scanner(System.in);
+        Stdio.stdIn = new Scanner(System.in);
     }
 
     /**
@@ -51,8 +51,8 @@ public class StdIO {
      * @return - string that has been string.
      */
     public static String readStr() {
-        if (StdIO.stdIn.hasNext()) {
-            return StdIO.stdIn.nextLine();
+        if (Stdio.stdIn.hasNext()) {
+            return Stdio.stdIn.nextLine();
         } else {
             return null;
         }
@@ -62,6 +62,6 @@ public class StdIO {
      * Closing a scanner.
      */
     public static void closeStdin() {
-        StdIO.stdIn.close();
+        Stdio.stdIn.close();
     }
 }

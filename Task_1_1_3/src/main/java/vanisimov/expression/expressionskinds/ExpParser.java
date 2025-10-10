@@ -23,7 +23,8 @@ class ExpParser {
 
     void tokenize() {
         char s;
-        int atomBeg = -1, atomSize = 0;
+        int atomBeg = -1;
+        int atomSize = 0;
         boolean isAtom = false;
         String st = this.st;
         for (int i = 0; i < this.st.length(); i++) {

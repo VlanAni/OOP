@@ -1,6 +1,6 @@
 package vanisimov.expression.expressionskinds;
 
-import vanisimov.expression.customio.StdIO;
+import vanisimov.expression.customio.Stdio;
 import vanisimov.expression.exceptions.ArgsErrors;
 import vanisimov.expression.exceptions.ErrorsMessages;
 
@@ -14,7 +14,7 @@ public class Variable extends Expression {
 
     @Override
     public void printExp() {
-        StdIO.printf("%s", this.name);
+        Stdio.printf("%s", this.name);
     }
 
     @Override

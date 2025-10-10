@@ -1,6 +1,6 @@
 package vanisimov.expression.expressionskinds;
 
-import vanisimov.expression.customio.StdIO;
+import vanisimov.expression.customio.Stdio;
 import vanisimov.expression.exceptions.ArgsErrors;
 
 public class Div extends Expression {
@@ -15,11 +15,11 @@ public class Div extends Expression {
 
     @Override
     public void printExp() {
-        StdIO.print("(");
+        Stdio.print("(");
         this.num.printExp();
-        StdIO.print(" / ");
+        Stdio.print(" / ");
         this.denom.printExp();
-        StdIO.print(")");
+        Stdio.print(")");
     }
 
     @Override
