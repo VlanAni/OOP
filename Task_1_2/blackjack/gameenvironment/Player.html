@@ -71,12 +71,14 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Player" class="title">Class Player</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance"><a href="Participant.html" title="class in blackjack.gameenvironment">blackjack.gameenvironment.Participant</a>
 <div class="inheritance">blackjack.gameenvironment.Player</div>
+</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Player</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="Participant.html" title="class in blackjack.gameenvironment">Participant</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -88,7 +90,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(blackjack.customio.InOut)" class="member-name-link">Player</a><wbr>(<a href="../customio/InOut.html" title="class in blackjack.customio">InOut</a>&nbsp;inout)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(blackjack.customio.StdIn)" class="member-name-link">Player</a><wbr>(<a href="../customio/StdIn.html" title="class in blackjack.customio">StdIn</a>&nbsp;in)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -123,7 +125,8 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showCards()" class="member-name-link">showCards</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#step(blackjack.gameenvironment.Deck)" class="member-name-link">step</a><wbr>(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;deck)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#step(blackjack.gameenvironment.Deck,java.util.Properties)" class="member-name-link">step</a><wbr>(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;deck,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Properties.html" title="class or interface in java.util" class="external-link">Properties</a>&nbsp;local)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Doing a step according to player's rools.</div>
 </div>
@@ -150,9 +153,9 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(blackjack.customio.InOut)">
+<section class="detail" id="&lt;init&gt;(blackjack.customio.StdIn)">
 <h3>Player</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Player</span><wbr><span class="parameters">(<a href="../customio/InOut.html" title="class in blackjack.customio">InOut</a>&nbsp;inout)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Player</span><wbr><span class="parameters">(<a href="../customio/StdIn.html" title="class in blackjack.customio">StdIn</a>&nbsp;in)</span></div>
 </section>
 </li>
 </ul>
@@ -164,11 +167,14 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="step(blackjack.gameenvironment.Deck)">
+<section class="detail" id="step(blackjack.gameenvironment.Deck,java.util.Properties)">
 <h3>step</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">step</span><wbr><span class="parameters">(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;deck)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">step</span><wbr><span class="parameters">(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;deck,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Properties.html" title="class or interface in java.util" class="external-link">Properties</a>&nbsp;local)</span></div>
 <div class="block">Doing a step according to player's rools.</div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Participant.html#step(blackjack.gameenvironment.Deck,java.util.Properties)">step</a></code>&nbsp;in class&nbsp;<code><a href="Participant.html" title="class in blackjack.gameenvironment">Participant</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>deck</code> - - game deck</dd>
 </dl>
@@ -178,15 +184,23 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="openLastCard()">
 <h3>openLastCard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">openLastCard</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Participant.html#openLastCard()">Participant</a></code></span></div>
 <div class="block">Open last taken card and update sum of opened card.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Participant.html#openLastCard()">openLastCard</a></code>&nbsp;in class&nbsp;<code><a href="Participant.html" title="class in blackjack.gameenvironment">Participant</a></code></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="takeCard(blackjack.gameenvironment.Deck)">
 <h3>takeCard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.html" title="class in blackjack.gameenvironment">Card</a></span>&nbsp;<span class="element-name">takeCard</span><wbr><span class="parameters">(<a href="Deck.html" title="class in blackjack.gameenvironment">Deck</a>&nbsp;gameDeck)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Participant.html#takeCard(blackjack.gameenvironment.Deck)">Participant</a></code></span></div>
 <div class="block">Take closed card from the deck.</div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Participant.html#takeCard(blackjack.gameenvironment.Deck)">takeCard</a></code>&nbsp;in class&nbsp;<code><a href="Participant.html" title="class in blackjack.gameenvironment">Participant</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>gameDeck</code> - - deck.</dd>
 <dt>Returns:</dt>
@@ -198,7 +212,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="prepare()">
 <h3>prepare</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">prepare</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Participant.html#prepare()">Participant</a></code></span></div>
 <div class="block">Give cards back and update state.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Participant.html#prepare()">prepare</a></code>&nbsp;in class&nbsp;<code><a href="Participant.html" title="class in blackjack.gameenvironment">Participant</a></code></dd>
+</dl>
 </section>
 </li>
 <li>
@@ -206,6 +225,8 @@ loadScripts(document, 'script');</script>
 <h3>showCards</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Card.html" title="class in blackjack.gameenvironment">Card</a>&gt;</span>&nbsp;<span class="element-name">showCards</span>()</div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Participant.html#showCards()">showCards</a></code>&nbsp;in class&nbsp;<code><a href="Participant.html" title="class in blackjack.gameenvironment">Participant</a></code></dd>
 <dt>Returns:</dt>
 <dd>- arrayList of cards.</dd>
 </dl>
@@ -215,8 +236,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sayCardsSum()">
 <h3>sayCardsSum</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">sayCardsSum</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Participant.html#sayCardsSum()">Participant</a></code></span></div>
 <div class="block">Return points.</div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Participant.html#sayCardsSum()">sayCardsSum</a></code>&nbsp;in class&nbsp;<code><a href="Participant.html" title="class in blackjack.gameenvironment">Participant</a></code></dd>
 <dt>Returns:</dt>
 <dd>- sum of participant's points.</dd>
 </dl>

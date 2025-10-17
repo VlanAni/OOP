@@ -1,4 +1,4 @@
-blackjack.constructor
+blackjack.controller
 blackjack.customio
 blackjack.gameenvironment
 blackjack.loader

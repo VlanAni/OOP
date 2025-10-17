@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"blackjack.constructor"},{"l":"blackjack.customio"},{"l":"blackjack.gameenvironment"},{"l":"blackjack.loader"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"blackjack.controller"},{"l":"blackjack.customio"},{"l":"blackjack.gameenvironment"},{"l":"blackjack.loader"}];updateSearchResults();
