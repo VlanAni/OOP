@@ -1,17 +1,18 @@
 package blackjack.gameenvironment;
 
-import blackjack.constructor.Strings;
-import blackjack.customio.InOut;
+import blackjack.customio.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class Player extends Participant {
 
     private PartState state;
-    private InOut plScan;
+    private StdIn plScan;
+    private Properties local;
 
-    public Player(InOut inout) {
+    public Player(StdIn in) {
         this.state = new PartState();
-        this.plScan = inout;
+        this.plScan = in;
     }
 
     /**
@@ -20,14 +21,14 @@ public class Player extends Participant {
      * @param deck - game deck
      */
     @Override
-    public void step(Deck deck) {
+    public void step(Deck deck, Properties local) {
         Card takenCard;
         for (int decn = this.plScan.scanInt(); decn == 1; decn = this.plScan.scanInt()) {
             takenCard = this.takeCard(deck);
             this.openLastCard();
-            InOut.print(Strings.plrTookCard);
-            BlackJackLeader.nameCard(takenCard);
-            InOut.printfInt(Strings.plrSum, this.state.sum);
+            StdOut.print(local.getProperty("plrTookCard"));
+            Judge.nameCard(takenCard, local);
+            StdOut.printf(local.getProperty("plrSum"), this.state.sum);
             if (this.state.sum >= 21) {
                 break;
             }

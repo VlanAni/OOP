@@ -1,10 +1,13 @@
 package blackjack.gameenvironment;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
-abstract class Participant {
+public abstract class Participant {
 
-    public abstract void step(Deck deck);
+
+
+    public abstract void step(Deck deck, Properties local);
 
     /**
      * Take closed card from the deck.

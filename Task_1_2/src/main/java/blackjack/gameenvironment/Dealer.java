@@ -1,9 +1,8 @@
 package blackjack.gameenvironment;
 
-import blackjack.constructor.Strings;
-import blackjack.customio.InOut;
-
+import blackjack.customio.StdOut;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class Dealer extends Participant {
 
@@ -19,14 +18,14 @@ public class Dealer extends Participant {
      * @param deck - game deck.
      */
     @Override
-    public void step(Deck deck) {
+    public void step(Deck deck, Properties local) {
         Card takenCard;
         for (int delSum = this.state.sum; delSum < 17; delSum = this.state.sum) {
             takenCard = this.takeCard(deck);
             this.openLastCard();
-            InOut.print(Strings.dlrTookCard);
-            BlackJackLeader.nameCard(takenCard);
-            InOut.printfInt(Strings.dlrsSum, this.state.sum);
+            StdOut.print(local.getProperty("dlrTookCard"));
+            Judge.nameCard(takenCard, local);
+            StdOut.printf(local.getProperty("dlrsSum"), this.state.sum);
             if (this.state.sum >= 21) {
                 break;
             }

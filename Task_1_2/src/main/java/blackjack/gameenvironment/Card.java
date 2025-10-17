@@ -5,6 +5,7 @@ package blackjack.gameenvironment;
  * It can be read by other classes.
  */
 public class Card {
+
     private CardTypes type;
     private Suit suit;
     private boolean isOpen;
@@ -30,4 +31,5 @@ public class Card {
     void open() {
         this.isOpen = true;
     }
+
 }
