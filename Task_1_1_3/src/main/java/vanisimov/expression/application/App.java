@@ -2,7 +2,8 @@ package vanisimov.expression.application;
 
 import java.io.IOException;
 import vanisimov.expression.customio.FileIO;
-import vanisimov.expression.customio.StdIO;
+import vanisimov.expression.customio.StdIn;
+import vanisimov.expression.customio.StdOut;
 import vanisimov.expression.exceptions.ArgsErrors;
 import vanisimov.expression.exceptions.ErrorsMessages;
 import vanisimov.expression.expressionskinds.Expression;
@@ -32,41 +33,41 @@ class App {
         if (App.fileSrc) {
             boolean successOpened = false;
             while (!successOpened) {
-                StdIO.printf(Consts.inputFilepath);
-                App.filePath = StdIO.readStr();
+                StdOut.printf(Consts.inputFilepath);
+                App.filePath = StdIn.readStr();
                 while (App.filePath == null) {
-                    StdIO.printf(ErrorsMessages.noInput);
-                    StdIO.printf(Consts.inputFilepath);
-                    App.filePath = StdIO.readStr();
+                    StdOut.printf(ErrorsMessages.noInput);
+                    StdOut.printf(Consts.inputFilepath);
+                    App.filePath = StdIn.readStr();
                 }
-                StdIO.printf(Consts.inputEncoding);
-                App.fileEncoding = StdIO.readStr();
+                StdOut.printf(Consts.inputEncoding);
+                App.fileEncoding = StdIn.readStr();
                 while (App.fileEncoding == null) {
-                    StdIO.printf(ErrorsMessages.noInput);
-                    StdIO.printf(Consts.inputEncoding);
-                    App.fileEncoding = StdIO.readStr();
+                    StdOut.printf(ErrorsMessages.noInput);
+                    StdOut.printf(Consts.inputEncoding);
+                    App.fileEncoding = StdIn.readStr();
                 }
                 try {
                     FileIO.openFile(App.filePath, App.fileEncoding);
                     successOpened = true;
                 } catch (IOException e) {
-                    StdIO.print(ErrorsMessages.noFile);
+                    StdOut.print(ErrorsMessages.noFile);
                 }
             }
             App.processedExp = FileIO.readFileline();
             if (App.processedExp == null) {
-                StdIO.print(ErrorsMessages.emptyFile);
+                StdOut.print(ErrorsMessages.emptyFile);
                 App.closeDialog();
                 FileIO.closeFile();
                 return;
             }
             FileIO.closeFile();
         } else {
-            StdIO.print(Consts.inputExp);
-            App.processedExp = StdIO.readStr();
+            StdOut.print(Consts.inputExp);
+            App.processedExp = StdIn.readStr();
             while (App.processedExp == null) {
-                StdIO.print(ErrorsMessages.emptyFile);
-                App.processedExp = StdIO.readStr();
+                StdOut.print(ErrorsMessages.emptyFile);
+                App.processedExp = StdIn.readStr();
             }
         }
 
@@ -77,18 +78,18 @@ class App {
     }
 
     static void openDialog() {
-        StdIO.openStdin();
+        StdIn.openStdin();
     }
 
     static void start() {
-        StdIO.print(Consts.greeting);
-        StdIO.print(Consts.userInput);
+        StdOut.print(Consts.greeting);
+        StdOut.print(Consts.userInput);
     }
 
     static void readChoice() {
-        String choice = StdIO.readStr();
+        String choice = StdIn.readStr();
         if (choice == null) {
-            StdIO.print(ErrorsMessages.noInput);
+            StdOut.print(ErrorsMessages.noInput);
         } else {
             try {
                 App.fileSrc = Integer.parseInt(choice) == 1;
@@ -100,42 +101,42 @@ class App {
 
     static void exploreExp() {
 
-        StdIO.print(Consts.inputVar);
-        String var = StdIO.readStr();
+        StdOut.print(Consts.inputVar);
+        String var = StdIn.readStr();
         while (var == null) {
-            StdIO.print(ErrorsMessages.noInput);
-            var = StdIO.readStr();
+            StdOut.print(ErrorsMessages.noInput);
+            var = StdIn.readStr();
         }
 
         Expression exp = Expression.makeExp(App.processedExp);
-        StdIO.printf(Consts.showDer, var);
+        StdOut.printf(Consts.showDer, var);
         exp.derivative(var).printExp();
-        StdIO.newStr();
+        StdOut.newStr();
 
-        StdIO.print(Consts.inputVales);
+        StdOut.print(Consts.inputVales);
         boolean evalSuccess = false;
         String varValues = null;
         while (!evalSuccess) {
 
-            varValues = StdIO.readStr();
+            varValues = StdIn.readStr();
             while (varValues == null) {
-                StdIO.print(ErrorsMessages.noInput);
-                varValues = StdIO.readStr();
+                StdOut.print(ErrorsMessages.noInput);
+                varValues = StdIn.readStr();
             }
 
             int value;
             try {
                 value = exp.eval(varValues);
-                StdIO.printf(Consts.showVal, value);
+                StdOut.printf(Consts.showVal, value);
                 evalSuccess = true;
             } catch (ArgsErrors e) {
-                StdIO.print(ErrorsMessages.wrongFormat);
+                StdOut.print(ErrorsMessages.wrongFormat);
             }
         }
     }
 
     static void closeDialog() {
-        StdIO.closeStdin();
+        StdIn.closeStdin();
     }
 
 }

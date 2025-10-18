@@ -1,6 +1,6 @@
 package vanisimov.expression.expressionskinds;
 
-import vanisimov.expression.customio.StdIO;
+import vanisimov.expression.customio.StdOut;
 
 public class Number extends Expression {
     private int value;
@@ -11,7 +11,7 @@ public class Number extends Expression {
 
     @Override
     public void printExp() {
-        StdIO.printf("%d", this.value);
+        StdOut.printf("%d", this.value);
     }
 
     @Override

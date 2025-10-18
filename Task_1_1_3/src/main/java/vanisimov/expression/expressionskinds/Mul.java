@@ -1,6 +1,6 @@
 package vanisimov.expression.expressionskinds;
 
-import vanisimov.expression.customio.StdIO;
+import vanisimov.expression.customio.StdOut;
 import vanisimov.expression.exceptions.ArgsErrors;
 
 public class Mul extends Expression {
@@ -15,11 +15,11 @@ public class Mul extends Expression {
 
     @Override
     public void printExp() {
-        StdIO.print("(");
+        StdOut.print("(");
         this.firstOp.printExp();
-        StdIO.print(" * ");
+        StdOut.print(" * ");
         this.secondOp.printExp();
-        StdIO.print(")");
+        StdOut.print(")");
     }
 
     @Override
