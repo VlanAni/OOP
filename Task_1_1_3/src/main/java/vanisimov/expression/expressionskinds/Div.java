@@ -1,7 +1,8 @@
 package vanisimov.expression.expressionskinds;
 
 import vanisimov.expression.customio.StdOut;
-import vanisimov.expression.exceptions.ArgsErrors;
+import vanisimov.expression.exceptions.DivZero;
+import vanisimov.expression.exceptions.ValErrors;
 
 public class Div extends Expression {
 
@@ -14,11 +15,11 @@ public class Div extends Expression {
     }
 
     @Override
-    public void printExp() {
+    public void print() {
         StdOut.print("(");
-        this.num.printExp();
+        this.num.print();
         StdOut.print(" / ");
-        this.denom.printExp();
+        this.denom.print();
         StdOut.print(")");
     }
 
@@ -32,7 +33,12 @@ public class Div extends Expression {
     }
 
     @Override
-    public int eval(String values) throws ArgsErrors  {
-        return this.num.eval(values) / this.denom.eval(values);
+    public int eval(String values) throws ValErrors, DivZero {
+        int arg2 = this.denom.eval(values);
+        if (arg2 == 0) {
+            throw new DivZero();
+        }
+        int arg1 = this.num.eval(values);
+        return arg1 / arg2;
     }
 }

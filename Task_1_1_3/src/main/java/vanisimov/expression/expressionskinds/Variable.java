@@ -1,19 +1,19 @@
 package vanisimov.expression.expressionskinds;
 
 import vanisimov.expression.customio.StdOut;
-import vanisimov.expression.exceptions.ArgsErrors;
-import vanisimov.expression.exceptions.ErrorsMessages;
+import vanisimov.expression.exceptions.DivZero;
+import vanisimov.expression.exceptions.ValErrors;
 
 public class Variable extends Expression {
 
     private String name;
 
     public Variable(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
     @Override
-    public void printExp() {
+    public void print() {
         StdOut.printf("%s", this.name);
     }
 
@@ -27,26 +27,30 @@ public class Variable extends Expression {
     }
 
     @Override
-    public int eval(String input) throws ArgsErrors {
+    public int eval(String input) throws ValErrors, DivZero {
         String[] values = input.split(";");
         String[] data;
         int value = 0;
         if (values.length == 0) {
-            throw new ArgsErrors(ErrorsMessages.noValues);
+            throw new ValErrors();
         }
         for (String var : values) {
             data = var.split("=");
             if (data.length != 2) {
-                throw new ArgsErrors(ErrorsMessages.formatErr);
+                throw new ValErrors();
             }
             data[0] = data[0].trim();
             data[1] = data[1].trim();
             if (this.name.compareTo(data[0]) == 0) {
-                value = Integer.parseInt(data[1]);
-                return value;
+                try {
+                    value = Integer.parseInt(data[1]);
+                    return value;
+                } catch (NumberFormatException e) {
+                    throw new ValErrors();
+                }
             }
         }
-        throw new ArgsErrors(ErrorsMessages.noVar);
+        throw new ValErrors();
     }
 
 }

@@ -1,6 +1,7 @@
 package vanisimov.expression.expressionskinds;
 
-import vanisimov.expression.exceptions.ArgsErrors;
+import vanisimov.expression.exceptions.DivZero;
+import vanisimov.expression.exceptions.ValErrors;
 
 /**
  * Expression.
@@ -10,7 +11,7 @@ public abstract class Expression {
     /**
      * print expression.
      */
-    public abstract void printExp();
+    public abstract void print();
 
     /**
      * Taking derivative.
@@ -26,7 +27,7 @@ public abstract class Expression {
      * @param values - values of variables.
      * @return - value of an expression.
      */
-    public abstract int eval(String values) throws ArgsErrors;
+    public abstract int eval(String values) throws ValErrors, DivZero;
 
     /**
      * Parse string expression.
@@ -36,7 +37,6 @@ public abstract class Expression {
      */
     public static Expression makeExp(String exp) {
         ExpParser parser = new ExpParser(exp);
-        parser.tokenize();
-        return parser.parse();
+        return parser.processString();
     }
 }

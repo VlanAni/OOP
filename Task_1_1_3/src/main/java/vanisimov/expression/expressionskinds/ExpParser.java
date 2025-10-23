@@ -14,14 +14,14 @@ class ExpParser {
         this.st = st;
     }
 
-    Expression parse() {
+    Expression processString() {
         this.tokens = new ArrayList<String>();
         this.parsePoint = 0;
         this.tokenize();
-        return this.parseHelper();
+        return this.parse();
     }
 
-    void tokenize() {
+    private void tokenize() {
         char s;
         int atomBeg = -1;
         int atomSize = 0;
@@ -61,45 +61,20 @@ class ExpParser {
         }
     }
 
-    private Expression parseHelper() {
-        String token = this.tokens.get(this.parsePoint);
-        char s = token.charAt(0);
-        Expression arg1;
-        if (s == '(') {
-            this.parsePoint++;
-            arg1 = this.parseHelper();
-        } else if (Character.isDigit(s) || (s == '-' && token.length() > 1)) {
-            arg1 = new Number(Integer.parseInt(token));
-            this.parsePoint++;
-        } else {
-            arg1 = new Variable(token);
-            this.parsePoint++;
-        }
+    private Expression parse() {
+        Expression arg1 = this.parseArg();
         if (!(this.parsePoint < this.tokens.size())) {
             return arg1;
         }
-        token = this.tokens.get(this.parsePoint);
-        s = token.charAt(0);
+        String token = this.tokens.get(this.parsePoint);
+        char s = token.charAt(0);
         if (s == ')') {
             this.parsePoint++;
             return arg1;
         }
         char binOp = s;
         this.parsePoint++;
-        token = this.tokens.get(this.parsePoint);
-        s = token.charAt(0);
-        Expression arg2;
-        if (s == '(') {
-            this.parsePoint++;
-            arg2 = this.parseHelper();
-        } else if (s == '-' || Character.isDigit(s)) {
-            arg2 = new Number(Integer.parseInt(token));
-            this.parsePoint++;
-        } else {
-            arg2 = new Variable(token);
-            this.parsePoint++;
-        }
-        this.parsePoint++;
+        Expression arg2 = this.parseArg();
         if (binOp == '+') {
             return new Add(arg1, arg2);
         } else if (binOp == '-') {
@@ -109,5 +84,22 @@ class ExpParser {
         } else {
             return new Div(arg1, arg2);
         }
+    }
+
+    private Expression parseArg() {
+        String token = this.tokens.get(this.parsePoint);
+        char s = token.charAt(0);
+        Expression arg;
+        if (s == '(') {
+            this.parsePoint++;
+            arg = this.parse();
+        } else if (Character.isDigit(s) || (s == '-' && token.length() > 1)) {
+            arg = new Number(Integer.parseInt(token));
+            this.parsePoint++;
+        } else {
+            arg = new Variable(token);
+            this.parsePoint++;
+        }
+        return arg;
     }
 }

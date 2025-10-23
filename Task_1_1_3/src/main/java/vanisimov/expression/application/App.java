@@ -4,7 +4,8 @@ import java.io.IOException;
 import vanisimov.expression.customio.FileIO;
 import vanisimov.expression.customio.StdIn;
 import vanisimov.expression.customio.StdOut;
-import vanisimov.expression.exceptions.ArgsErrors;
+import vanisimov.expression.exceptions.DivZero;
+import vanisimov.expression.exceptions.ValErrors;
 import vanisimov.expression.exceptions.ErrorsMessages;
 import vanisimov.expression.expressionskinds.Expression;
 
@@ -73,8 +74,8 @@ class App {
 
         // printing information about expression
         App.exploreExp();
-
         App.closeDialog();
+
     }
 
     static void openDialog() {
@@ -109,8 +110,8 @@ class App {
         }
 
         Expression exp = Expression.makeExp(App.processedExp);
-        StdOut.printf(Consts.showDer, var);
-        exp.derivative(var).printExp();
+        StdOut.printf(Consts.showDer, var.trim());
+        exp.derivative(var).print();
         StdOut.newStr();
 
         StdOut.print(Consts.inputVales);
@@ -129,8 +130,10 @@ class App {
                 value = exp.eval(varValues);
                 StdOut.printf(Consts.showVal, value);
                 evalSuccess = true;
-            } catch (ArgsErrors e) {
+            } catch (ValErrors e) {
                 StdOut.print(ErrorsMessages.wrongFormat);
+            } catch (DivZero e) {
+                StdOut.print(ErrorsMessages.zerdiv);
             }
         }
     }

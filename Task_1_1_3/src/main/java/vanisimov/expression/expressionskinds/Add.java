@@ -1,7 +1,8 @@
 package vanisimov.expression.expressionskinds;
 
 import vanisimov.expression.customio.StdOut;
-import vanisimov.expression.exceptions.ArgsErrors;
+import vanisimov.expression.exceptions.DivZero;
+import vanisimov.expression.exceptions.ValErrors;
 
 /**
  * Addition.
@@ -26,11 +27,11 @@ public class Add extends Expression {
      * same.
      */
     @Override
-    public void printExp() {
+    public void print() {
         StdOut.print("(");
-        this.firstOp.printExp();
+        this.firstOp.print();
         StdOut.print(" + ");
-        this.secondOp.printExp();
+        this.secondOp.print();
         StdOut.print(")");
     }
 
@@ -52,7 +53,7 @@ public class Add extends Expression {
      * @return - same.
      */
     @Override
-    public int eval(String values) throws ArgsErrors {
+    public int eval(String values) throws ValErrors, DivZero {
         return this.firstOp.eval(values) + this.secondOp.eval(values);
     }
 }

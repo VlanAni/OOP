@@ -1,6 +1,8 @@
 package vanisimov.expression.expressionskinds;
 
 import vanisimov.expression.customio.StdOut;
+import vanisimov.expression.exceptions.DivZero;
+import vanisimov.expression.exceptions.ValErrors;
 
 public class Number extends Expression {
     private int value;
@@ -10,8 +12,12 @@ public class Number extends Expression {
     }
 
     @Override
-    public void printExp() {
-        StdOut.printf("%d", this.value);
+    public void print() {
+        if (this.value < 0) {
+            StdOut.printf("(%d)", this.value);
+        } else {
+            StdOut.printf("%d", this.value);
+        }
     }
 
     @Override
@@ -20,7 +26,7 @@ public class Number extends Expression {
     }
 
     @Override
-    public int eval(String values) {
+    public int eval(String values) throws ValErrors, DivZero {
         return this.value;
     }
 }
