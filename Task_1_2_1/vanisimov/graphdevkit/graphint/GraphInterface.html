@@ -73,7 +73,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="../graphimplementings/AdMatrixGraph.html" title="class in vanisimov.graphdevkit.graphimplementings">AdMatrixGraph</a></code>, <code><a href="../graphimplementings/Graph.html" title="class in vanisimov.graphdevkit.graphimplementings">Graph</a></code></dd>
+<dd><code><a href="../graphimplementings/AdListGraph.html" title="class in vanisimov.graphdevkit.graphimplementings">AdListGraph</a></code>, <code><a href="../graphimplementings/AdMatrixGraph.html" title="class in vanisimov.graphdevkit.graphimplementings">AdMatrixGraph</a></code>, <code><a href="../graphimplementings/Graph.html" title="class in vanisimov.graphdevkit.graphimplementings">Graph</a></code>, <code><a href="../graphimplementings/IncMatrixGraph.html" title="class in vanisimov.graphdevkit.graphimplementings">IncMatrixGraph</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">GraphInterface</span></div>
@@ -92,19 +92,22 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addEdge(vanisimov.graphdevkit.graphelements.Edge)" class="member-name-link">addEdge</a><wbr>(<a href="../graphelements/Edge.html" title="class in vanisimov.graphdevkit.graphelements">Edge</a>&nbsp;edge)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addEdge(java.lang.String,java.lang.String)" class="member-name-link">addEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;src,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dst)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addVertex(vanisimov.graphdevkit.graphelements.Vertex)" class="member-name-link">addVertex</a><wbr>(<a href="../graphelements/Vertex.html" title="class in vanisimov.graphdevkit.graphelements">Vertex</a>&nbsp;vertex)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addVertex(java.lang.String,vanisimov.graphdevkit.graphelements.Vertex)" class="member-name-link">addVertex</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+ <a href="../graphelements/Vertex.html" title="class in vanisimov.graphdevkit.graphelements">Vertex</a>&nbsp;vertex)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteEdge(int)" class="member-name-link">deleteEdge</a><wbr>(int&nbsp;edgeIdx)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteEdge(java.lang.String,java.lang.String)" class="member-name-link">deleteEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;src,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dst)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteVertex(int)" class="member-name-link">deleteVertex</a><wbr>(int&nbsp;vertexIdx)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteVertex(java.lang.String)" class="member-name-link">deleteVertex</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../graphelements/Vertex.html" title="class in vanisimov.graphdevkit.graphelements">Vertex</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getNeibs(int)" class="member-name-link">getNeibs</a><wbr>(int&nbsp;vertexIdx)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getNeibs(java.lang.String)" class="member-name-link">getNeibs</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#printGraph()" class="member-name-link">printGraph</a>()</code></div>
@@ -113,13 +116,14 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#readFile(java.lang.String)" class="member-name-link">readFile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setvertexVal(int)" class="member-name-link">setvertexVal</a><wbr>(int&nbsp;vertexIdx)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setvertexVal(java.lang.String,int)" class="member-name-link">setvertexVal</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+ int&nbsp;val)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#sort()" class="member-name-link">sort</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#vertexVal(int)" class="member-name-link">vertexVal</a><wbr>(int&nbsp;vertexIdx)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#vertexVal(java.lang.String)" class="member-name-link">vertexVal</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
 </div>
@@ -136,33 +140,36 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="addVertex(vanisimov.graphdevkit.graphelements.Vertex)">
+<section class="detail" id="addVertex(java.lang.String,vanisimov.graphdevkit.graphelements.Vertex)">
 <h3>addVertex</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addVertex</span><wbr><span class="parameters">(<a href="../graphelements/Vertex.html" title="class in vanisimov.graphdevkit.graphelements">Vertex</a>&nbsp;vertex)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addVertex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+ <a href="../graphelements/Vertex.html" title="class in vanisimov.graphdevkit.graphelements">Vertex</a>&nbsp;vertex)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="deleteVertex(int)">
+<section class="detail" id="deleteVertex(java.lang.String)">
 <h3>deleteVertex</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">deleteVertex</span><wbr><span class="parameters">(int&nbsp;vertexIdx)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">deleteVertex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="addEdge(vanisimov.graphdevkit.graphelements.Edge)">
+<section class="detail" id="addEdge(java.lang.String,java.lang.String)">
 <h3>addEdge</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="../graphelements/Edge.html" title="class in vanisimov.graphdevkit.graphelements">Edge</a>&nbsp;edge)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;src,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dst)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="deleteEdge(int)">
+<section class="detail" id="deleteEdge(java.lang.String,java.lang.String)">
 <h3>deleteEdge</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">deleteEdge</span><wbr><span class="parameters">(int&nbsp;edgeIdx)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">deleteEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;src,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dst)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="getNeibs(int)">
+<section class="detail" id="getNeibs(java.lang.String)">
 <h3>getNeibs</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../graphelements/Vertex.html" title="class in vanisimov.graphdevkit.graphelements">Vertex</a>&gt;</span>&nbsp;<span class="element-name">getNeibs</span><wbr><span class="parameters">(int&nbsp;vertexIdx)</span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getNeibs</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
 </section>
 </li>
 <li>
@@ -180,19 +187,20 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="sort()">
 <h3>sort</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">sort</span>()</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">sort</span>()</div>
 </section>
 </li>
 <li>
-<section class="detail" id="vertexVal(int)">
+<section class="detail" id="vertexVal(java.lang.String)">
 <h3>vertexVal</h3>
-<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">vertexVal</span><wbr><span class="parameters">(int&nbsp;vertexIdx)</span></div>
+<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">vertexVal</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="setvertexVal(int)">
+<section class="detail" id="setvertexVal(java.lang.String,int)">
 <h3>setvertexVal</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setvertexVal</span><wbr><span class="parameters">(int&nbsp;vertexIdx)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setvertexVal</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+ int&nbsp;val)</span></div>
 </section>
 </li>
 </ul>
