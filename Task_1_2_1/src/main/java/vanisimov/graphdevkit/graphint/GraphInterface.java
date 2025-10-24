@@ -6,24 +6,24 @@ import java.util.ArrayList;
 
 public interface GraphInterface {
 
-    void addVertex(Vertex vertex);
+    void addVertex(String name, Vertex vertex);
 
-    void deleteVertex(int vertexIdx);
+    void deleteVertex(String name);
 
-    void addEdge(Edge edge);
+    void addEdge(String src, String dst);
 
-    void deleteEdge(int edgeIdx);
+    void deleteEdge(String src, String dst);
 
-    ArrayList<Vertex> getNeibs(int vertexIdx);
+    ArrayList<String> getNeibs(String name);
 
     Graph readFile(String path);
 
     void printGraph();
 
-    void sort();
+    ArrayList<String> sort();
 
-    int vertexVal(int vertexIdx);
+    int vertexVal(String name);
 
-    void setvertexVal(int vertexIdx);
+    void setvertexVal(String name, int val);
 
 }

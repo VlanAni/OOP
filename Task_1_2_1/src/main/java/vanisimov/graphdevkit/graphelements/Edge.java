@@ -2,14 +2,14 @@ package vanisimov.graphdevkit.graphelements;
 
 public class Edge {
 
-    private Vertex[] adjVers;
+    private String[] adjVers;
 
-    public Edge(Vertex ver1, Vertex ver2) {
-        this.adjVers = new Vertex[] {ver1, ver2};
+    public Edge(String ver1, String ver2) {
+        this.adjVers = new String[] {ver1, ver2};
     }
 
-    public Vertex[] getVers() {
-        Vertex[] copy = this.adjVers.clone();
+    public String[] getVers() {
+        String[] copy = this.adjVers.clone();
         return copy;
     }
 
