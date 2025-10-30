@@ -75,6 +75,7 @@ class ExpParser {
         char binOp = s;
         this.parsePoint++;
         Expression arg2 = this.parseArg();
+        this.parsePoint++;
         if (binOp == '+') {
             return new Add(arg1, arg2);
         } else if (binOp == '-') {
