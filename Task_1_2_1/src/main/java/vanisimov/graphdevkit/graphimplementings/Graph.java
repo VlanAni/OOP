@@ -16,8 +16,6 @@ abstract public class Graph implements GraphInterface {
 
     public abstract ArrayList<String> getNeibs(String name);
 
-    public abstract Graph readFile(String path);
-
     public abstract void printGraph();
 
     public abstract ArrayList<String> sort();

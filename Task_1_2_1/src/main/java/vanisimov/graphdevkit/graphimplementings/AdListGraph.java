@@ -87,11 +87,6 @@ public class AdListGraph extends Graph {
     }
 
     @Override
-    public Graph readFile(String path) {
-        return null;
-    }
-
-    @Override
     public void printGraph() {
         for (String v : this.vertexes.keySet()) {
             Out.printf("%s:\t", v);

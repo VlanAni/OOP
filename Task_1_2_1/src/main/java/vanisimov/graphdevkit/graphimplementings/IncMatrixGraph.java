@@ -93,6 +93,7 @@ public class IncMatrixGraph extends Graph {
     @Override
     public ArrayList<String> getNeibs(String name) {
         ArrayList<String> nbs = new ArrayList<String>();
+
         if (this.vertexes.get(name) == null) {
             return nbs;
         }
@@ -100,19 +101,19 @@ public class IncMatrixGraph extends Graph {
         for (String edgeName : this.incMatrix.keySet()) {
             HashMap<String, Integer> edgeRow = this.incMatrix.get(edgeName);
             if (edgeRow.get(name) == 1) {
+                boolean isLoop = true;
                 for (String vertexName : edgeRow.keySet()) {
                     if (edgeRow.get(vertexName) == -1) {
+                        isLoop = false;
                         nbs.add(vertexName);
                     }
+                }
+                if (isLoop) {
+                    nbs.add(name);
                 }
             }
         }
         return nbs;
-    }
-
-    @Override
-    public Graph readFile(String path) {
-        return null;
     }
 
     @Override

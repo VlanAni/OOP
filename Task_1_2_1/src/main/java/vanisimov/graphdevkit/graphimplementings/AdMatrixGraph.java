@@ -88,17 +88,17 @@ public class AdMatrixGraph extends Graph {
     @Override
     public ArrayList<String> getNeibs(String name) {
         ArrayList<String> nbrs = new ArrayList<String>();
+
+        if (this.vertexes.get(name) == null) {
+            return nbrs;
+        }
+
         for (String vertex : this.vertexes.keySet()) {
             if (this.adjMatrix.get(name).get(vertex) > 0) {
                 nbrs.add(vertex);
             }
         }
         return nbrs;
-    }
-
-    @Override
-    public Graph readFile(String path) {
-        return null;
     }
 
     @Override

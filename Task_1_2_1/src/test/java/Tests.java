@@ -1,67 +1,38 @@
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import vanisimov.graphdevkit.graphelements.Vertex;
 import vanisimov.graphdevkit.graphimplementings.AdListGraph;
 import vanisimov.graphdevkit.graphimplementings.AdMatrixGraph;
 import vanisimov.graphdevkit.graphimplementings.Graph;
 import vanisimov.graphdevkit.graphimplementings.IncMatrixGraph;
+import vanisimov.graphdevkit.graphint.GraphInterface;
 import vanisimov.graphdevkit.io.Out;
-
-import java.util.ArrayList;
 
 class Tests {
 
     @Test
     void adjmatrixTest1() {
-        Out.println("==[DELETE/ADD] [EDGES/VERTEXES] [ADJACENT MATRIX]==");
         Graph graph = new AdMatrixGraph();
         // добавили две вершины, петлю (a, a) и ребро (a, b)
         graph.addVertex("a", new Vertex(123));
         graph.addVertex("b", new Vertex(234));
         graph.addEdge("a", "a");
         graph.addEdge("a", "b");
-        Out.println("==Graph №1==");
-        graph.printGraph();
 
-        // удаляем одно ребро между (a, b)
-        graph.deleteEdge("a", "b");
-        graph.deleteEdge("b", "a");
-        Out.println("==Graph №2==");
-        graph.printGraph();
+        ArrayList<String> nbrs = graph.getNeibs("a");
 
-        // удаляем вершину b
-        graph.deleteVertex("b");
-        Out.println("==Graph №3==");
-        graph.printGraph();
+        assert (nbrs.contains("a") && nbrs.contains("b"));
 
-        // удаляем ребро (a, a)
-        graph.deleteEdge("a", "a");
-        Out.println("==Graph №4==");
-        graph.printGraph();
+        nbrs = graph.getNeibs("b");
 
-        // удаляем вершину a
-        graph.deleteVertex("a");
-        Out.println("==Graph №5==");
-        graph.printGraph();
-
-        // пытаемся удалить несуществующее ребро
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        Out.println("==Graph №6==");
-        graph.printGraph();
-
-        // добавляем вершину a, добавляем четыре петли
-        graph.addVertex("a", new Vertex(123));
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        Out.println("==Graph №7==");
-        graph.printGraph();
+        assert (nbrs.isEmpty());
     }
 
     @Test
     void adjmatrixTest2() {
-        Out.println("==[NEIGHBORS] [ADJACENT MATRIX]==");
         // создаём граф с четырьмя вершинами
         Graph graph = new AdMatrixGraph();
         graph.addVertex("a", new Vertex(1));
@@ -69,53 +40,27 @@ class Tests {
         graph.addVertex("b", new Vertex(1));
         graph.addVertex("c", new Vertex(1));
         graph.addVertex("d", new Vertex(1));
-        Out.println("==Graph №1==");
-        graph.printGraph();
 
-        // добавляем рёбра
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "b");
-        graph.addEdge("a", "c");
-        graph.addEdge("a", "d");
-        graph.addEdge("a", "a");
-        graph.addEdge("b", "a");
-        graph.addEdge("c", "d");
-        Out.println("==Graph №2==");
-        graph.printGraph();
-
-        // теперь выводим соседей для каждой вершины
-        Out.printf("==NEIGHBORS [a]==\n");
         ArrayList<String> nbrs = graph.getNeibs("a");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [b]==\n");
+        assert (nbrs.isEmpty());
+
         nbrs = graph.getNeibs("b");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [c]==\n");
+        assert (nbrs.isEmpty());
+
         nbrs = graph.getNeibs("c");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [d]==\n");
+        assert (nbrs.isEmpty());
+
         nbrs = graph.getNeibs("d");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
+
+        assert (nbrs.isEmpty());
+
     }
 
     @Test
     void tsortadjmTest() {
-        Out.println("==[TOPO SORT] [ADJACENT MATRIX]==");
         Graph graph = new AdMatrixGraph();
         graph.addVertex("A", new Vertex(1));
         graph.addVertex("B", new Vertex(1));
@@ -142,55 +87,25 @@ class Tests {
 
     @Test
     void incmatrixTest1() {
-        Out.println("==[DELETE/ADD] [EDGES/VERTEXES] [INCIDENCE MATRIX]==");
         Graph graph = new IncMatrixGraph();
         // добавили две вершины, петлю (a, a) и ребро (a, b)
         graph.addVertex("a", new Vertex(123));
         graph.addVertex("b", new Vertex(234));
         graph.addEdge("a", "a");
         graph.addEdge("a", "b");
-        Out.println("==Graph №1==");
-        graph.printGraph();
 
-        // удаляем одно ребро между (a, b)
-        graph.deleteEdge("a", "b");
-        Out.println("==Graph №2==");
-        graph.printGraph();
+        ArrayList<String> nbrs = graph.getNeibs("a");
 
-        // удаляем вершину b
-        graph.deleteVertex("b");
-        Out.println("==Graph №3==");
-        graph.printGraph();
+        assert (nbrs.contains("a") && nbrs.contains("b"));
 
-        // удаляем ребро (a, a)
-        graph.deleteEdge("a", "a");
-        Out.println("==Graph №4==");
-        graph.printGraph();
+        nbrs = graph.getNeibs("b");
 
-        // удаляем вершину a
-        graph.deleteVertex("a");
-        Out.println("==Graph №5==");
-        graph.printGraph();
+        assert (nbrs.isEmpty());
 
-        // пытаемся добавить рёбра для несуществующих вершин
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        Out.println("==Graph №6==");
-        graph.printGraph();
-
-        // добавляем вершину a, добавляем четыре петли
-        graph.addVertex("a", new Vertex(123));
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        Out.println("==Graph №7==");
-        graph.printGraph();
     }
 
     @Test
     void incmatrixTest2() {
-        Out.println("==[NEIGHBORS] [INCIDENCE MATRIX]==");
         // создаём граф с четырьмя вершинами
         Graph graph = new IncMatrixGraph();
         graph.addVertex("a", new Vertex(1));
@@ -198,8 +113,6 @@ class Tests {
         graph.addVertex("b", new Vertex(1));
         graph.addVertex("c", new Vertex(1));
         graph.addVertex("d", new Vertex(1));
-        Out.println("==Graph №1==");
-        graph.printGraph();
 
         // добавляем рёбра
         graph.addEdge("a", "a");
@@ -208,43 +121,35 @@ class Tests {
         graph.addEdge("a", "d");
         graph.addEdge("a", "a");
         graph.addEdge("b", "a");
+        graph.addEdge("b", "a");
         graph.addEdge("c", "d");
-        Out.println("==Graph №2==");
-        graph.printGraph();
 
-        // теперь выводим соседей для каждой вершины
-        Out.printf("==NEIGHBORS [a]==\n");
         ArrayList<String> nbrs = graph.getNeibs("a");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [b]==\n");
+        assert (nbrs.contains("a") &&
+                nbrs.contains("b") &&
+                nbrs.contains("c") &&
+                nbrs.contains("d"));
+
         nbrs = graph.getNeibs("b");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [c]==\n");
+        assert (nbrs.contains("a"));
+
+        nbrs = graph.getNeibs("b");
+
+        assert (nbrs.contains("a"));
+
         nbrs = graph.getNeibs("c");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [d]==\n");
+        assert (nbrs.contains("d"));
+
         nbrs = graph.getNeibs("d");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
+
+        assert (nbrs.isEmpty());
     }
 
     @Test
     void tsortincmTest() {
-        Out.println("==[TOPO SORT] [INCIDENCE MATRIX]==");
         Graph graph = new IncMatrixGraph();
         graph.addVertex("A", new Vertex(1));
         graph.addVertex("B", new Vertex(1));
@@ -279,56 +184,29 @@ class Tests {
 
     @Test
     void adjlistTest1() {
-        Out.println("==[DELETE/ADD] [EDGES/VERTEXES] [ADJACENCY LIST]==");
         Graph graph = new AdListGraph();
         // добавили две вершины, петлю (a, a) и ребро (a, b)
         graph.addVertex("a", new Vertex(123));
         graph.addVertex("b", new Vertex(234));
         graph.addEdge("a", "a");
         graph.addEdge("a", "b");
-        Out.println("==Graph №1==");
-        graph.printGraph();
 
         // удаляем одно ребро между (a, b)
         graph.deleteEdge("a", "b");
         graph.deleteEdge("b", "a");
-        Out.println("==Graph №2==");
-        graph.printGraph();
 
-        // удаляем вершину b
-        graph.deleteVertex("b");
-        Out.println("==Graph №3==");
-        graph.printGraph();
+        ArrayList<String> nbrs = graph.getNeibs("a");
 
-        // удаляем ребро (a, a)
-        graph.deleteEdge("a", "a");
-        Out.println("==Graph №4==");
-        graph.printGraph();
+        assert (nbrs.contains("a") && !nbrs.contains("b"));
 
-        // удаляем вершину a
-        graph.deleteVertex("a");
-        Out.println("==Graph №5==");
-        graph.printGraph();
+        nbrs = graph.getNeibs("b");
 
-        // пытаемся удалить несуществующее ребро
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        Out.println("==Graph №6==");
-        graph.printGraph();
+        assert (nbrs.isEmpty());
 
-        // добавляем вершину a, добавляем четыре петли
-        graph.addVertex("a", new Vertex(123));
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        graph.addEdge("a", "a");
-        Out.println("==Graph №7==");
-        graph.printGraph();
     }
 
     @Test
     void adjlistTest2() {
-        Out.println("==[NEIGHBORS] [ADJACENCY LIST]==");
         // создаём граф с четырьмя вершинами
         Graph graph = new AdListGraph();
         graph.addVertex("a", new Vertex(1));
@@ -336,8 +214,6 @@ class Tests {
         graph.addVertex("b", new Vertex(1));
         graph.addVertex("c", new Vertex(1));
         graph.addVertex("d", new Vertex(1));
-        Out.println("==Graph №1==");
-        graph.printGraph();
 
         // добавляем рёбра
         graph.addEdge("a", "a");
@@ -347,42 +223,34 @@ class Tests {
         graph.addEdge("a", "a");
         graph.addEdge("b", "a");
         graph.addEdge("c", "d");
-        Out.println("==Graph №2==");
-        graph.printGraph();
 
-        // теперь выводим соседей для каждой вершины
-        Out.printf("==NEIGHBORS [a]==\n");
         ArrayList<String> nbrs = graph.getNeibs("a");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [b]==\n");
+        assert (nbrs.contains("a") &&
+                nbrs.contains("b") &&
+                nbrs.contains("c") &&
+                nbrs.contains("d"));
+
         nbrs = graph.getNeibs("b");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [c]==\n");
+        assert (nbrs.contains("a"));
+
+        nbrs = graph.getNeibs("b");
+
+        assert (nbrs.contains("a"));
+
         nbrs = graph.getNeibs("c");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
 
-        Out.printf("==NEIGHBORS [d]==\n");
+        assert (nbrs.contains("d"));
+
         nbrs = graph.getNeibs("d");
-        for (int i = 0; i < nbrs.size(); ++i) {
-            Out.printf("[%s] ", nbrs.get(i));
-        }
-        Out.print("\n");
+
+        assert (nbrs.isEmpty());
+
     }
 
     @Test
     void tsortadjlTest() {
-        Out.println("==[TOPO SORT] [ADJACENCY LIST]==");
         Graph graph = new AdListGraph();
         graph.addVertex("A", new Vertex(1));
         graph.addVertex("B", new Vertex(1));
@@ -405,5 +273,97 @@ class Tests {
         assert(result.indexOf("B") < result.indexOf("C"));
 
         assert(result.indexOf("B") < result.indexOf("D"));
+    }
+
+    @Test
+    void fileReading1() {
+        String filepath = "test1.txt";
+        URL resource = getClass().getClassLoader().getResource(filepath);
+        try {
+            filepath = Paths.get(resource.toURI()).toAbsolutePath().toString();
+            Graph graph = GraphInterface.readFile(filepath);
+            ArrayList<String> nbs = graph.getNeibs("a");
+
+            assert (nbs.isEmpty());
+
+            nbs = graph.getNeibs("b");
+
+            assert (!nbs.contains("b") && nbs.contains("a"));
+
+            nbs = graph.getNeibs("c");
+
+            assert (nbs.contains("b") && nbs.contains("a"));
+
+            ArrayList<String> topoSort = graph.sort();
+
+            assert (topoSort.indexOf("c") == 0 &&
+                    topoSort.indexOf("b") == 1 &&
+                    topoSort.indexOf("a") == 2);
+
+        } catch (URISyntaxException e) {
+            Out.println("Error with URI");
+        }
+    }
+
+    @Test
+    void fileReading2() {
+        String filepath = "test2.txt";
+        URL resource = getClass().getClassLoader().getResource(filepath);
+        try {
+            filepath = Paths.get(resource.toURI()).toAbsolutePath().toString();
+            Graph graph = GraphInterface.readFile(filepath);
+
+            assert (graph == null);
+
+        } catch (URISyntaxException e) {
+            Out.println("Error with URI");
+        }
+    }
+
+    @Test
+    void fileReading3() {
+        String filepath = "test3.txt";
+        URL resource = getClass().getClassLoader().getResource(filepath);
+        try {
+            filepath = Paths.get(resource.toURI()).toAbsolutePath().toString();
+            Graph graph = GraphInterface.readFile(filepath);
+            ArrayList<String> nbs = graph.getNeibs("a");
+
+            assert (nbs.isEmpty());
+
+            nbs = graph.getNeibs("b");
+
+            assert (nbs.isEmpty());
+
+            nbs = graph.getNeibs("c");
+
+            assert (nbs.isEmpty());
+
+            nbs = graph.getNeibs("d");
+
+            assert (nbs.isEmpty());
+
+            nbs = graph.getNeibs("e");
+
+            assert (nbs.isEmpty());
+
+        } catch (URISyntaxException e) {
+            Out.println("Error with URI");
+        }
+    }
+
+    @Test
+    void fileReading4() {
+        String filepath = "test4.txt";
+        URL resource = getClass().getClassLoader().getResource(filepath);
+        try {
+            filepath = Paths.get(resource.toURI()).toAbsolutePath().toString();
+            Graph graph = GraphInterface.readFile(filepath);
+
+            assert (graph != null);
+
+        } catch (URISyntaxException e) {
+            Out.println("Error with URI");
+        }
     }
 }
