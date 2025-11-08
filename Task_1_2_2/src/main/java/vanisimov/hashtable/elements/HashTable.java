@@ -1,9 +1,12 @@
 package vanisimov.hashtable.elements;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 import vanisimov.hashtable.SystemIO.StdOut;
 
-public class HashTable<K, V> {
+public class HashTable<K, V> implements Iterable<Entry<K, V>> {
 
     private static final int stdSize = 10000; // standard capacity for new HashTable
     private static final double maxLoadCoef = 0.85;
@@ -11,6 +14,7 @@ public class HashTable<K, V> {
     private ArrayList<K> keys;
     private int size;
     private int recordsAmount;
+    private int modAmount;
 
 
     public HashTable() {
@@ -21,6 +25,7 @@ public class HashTable<K, V> {
             this.table.add(null);
         }
         this.recordsAmount = 0;
+        this.modAmount = 0;
     }
 
     public V getValue(K key) {
@@ -48,6 +53,7 @@ public class HashTable<K, V> {
         while (node != null) {
             if (node.getKey().equals(key)) {
                 node.setValue(newValue);
+                this.modAmount++;
                 return true;
             }
             node = node.getNext();
@@ -89,6 +95,7 @@ public class HashTable<K, V> {
                 }
                 this.keys.remove(key);
                 this.recordsAmount--;
+                this.modAmount++;
                 return true;
             }
             lastNode = node;
@@ -113,6 +120,7 @@ public class HashTable<K, V> {
             this.addNodeToBucket(key, value);
             this.recordsAmount++;
             this.keys.add(key);
+            this.modAmount++;
             return true;
         }
         return false;
@@ -171,6 +179,7 @@ public class HashTable<K, V> {
     }
 
     private void resizeTable() {
+        this.modAmount++;
         int oldSize = this.size;
         this.size *= 2;
         ArrayList<Node<K, V>> newArr = new ArrayList<Node<K, V>>(this.size);
@@ -195,4 +204,73 @@ public class HashTable<K, V> {
         this.table.set(hashIdx, newNode);
     }
 
+    @Override
+    public Iterator<Entry<K, V>> iterator() {
+        return new HashTableIterator();
+    }
+
+    private class HashTableIterator implements Iterator<Entry<K, V>> {
+
+        private int expectedModCount;
+        private int currentBucket;
+        private Node<K, V> currentNode;
+        private Node<K, V> lastReturned;
+
+        HashTableIterator() {
+            this.expectedModCount = HashTable.this.modAmount;
+            this.currentBucket = 0;
+            this.currentNode = null;
+            this.lastReturned = null;
+            this.advanceSearch();
+        }
+
+        private void checkForComodification() {
+            if (HashTable.this.modAmount != this.expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
+        }
+
+        private void advanceSearch() {
+            if (this.currentNode != null) {
+                this.currentNode = this.currentNode.getNext();
+            }
+
+            while (this.currentNode == null && this.currentBucket < HashTable.this.size) {
+                this.currentNode = HashTable.this.table.get(this.currentBucket);
+                this.currentBucket++;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            this.checkForComodification();
+            return this.currentNode != null;
+        }
+
+        @Override
+        public Entry<K, V> next() {
+            this.checkForComodification();
+
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            Node<K, V> toReturn = this.currentNode;
+            this.lastReturned = toReturn;
+            this.advanceSearch();
+            return toReturn;
+        }
+
+        @Override
+        public void remove() {
+            checkForComodification();
+            if (lastReturned == null) {
+                throw new IllegalStateException();
+            }
+            K keyToRemove = this.lastReturned.getKey();
+            HashTable.this.remove(keyToRemove);
+            this.expectedModCount = HashTable.this.modAmount;
+            lastReturned = null;
+        }
+    }
 }

@@ -1,7 +1,10 @@
+import java.util.Iterator;
+import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import vanisimov.hashtable.elements.HashTable;
+import vanisimov.hashtable.elements.*;
 
 public class Tests {
 
@@ -126,5 +129,88 @@ public class Tests {
         table.add("key2", 200);
 
         assertDoesNotThrow(() -> table.printTable());
+    }
+
+    private void fillTableForIteration() {
+        table.add("apple", 10);
+        table.add("banana", 20);
+        table.add("potatoes", 30);
+    }
+
+    @Test
+    void testForEachLoopTraversal() {
+        fillTableForIteration();
+        int count = 0;
+
+        for (Entry<String, Integer> node : table) {
+            assertNotNull(node.getKey());
+            assertNotNull(node.getValue());
+            count++;
+        }
+
+        assertEquals(3, count);
+    }
+
+    @Test
+    void testNoSuchElementException() {
+        fillTableForIteration();
+
+        Iterator<Entry<String, Integer>> it = table.iterator();
+
+        it.next();
+        it.next();
+        it.next();
+
+        assertThrows(NoSuchElementException.class, () -> it.next());
+    }
+
+    @Test
+    void testCMEOnExternalAdd() {
+        fillTableForIteration();
+        Iterator<Entry<String, Integer>> it = table.iterator();
+
+        it.next();
+
+        table.add("date", 40);
+
+        assertThrows(ConcurrentModificationException.class, () -> it.next());
+    }
+
+    @Test
+    void testCMEOnExternalRemove() {
+        fillTableForIteration();
+        Iterator<Entry<String, Integer>> it = table.iterator();
+
+        it.next();
+
+        table.remove("apple");
+
+        assertThrows(ConcurrentModificationException.class, () -> it.hasNext());
+    }
+
+    @Test
+    void testSafeRemoveUsingIterator() {
+        fillTableForIteration();
+        Iterator<Entry<String, Integer>> it = table.iterator();
+
+        Entry<String, Integer> pair = it.next();
+
+        assertDoesNotThrow(() -> it.remove());
+
+        assertNull(table.getValue(pair.getKey()));
+
+        assertEquals(2, table.getRecordsAmount());
+
+        assertDoesNotThrow(() -> it.next());
+    }
+
+    @Test
+    void testDoubleRemove() {
+        fillTableForIteration();
+        Iterator<Entry<String, Integer>> it = table.iterator();
+        it.next();
+        it.remove();
+
+        assertThrows(IllegalStateException.class, () -> it.remove());
     }
 }

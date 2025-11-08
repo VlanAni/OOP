@@ -1,6 +1,6 @@
 package vanisimov.hashtable.elements;
 
-class Node<K, V>{
+public class Node<K, V> implements Entry<K, V> {
 
     private K key;
     private V value;
@@ -20,11 +20,11 @@ class Node<K, V>{
         this.next = newNext;
     }
 
-    V getValue() {
+    public V getValue() {
         return this.value;
     }
 
-    K getKey() {
+    public K getKey() {
         return this.key;
     }
 
