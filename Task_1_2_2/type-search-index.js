@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"vanisimov.hashtable.elements","l":"HashTable"},{"p":"vanisimov.hashtable.SystemIO","l":"StdOut"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"vanisimov.hashtable.elements","l":"Entry"},{"p":"vanisimov.hashtable.elements","l":"HashTable"},{"p":"vanisimov.hashtable.elements","l":"Node"},{"p":"vanisimov.hashtable.SystemIO","l":"StdOut"}];updateSearchResults();
