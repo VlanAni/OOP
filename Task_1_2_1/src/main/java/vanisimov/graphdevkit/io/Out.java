@@ -13,8 +13,8 @@ public class Out {
         System.out.printf(string, args);
     }
 
-    public static void print(String string) {
-        System.out.print(string);
+    public static void print(Object obj) {
+        System.out.print(obj);
     }
 
 }

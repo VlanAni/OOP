@@ -1,23 +1,24 @@
 package vanisimov.graphdevkit.graphimplementings;
 
+import java.util.*;
 import vanisimov.graphdevkit.graphelements.Vertex;
 import vanisimov.graphdevkit.graphelements.Edge;
-import vanisimov.graphdevkit.io.Out;
-import java.util.*;
+import vanisimov.graphdevkit.graphint.Graph;
 
-public class IncMatrixGraph extends Graph {
+public class IncMatrixGraph implements Graph {
 
     private HashMap<String, Vertex> vertexes;
     private HashMap<String, Edge> edges;
     private HashMap<String, HashMap<String, Integer>> incMatrix;
+    private int edgeCounter;
 
     public IncMatrixGraph() {
         this.vertexes = new HashMap<String, Vertex>();
         this.edges = new HashMap<String, Edge>();
         this.incMatrix = new HashMap<String, HashMap<String, Integer>>();
+        this.edgeCounter = 0;
     }
 
-    @Override
     public void addVertex(String name, Vertex vertex) {
         if (this.vertexes.get(name) != null) {
             return;
@@ -29,7 +30,6 @@ public class IncMatrixGraph extends Graph {
         }
     }
 
-    @Override
     public void deleteVertex(String name) {
         if (this.vertexes.get(name) == null) {
             return;
@@ -56,12 +56,12 @@ public class IncMatrixGraph extends Graph {
         this.vertexes.remove(name);
     }
 
-    @Override
     public void addEdge(String src, String dst) {
         if (this.vertexes.get(src) == null || this.vertexes.get(dst) == null) {
             return;
         } else {
-            String edgeName = src + "->" + dst;
+            String edgeName = src + "->" + dst + "_" + this.edgeCounter;
+            this.edgeCounter++;
             Edge edge = new Edge(src, dst);
             this.edges.put(edgeName, edge);
 
@@ -79,18 +79,26 @@ public class IncMatrixGraph extends Graph {
         }
     }
 
-    @Override
     public void deleteEdge(String src, String dst) {
         if (this.vertexes.get(src) == null || this.vertexes.get(dst) == null) {
             return;
         }
 
-        String edgeName = src + "->" + dst;
-        this.edges.remove(edgeName);
-        this.incMatrix.remove(edgeName);
+        String prefix = src + "->" + dst + "_";
+        String edgeName = null;
+        for (String edge : this.edges.keySet()) {
+            if (edge.startsWith(prefix)) {
+                edgeName = edge;
+                break;
+            }
+        }
+
+        if (edgeName != null) {
+            this.edges.remove(edgeName);
+            this.incMatrix.remove(edgeName);
+        }
     }
 
-    @Override
     public ArrayList<String> getNeibs(String name) {
         ArrayList<String> nbs = new ArrayList<String>();
 
@@ -117,24 +125,25 @@ public class IncMatrixGraph extends Graph {
     }
 
     @Override
-    public void printGraph() {
-        Out.print("\t\t");
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("\t\t");
         String[] verts = this.vertexes.keySet().toArray(new String[0]);
         for (String v : verts) {
-            Out.printf("%s\t", v);
+            str.append(v).append('\t');
         }
-        Out.print("\n");
+        str.append('\n');
         for (String edgeName : this.incMatrix.keySet()) {
-            Out.printf("%s|\t", edgeName);
+            str.append(edgeName).append('\t');
             HashMap<String, Integer> edgeRow = this.incMatrix.get(edgeName);
             for (String vertex : verts) {
-                Out.printf("%d\t", edgeRow.get(vertex));
+                str.append(edgeRow.get(vertex)).append('\t');
             }
-            Out.print("\n");
+            str.append('\n');
         }
+        return str.toString();
     }
 
-    @Override
     public ArrayList<String> sort() {
         ArrayList<String> result = new ArrayList<>();
         HashMap<String, Integer> visited = new HashMap<>();
@@ -169,7 +178,6 @@ public class IncMatrixGraph extends Graph {
         return true;
     }
 
-    @Override
     public int vertexVal(String name) {
         if (this.vertexes.get(name) == null) {
             return -1;
@@ -177,11 +185,34 @@ public class IncMatrixGraph extends Graph {
         return this.vertexes.get(name).getValue();
     }
 
-    @Override
     public void setvertexVal(String name, int val) {
         if (this.vertexes.get(name) == null) {
             return;
         }
         this.vertexes.get(name).setValue(val);
+    }
+
+    public HashSet<String> getVertexes() {
+        HashSet<String> vertexes = new HashSet<String>();
+        vertexes.addAll(this.vertexes.keySet());
+        return vertexes;
+    }
+
+    public HashMap<String, Integer> getEdges() {
+        HashMap<String, Integer> edges = new HashMap<String, Integer>();
+        String[] edgesVers;
+        String edgeIdx;
+        for (Edge edge : this.edges.values()) {
+            edgesVers = edge.getVers();
+            edgeIdx = edgesVers[0] + "->" + edgesVers[1];
+            if (edges.containsKey(edgeIdx)) {
+                int value = edges.get(edgeIdx);
+                value++;
+                edges.put(edgeIdx, value);
+            } else {
+                edges.put(edgeIdx, 1);
+            }
+        }
+        return edges;
     }
 }

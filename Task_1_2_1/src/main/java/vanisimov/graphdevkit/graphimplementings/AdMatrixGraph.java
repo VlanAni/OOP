@@ -1,12 +1,13 @@
 package vanisimov.graphdevkit.graphimplementings;
 
 import vanisimov.graphdevkit.graphelements.*;
-import vanisimov.graphdevkit.io.Out;
+import vanisimov.graphdevkit.graphint.Graph;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
-public class AdMatrixGraph extends Graph {
+public class AdMatrixGraph implements Graph {
 
     private HashMap<String, Vertex> vertexes;
     private HashMap<String, HashMap<String, Integer>> adjMatrix;
@@ -22,7 +23,6 @@ public class AdMatrixGraph extends Graph {
      * @param name - name for the vertex.
      * @param vertex - object of the vertex.
      */
-    @Override
     public void addVertex(String name, Vertex vertex) {
         if (this.vertexes.get(name) != null) {
             return;
@@ -36,7 +36,6 @@ public class AdMatrixGraph extends Graph {
         }
     }
 
-    @Override
     public void deleteVertex(String name) {
         if (this.vertexes.get(name) == null || this.adjMatrix.get(name) == null) {
             return;
@@ -55,7 +54,6 @@ public class AdMatrixGraph extends Graph {
      * @param dst - first node
      * @param src - second node
      */
-    @Override
     public void addEdge(String src, String dst) {
         if (this.vertexes.get(dst) == null || this.vertexes.get(src) == null) {
             return;
@@ -72,7 +70,6 @@ public class AdMatrixGraph extends Graph {
      * @param dst - first node
      * @param src - second node
      */
-    @Override
     public void deleteEdge(String src, String dst) {
         if (this.vertexes.get(dst) == null || this.vertexes.get(src) == null) {
             return;
@@ -85,7 +82,6 @@ public class AdMatrixGraph extends Graph {
         }
     }
 
-    @Override
     public ArrayList<String> getNeibs(String name) {
         ArrayList<String> nbrs = new ArrayList<String>();
 
@@ -102,25 +98,26 @@ public class AdMatrixGraph extends Graph {
     }
 
     @Override
-    public void printGraph() {
-        Out.print("\t");
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append('\t');
         String[] verts = this.vertexes.keySet().toArray(new String[0]);
         for (String v : verts) {
-            Out.printf("%s\t", v);
+            str.append(v).append('\t');
         }
-        Out.print("\n");
+        str.append('\n');
         HashMap<String, Integer> array;
         for (String v : verts) {
-            Out.printf("%s |\t", v);
+            str.append(v).append(" |\t");
             array = this.adjMatrix.get(v);
             for (String adj : verts) {
-                Out.printf("%d\t", array.get(adj));
+                str.append(array.get(adj)).append('\t');
             }
-            Out.print("\n");
+            str.append('\n');
         }
+        return str.toString();
     }
 
-    @Override
     public ArrayList<String> sort() {
         ArrayList<String> result = new ArrayList<>();
         HashMap<String, Integer> visited = new HashMap<>(); // 0 - не посещена, 1 - посещена, 2 - обработана
@@ -155,7 +152,6 @@ public class AdMatrixGraph extends Graph {
         return true;
     }
 
-    @Override
     public int vertexVal(String name) {
         if (this.vertexes.get(name) == null) {
             return -1;
@@ -163,11 +159,37 @@ public class AdMatrixGraph extends Graph {
         return this.vertexes.get(name).getValue();
     }
 
-    @Override
     public void setvertexVal(String name, int val) {
         if (this.vertexes.get(name) == null) {
             return;
         }
         this.vertexes.get(name).setValue(val);
     }
+
+    public HashSet<String> getVertexes() {
+        HashSet<String> vertexes = new HashSet<String>();
+        vertexes.addAll(this.vertexes.keySet());
+        return vertexes;
+    }
+
+    public HashMap<String, Integer> getEdges() {
+        HashMap<String, Integer> edges = new HashMap<String, Integer>();
+        HashMap<String, Integer> row = null;
+        String edgeIdx = null;
+        for (String src : this.vertexes.keySet()) {
+            row = this.adjMatrix.get(src);
+            for (String dst : row.keySet()) {
+                edgeIdx = src + "->" + dst;
+                if (edges.containsKey(edgeIdx)) {
+                    int value = edges.get(edgeIdx);
+                    value++;
+                    edges.put(edgeIdx, value);
+                } else {
+                    edges.put(edgeIdx, 1);
+                }
+            }
+        }
+        return edges;
+    }
+
 }

@@ -1,12 +1,13 @@
 package vanisimov.graphdevkit.graphimplementings;
 
 import vanisimov.graphdevkit.graphelements.Vertex;
-import vanisimov.graphdevkit.io.Out;
+import vanisimov.graphdevkit.graphint.Graph;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
-public class AdListGraph extends Graph {
+public class AdListGraph implements Graph {
 
     private HashMap<String, Vertex> vertexes;
     private HashMap<String, ArrayList<String>> adjLists;
@@ -16,7 +17,6 @@ public class AdListGraph extends Graph {
         this.adjLists = new HashMap<String, ArrayList<String>>();
     }
 
-    @Override
     public void addVertex(String name, Vertex vertex) {
         if (this.vertexes.get(name) != null) {
             return;
@@ -26,7 +26,6 @@ public class AdListGraph extends Graph {
         }
     }
 
-    @Override
     public void deleteVertex(String name) {
         if (this.vertexes.get(name) == null) {
             return;
@@ -45,7 +44,6 @@ public class AdListGraph extends Graph {
         this.adjLists.remove(name);
     }
 
-    @Override
     public void addEdge(String src, String dst) {
         if (this.vertexes.get(src) == null || this.vertexes.get(dst) == null) {
             return;
@@ -55,7 +53,6 @@ public class AdListGraph extends Graph {
         }
     }
 
-    @Override
     public void deleteEdge(String src, String dst) {
         if (this.vertexes.get(src) == null || this.vertexes.get(dst) == null) {
             return;
@@ -70,7 +67,6 @@ public class AdListGraph extends Graph {
         }
     }
 
-    @Override
     public ArrayList<String> getNeibs(String name) {
         ArrayList<String> neighbors = new ArrayList<String>();
         if (this.vertexes.get(name) == null) {
@@ -87,20 +83,21 @@ public class AdListGraph extends Graph {
     }
 
     @Override
-    public void printGraph() {
+    public String toString() {
+        StringBuilder str = new StringBuilder();
         for (String v : this.vertexes.keySet()) {
-            Out.printf("%s:\t", v);
+            str.append(v).append(":\t");
             for (String adjVertex : this.adjLists.get(v)) {
-                Out.printf("[%s]\t", adjVertex);
+                str.append("[").append(adjVertex).append("]\t");
             }
-            Out.print("\n");
+            str.append('\n');
         }
+        return str.toString();
     }
 
-    @Override
     public ArrayList<String> sort() {
         ArrayList<String> result = new ArrayList<>();
-        HashMap<String, Integer> visited = new HashMap<>(); // 0 - не посещена, 1 - посещена, 2 - обработана
+        HashMap<String, Integer> visited = new HashMap<>();
         for (String vertex : vertexes.keySet()) {
             visited.put(vertex, 0);
         }
@@ -119,7 +116,7 @@ public class AdListGraph extends Graph {
         visited.put(curr, 1);
         for (String neighbor : getNeibs(curr)) {
             if (visited.get(neighbor) == 1) {
-                return false; // найден цикл
+                return false;
             }
             if (visited.get(neighbor) == 0) {
                 if (!DFS(neighbor, visited, result)) {
@@ -132,7 +129,6 @@ public class AdListGraph extends Graph {
         return true;
     }
 
-    @Override
     public int vertexVal(String name) {
         if (this.vertexes.get(name) == null) {
             return -1;
@@ -140,11 +136,36 @@ public class AdListGraph extends Graph {
         return this.vertexes.get(name).getValue();
     }
 
-    @Override
     public void setvertexVal(String name, int val) {
         if (this.vertexes.get(name) == null) {
             return;
         }
         this.vertexes.get(name).setValue(val);
+    }
+
+    public HashSet<String> getVertexes() {
+        HashSet<String> vertexes = new HashSet<String>();
+        vertexes.addAll(this.vertexes.keySet());
+        return vertexes;
+    }
+
+    public HashMap<String, Integer> getEdges() {
+        HashMap<String, Integer> edges = new HashMap<String, Integer>();
+        ArrayList<String> neighbors = null;
+        String edgeIdx = null;
+        for (String src : this.vertexes.keySet()) {
+            neighbors = this.adjLists.get(src);
+            for (String dst : neighbors) {
+                edgeIdx = src + "->" + dst;
+                if (edges.containsKey(edgeIdx)) {
+                    int value = edges.get(edgeIdx);
+                    value++;
+                    edges.put(edgeIdx, value);
+                } else {
+                    edges.put(edgeIdx, 1);
+                }
+            }
+        }
+        return edges;
     }
 }
