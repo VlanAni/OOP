@@ -1,0 +1,9 @@
+AdList
+3
+a
+b
+c
+3
+c -> b
+b -> a
+c -> a
