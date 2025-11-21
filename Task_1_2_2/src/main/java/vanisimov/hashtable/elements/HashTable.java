@@ -1,17 +1,13 @@
 package vanisimov.hashtable.elements;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
-import vanisimov.hashtable.SystemIO.StdOut;
+import java.util.*;
 
 public class HashTable<K, V> implements Iterable<Entry<K, V>> {
 
     private static final int stdSize = 10000; // standard capacity for new HashTable
     private static final double maxLoadCoef = 0.85;
-    private ArrayList<Node<K, V>> table;
-    private ArrayList<K> keys;
+    private List<Node<K, V>> table;
+    private List<K> keys;
     private int size;
     private int recordsAmount;
     private int modAmount;
@@ -28,7 +24,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         this.modAmount = 0;
     }
 
-    public V getValue(K key) {
+    public V get(K key) {
         if (key == null) {
             return null;
         }
@@ -61,7 +57,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         return false;
     }
 
-    public boolean checkValue(K key) {
+    public boolean containsKey(K key) {
         if (key == null) {
             return false;
         }
@@ -91,7 +87,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 if (nodeNum == 1) {
                     this.table.set(hashIdx, node.getNext());
                 } else {
-                    lastNode.setNextNode(node.getNext());
+                    lastNode.setNext(node.getNext());
                 }
                 this.keys.remove(key);
                 this.recordsAmount--;
@@ -105,11 +101,11 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     }
 
     // true - if new record has been addrd, otherwise - false
-    public boolean add(K key, V value) {
+    public boolean put(K key, V value) {
         if (key == null || value == null) {
             return false;
         }
-        boolean isExists = this.checkValue(key);
+        boolean isExists = this.containsKey(key);
         // if the record with such a key exists, do nothing
         if (!isExists) {
             int newRecAmount = this.recordsAmount + 1;
@@ -143,8 +139,8 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 }
 
                 for (K key : this.keys) {
-                    V thisValue = this.getValue(key);
-                    V otherValue = other.getValue(key);
+                    V thisValue = this.get(key);
+                    V otherValue = other.get(key);
                     if (otherValue == null || !thisValue.equals(otherValue)) {
                         return false;
                     }
@@ -156,20 +152,21 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         }
     }
 
-    public void printTable() {
-        StdOut.println("==HASH TABLE==");
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         for (K key : this.keys) {
-            StdOut.print("[Key: ");
-            StdOut.print(key);
-            StdOut.print(" | ");
-            StdOut.print("Value: ");
-            StdOut.print(this.getValue(key));
-            StdOut.println(" ]");
+            sb.append("[Key: ");
+            sb.append(key);
+            sb.append(" | ");
+            sb.append("Value: ");
+            sb.append(this.get(key));
+            sb.append(" ] ");
         }
-        StdOut.println("====");
+        return sb.toString();
     }
 
-    public int getRecordsAmount() {
+    public int size() {
         return this.recordsAmount;
     }
 
@@ -186,7 +183,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         for (int i = 0; i < this.size; ++i) {
             newArr.add(null);
         }
-        ArrayList<Node<K, V>> oldArr = this.table;
+        List<Node<K, V>> oldArr = this.table;
         this.table = newArr;
         for (int i = 0; i < oldSize; ++i) {
             Node<K, V> node = oldArr.get(i);
@@ -200,7 +197,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     private void addNodeToBucket(K key, V value) {
         int hashIdx = this.hash(key);
         Node<K, V> newNode = new Node<K, V>(key, value);
-        newNode.setNextNode(this.table.get(hashIdx));
+        newNode.setNext(this.table.get(hashIdx));
         this.table.set(hashIdx, newNode);
     }
 
@@ -224,6 +221,38 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
             this.advanceSearch();
         }
 
+        @Override
+        public boolean hasNext() {
+            this.checkForComodification();
+            return this.currentNode != null;
+        }
+
+        @Override
+        public Entry<K, V> next() {
+            this.checkForComodification();
+
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            this.lastReturned = this.currentNode;
+            Entry<K, V> toReturn = this.currentNode;
+            this.advanceSearch();
+            return toReturn;
+        }
+
+        @Override
+        public void remove() {
+            checkForComodification();
+            if (lastReturned == null) {
+                throw new IllegalStateException();
+            }
+            K keyToRemove = this.lastReturned.getKey();
+            HashTable.this.remove(keyToRemove);
+            this.expectedModCount = HashTable.this.modAmount;
+            lastReturned = null;
+        }
+
         private void checkForComodification() {
             if (HashTable.this.modAmount != this.expectedModCount) {
                 throw new ConcurrentModificationException();
@@ -239,38 +268,6 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 this.currentNode = HashTable.this.table.get(this.currentBucket);
                 this.currentBucket++;
             }
-        }
-
-        @Override
-        public boolean hasNext() {
-            this.checkForComodification();
-            return this.currentNode != null;
-        }
-
-        @Override
-        public Entry<K, V> next() {
-            this.checkForComodification();
-
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-
-            Node<K, V> toReturn = this.currentNode;
-            this.lastReturned = toReturn;
-            this.advanceSearch();
-            return toReturn;
-        }
-
-        @Override
-        public void remove() {
-            checkForComodification();
-            if (lastReturned == null) {
-                throw new IllegalStateException();
-            }
-            K keyToRemove = this.lastReturned.getKey();
-            HashTable.this.remove(keyToRemove);
-            this.expectedModCount = HashTable.this.modAmount;
-            lastReturned = null;
         }
     }
 }

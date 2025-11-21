@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import vanisimov.hashtable.SystemIO.StdOut;
 import vanisimov.hashtable.elements.*;
 
 public class Tests {
@@ -18,27 +19,27 @@ public class Tests {
     @Test
     void testAddAndGet() {
 
-        assertTrue(table.add("key1", 100));
+        assertTrue(table.put("key1", 100));
 
-        assertEquals(100, table.getValue("key1"));
+        assertEquals(100, table.get("key1"));
     }
 
     @Test
     void testAddDuplicate() {
-        table.add("key1", 100);
+        table.put("key1", 100);
 
-        assertFalse(table.add("key1", 200));
+        assertFalse(table.put("key1", 200));
 
-        assertEquals(100, table.getValue("key1"));
+        assertEquals(100, table.get("key1"));
     }
 
     @Test
     void testUpdateValue() {
-        table.add("key1", 100);
+        table.put("key1", 100);
 
         assertTrue(table.updValue("key1", 200));
 
-        assertEquals(200, table.getValue("key1"));
+        assertEquals(200, table.get("key1"));
     }
 
     @Test
@@ -48,22 +49,22 @@ public class Tests {
 
     @Test
     void testCheckValue() {
-        table.add("key1", 100);
+        table.put("key1", 100);
 
-        assertTrue(table.checkValue("key1"));
+        assertTrue(table.containsKey("key1"));
 
-        assertFalse(table.checkValue("nonexistent"));
+        assertFalse(table.containsKey("nonexistent"));
     }
 
     @Test
     void testRemove() {
-        table.add("key1", 100);
+        table.put("key1", 100);
 
         assertTrue(table.remove("key1"));
 
-        assertFalse(table.checkValue("key1"));
+        assertFalse(table.containsKey("key1"));
 
-        assertEquals(0, table.getRecordsAmount());
+        assertEquals(0, table.size());
     }
 
     @Test
@@ -74,15 +75,15 @@ public class Tests {
     @Test
     void testNullHandling() {
 
-        assertFalse(table.add(null, 100));
+        assertFalse(table.put(null, 100));
 
-        assertFalse(table.add("key", null));
+        assertFalse(table.put("key", null));
 
-        assertNull(table.getValue(null));
+        assertNull(table.get(null));
 
         assertFalse(table.updValue(null, 100));
 
-        assertFalse(table.checkValue(null));
+        assertFalse(table.containsKey(null));
 
         assertFalse(table.remove(null));
 
@@ -92,10 +93,10 @@ public class Tests {
     void testResize() {
 
         for (int i = 0; i < 9000; i++) {
-            table.add("key" + i, i);
+            table.put("key" + i, i);
         }
 
-        assertEquals(8999, table.getValue("key8999"));
+        assertEquals(8999, table.get("key8999"));
     }
 
     @Test
@@ -103,11 +104,11 @@ public class Tests {
         HashTable<String, Integer> table1 = new HashTable<>();
         HashTable<String, Integer> table2 = new HashTable<>();
 
-        table1.add("key1", 100);
-        table1.add("key2", 200);
+        table1.put("key1", 100);
+        table1.put("key2", 200);
 
-        table2.add("key1", 100);
-        table2.add("key2", 200);
+        table2.put("key1", 100);
+        table2.put("key2", 200);
 
         assertEquals(table1, table2);
     }
@@ -117,24 +118,24 @@ public class Tests {
         HashTable<String, Integer> table1 = new HashTable<>();
         HashTable<String, Integer> table2 = new HashTable<>();
 
-        table1.add("key1", 100);
-        table2.add("key1", 200);
+        table1.put("key1", 100);
+        table2.put("key1", 200);
 
         assertNotEquals(table1, table2);
     }
 
     @Test
     void testPrintTable() {
-        table.add("key1", 100);
-        table.add("key2", 200);
+        table.put("key1", 100);
+        table.put("key2", 200);
 
-        assertDoesNotThrow(() -> table.printTable());
+        assertDoesNotThrow(() -> StdOut.print(table));
     }
 
     private void fillTableForIteration() {
-        table.add("apple", 10);
-        table.add("banana", 20);
-        table.add("potatoes", 30);
+        table.put("apple", 10);
+        table.put("banana", 20);
+        table.put("potatoes", 30);
     }
 
     @Test
@@ -171,7 +172,7 @@ public class Tests {
 
         it.next();
 
-        table.add("date", 40);
+        table.put("date", 40);
 
         assertThrows(ConcurrentModificationException.class, () -> it.next());
     }
@@ -197,11 +198,26 @@ public class Tests {
 
         assertDoesNotThrow(() -> it.remove());
 
-        assertNull(table.getValue(pair.getKey()));
+        assertNull(table.get(pair.getKey()));
 
-        assertEquals(2, table.getRecordsAmount());
+        assertEquals(2, table.size());
 
         assertDoesNotThrow(() -> it.next());
+    }
+
+    @Test
+    void testForEachRemaining() {
+        table.put("Banana", 1);
+        table.put("Limon", 2);
+        table.put("Apple", 3);
+        StringBuilder sb = new StringBuilder();
+        table.iterator().forEachRemaining(x -> sb.append(x.getValue()));
+        String st = sb.toString();
+
+        assert (st.length() == 3 &&
+                st.contains("1") &&
+                st.contains("2") &&
+                st.contains("3"));
     }
 
     @Test
