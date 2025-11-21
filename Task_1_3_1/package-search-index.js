@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"vanisimov.substringsearch.application"},{"l":"vanisimov.substringsearch.components"},{"l":"vanisimov.substringsearch.exceptions"},{"l":"vanisimov.substringsearch.IO"}];updateSearchResults();
