@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"vanisimov.creditbook.consts"},{"l":"vanisimov.creditbook.implementation"}];updateSearchResults();
