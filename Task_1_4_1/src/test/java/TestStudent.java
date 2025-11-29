@@ -9,11 +9,12 @@ public class TestStudent {
     private static String name = "Анисимов Владимир Сергеевич";
     private static String group = "24214";
     private static EdLevel edLevel = EdLevel.GRADUATED;
+    private static boolean isBudget = true;
 
     @BeforeEach
     void prepareStudent() {
         TestStudent.student = new Student(TestStudent.name,
-                TestStudent.group, TestStudent.edLevel);
+                TestStudent.group, TestStudent.edLevel, TestStudent.isBudget);
     }
 
     @Test
@@ -41,5 +42,12 @@ public class TestStudent {
         assert (!TestStudent.student.getEdLevel().equals(TestStudent.edLevel));
 
         assert (TestStudent.student.getEdLevel().equals(EdLevel.FOURTH));
+    }
+
+    @Test
+    void testGetSetIsBudget() {
+        TestStudent.student.setIsBudget(false);
+
+        assert (!TestStudent.student.getIsBudget());
     }
 }

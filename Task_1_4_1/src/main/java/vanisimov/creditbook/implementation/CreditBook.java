@@ -21,6 +21,9 @@ public class CreditBook {
     }
 
     public void addSemester(Semester semester) {
+        if (semester == null) {
+            return;
+        }
         if (!(this.student.getEdLevel().getValue() <= semester.getSemstrNum().getValue()) &&
                 !this.semesters.contains(semester)) {
             this.semesters.add(semester);
@@ -53,15 +56,31 @@ public class CreditBook {
     }
 
     public boolean canTransferToBudget() {
-        if (semesters.size() < 2) {
+        if (this.student.getIsBudget()) {
+            return true;
+        }
+        if (semesters.size() < 2 ||
+                semesters.size() < (this.student.getEdLevel().getValue() - 1) ||
+                this.student.getEdLevel() == EdLevel.GRADUATED) {
             return false;
         }
-        Semester lastSem = this.semesters.get(this.semesters.size() - 1);
-        Semester preLastSem = this.semesters.get(this.semesters.size() - 2);
+        Semester lastSem = null;
+        Semester preLastSem = null;
+        for (int i = 0; i < this.semesters.size(); i++) {
+            if (this.semesters.get(i).getSemstrNum().getValue() == this.student.getEdLevel().getValue() - 1) {
+                lastSem = this.semesters.get(i);
+            }
+            if (this.semesters.get(i).getSemstrNum().getValue() == this.student.getEdLevel().getValue() - 2) {
+                preLastSem = this.semesters.get(i);
+            }
+        }
         return (successSession(lastSem) && successSession(preLastSem));
     }
 
     private boolean successSession(Semester semester) {
+        if (semester == null) {
+            return false;
+        }
         for (Subject s : this.curriculum.getPlanForSemester(semester.getSemstrNum()).getExams()) {
             if (semester.getExamInfo(s).equals(Mark.SATISFACTORY)) {
                 return false;
@@ -71,6 +90,12 @@ public class CreditBook {
     }
 
     public boolean canGetRedDiploma(Mark vkrMark) {
+        if (semesters.isEmpty()) {
+            return false;
+        }
+        if (semesters.size() < (this.student.getEdLevel().getValue() - 1)) {
+            return false;
+        }
         if (student.getEdLevel() == EdLevel.GRADUATED) {
             if (vkrMark != Mark.EXCELLENT) {
                 return false;
@@ -84,7 +109,7 @@ public class CreditBook {
             if (mark == Mark.SATISFACTORY) {
                 return false;
             }
-            if (mark == Mark.EXCELLENT || mark == Mark.GOOD || mark == Mark.SATISFACTORY) {
+            if (mark != Mark.CREDIT && mark != Mark.NOTEV) {
                 totalGradedCount++;
                 if (mark == Mark.EXCELLENT) {
                     excellentCount++;
@@ -110,9 +135,12 @@ public class CreditBook {
         return finalGrades;
     }
 
-    public boolean canGetIncreasedScholarship() { // в задании не указано, поэтому ПГАС - красный диплом
+    public boolean canGetIncreasedScholarship() { // в задании не указано, поэтому решил, что ПГАС - красный диплом
+        if (!this.student.getIsBudget()) {
+            return false;
+        }
         if (!this.student.getEdLevel().equals(EdLevel.GRADUATED)) {
-            return canGetRedDiploma(Mark.CREDIT);
+            return canGetRedDiploma(Mark.NOTEV);
         } else {
             return false;
         }

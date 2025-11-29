@@ -16,7 +16,7 @@ public class CreditBookTest {
 
     @BeforeEach
     void setUp() {
-        student = new Student("Иванов И.И.", "ФИТ-2101", EdLevel.FOURTH);
+        student = new Student("Иванов И.И.", "24214", EdLevel.FOURTH, true);
         curriculum = new Curriculum();
         creditBook = new CreditBook(student, curriculum);
     }
@@ -24,19 +24,15 @@ public class CreditBookTest {
     private Semester createFullSemester(Num num, Mark examMark, Mark diffCreditMark) {
         Semester semester = new Semester(num);
         SemesterPlan plan = curriculum.getPlanForSemester(num);
-
         for (Subject s : plan.getExams()) {
             semester.putExamInfo(s, examMark);
         }
-
         for (Subject s : plan.getDiffCredits()) {
             semester.putDiffCreditInfo(s, diffCreditMark);
         }
-
         for (Subject s : plan.getCredits()) {
             semester.putCreditInfo(s, Mark.CREDIT);
         }
-
         return semester;
     }
 
@@ -73,9 +69,11 @@ public class CreditBookTest {
         Semester semII = createFullSemester(Num.II, Mark.EXCELLENT, Mark.SATISFACTORY);
         Semester semIII = createFullSemester(Num.III, Mark.GOOD, Mark.SATISFACTORY);
 
-        creditBook.addSemester(semI);
-        creditBook.addSemester(semII);
         creditBook.addSemester(semIII);
+        creditBook.addSemester(semII);
+        creditBook.addSemester(semI);
+
+        creditBook.getStudent().setIsBudget(false);
 
         assertTrue(creditBook.canTransferToBudget());
     }
@@ -84,31 +82,38 @@ public class CreditBookTest {
     void testCanTransferToBudget_FailLastSessionExam() {
         Semester semI = createFullSemester(Num.I, Mark.EXCELLENT, Mark.EXCELLENT);
         Semester semII = createFullSemester(Num.II, Mark.EXCELLENT, Mark.EXCELLENT);
-
         Semester semIII = createFullSemester(Num.III, Mark.GOOD, Mark.EXCELLENT);
         semIII.putExamInfo(Subject.STATISTICS, Mark.SATISFACTORY);
-
         creditBook.addSemester(semI);
         creditBook.addSemester(semII);
         creditBook.addSemester(semIII);
 
-        assertFalse(creditBook.canTransferToBudget());
+        creditBook.getStudent().setIsBudget(false);
+
+        assertFalse (creditBook.canTransferToBudget());
+
+        creditBook.getStudent().setIsBudget(true);
+
+        assert (creditBook.canTransferToBudget());
     }
 
     @Test
     void testCanTransferToBudget_FailPreLastSessionExam() {
         Semester semI = createFullSemester(Num.I, Mark.EXCELLENT, Mark.EXCELLENT);
-
         Semester semII = createFullSemester(Num.II, Mark.EXCELLENT, Mark.EXCELLENT);
         semII.putExamInfo(Subject.MATH, Mark.SATISFACTORY);
-
         Semester semIII = createFullSemester(Num.III, Mark.EXCELLENT, Mark.EXCELLENT);
-
         creditBook.addSemester(semI);
         creditBook.addSemester(semII);
         creditBook.addSemester(semIII);
 
-        assertFalse(creditBook.canTransferToBudget());
+        creditBook.getStudent().setIsBudget(false);
+
+        assertFalse (creditBook.canTransferToBudget());
+
+        creditBook.getStudent().setIsBudget(true);
+
+        assert (creditBook.canTransferToBudget());
     }
 
     @Test
@@ -155,13 +160,11 @@ public class CreditBookTest {
     }
 
     @Test
-    void testCanGetRedDiploma_GraduatedRequiresVkrExcellent() {
+    void testCanGetRedDiploma_GraduatedButNotEnoughSemesters() {
         student.setEdLevel(EdLevel.GRADUATED);
         creditBook.addSemester(createFullSemester(Num.I, Mark.EXCELLENT, Mark.EXCELLENT));
 
         assertFalse(creditBook.canGetRedDiploma(Mark.GOOD));
-
-        assertTrue(creditBook.canGetRedDiploma(Mark.EXCELLENT));
     }
 
     @Test

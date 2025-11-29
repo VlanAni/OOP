@@ -5,7 +5,8 @@ public enum Mark {
     EXCELLENT("Отлично", 5),
     GOOD("Хорошо", 4),
     SATISFACTORY("Удовлетворительно", 3),
-    CREDIT("Зачёт", 0);
+    CREDIT("Зачёт", 0),
+    NOTEV("Неоценено", 0);
 
     private String value;
 
