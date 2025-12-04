@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class StdIn implements AutoCloseable {
 
-    private Scanner input;
+    private final Scanner input;
 
     public StdIn () {
         this.input = new Scanner(System.in);

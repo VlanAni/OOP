@@ -8,11 +8,11 @@ import java.util.List;
 
 public class SearchEngine {
 
-    private String subString;
+    private final String subString;
     private int[] prefFunc;
-    private FileHandler fh;
+    private final Source fh;
 
-    SearchEngine(FileHandler resource, String subString) {
+    SearchEngine(Source resource, String subString) {
         this.fh = resource;
         this.subString = subString;
         this.calcPrefFunc();

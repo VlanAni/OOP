@@ -24,7 +24,7 @@ public class Controller {
     }
 
     public static List<Integer> find(String filePath, String subString) {
-        try (FileHandler fh = new FileHandler(filePath)) {
+        try (Source fh = new Source(filePath)) {
             SearchEngine schEng = new SearchEngine(fh, subString);
             return schEng.findAll();
         } catch (ReadError e) {
