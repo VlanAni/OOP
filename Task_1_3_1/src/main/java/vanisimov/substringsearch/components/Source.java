@@ -28,17 +28,28 @@ class Source implements AutoCloseable {
         }
     }
 
-    char getChar() throws IOException {
-        try {
-            int c = this.in.read();
-            if (c == -1) {
-                throw new EOFException("End of file reached");
-            }
-            return (char) c;
-        } catch (EOFException e) {
-            throw new EOFException("End of file reached");
-        } catch (IOException e) {
-            throw new IOException("I/O error");
+    int getCodePoint() throws IOException {
+        int r = in.read();
+        if (r == -1) {
+            throw new EOFException("EOF");
+        }
+        char c = (char) r;
+
+        if (!Character.isHighSurrogate(c)) {
+            return c;
+        }
+
+        in.mark(1);
+        int r2 = in.read();
+        if (r2 == -1) {
+            return c;
+        }
+        char low = (char) r2;
+        if (Character.isLowSurrogate(low)) {
+            return Character.toCodePoint(c, low);
+        } else {
+            in.reset();
+            return c;
         }
     }
 }

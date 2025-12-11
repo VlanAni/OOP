@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,9 +10,14 @@ public class TestNormalCase {
     public void testTaskExample() {
         try {
             File file = FileGenerator.create("абракадабра");
-            List<Integer> result = Controller.find(file.getPath(), "бра");
+            List<Long> result = Controller.find(file.getPath(), "бра");
 
-            Assertions.assertEquals(List.of(1, 8), result);
+            Assertions.assertNotNull(result);
+
+            assert (result.contains((long) 1) &&
+                    result.contains((long) 8));
+
+            assert (result.size() == 2);
 
         } catch (Exception e) {
 
@@ -28,9 +31,14 @@ public class TestNormalCase {
         try {
             String text = "Hello world! Hello";
             File file = FileGenerator.create(text);
-            List<Integer> result = Controller.find(file.getPath(), "Hello");
+            List<Long> result = Controller.find(file.getPath(), "Hello");
 
-            Assertions.assertEquals(List.of(0, 13), result);
+            Assertions.assertNotNull(result);
+
+            assert (result.contains((long) 0) &&
+                    result.contains((long) 13));
+
+            assert (result.size() == 2);
 
         } catch (Exception e) {
 
@@ -44,9 +52,15 @@ public class TestNormalCase {
         try {
             String text = "one one one";
             File file = FileGenerator.create(text);
-            List<Integer> result = Controller.find(file.getPath(), "one");
+            List<Long> result = Controller.find(file.getPath(), "one");
 
-            Assertions.assertEquals(List.of(0, 4, 8), result);
+            Assertions.assertNotNull(result);
+
+            for (long i = 0; i <= 8; i += 4) {
+                assert (result.contains(i));
+            }
+
+            assert (result.size() == 3);
 
         } catch (Exception e) {
 
@@ -59,9 +73,15 @@ public class TestNormalCase {
     public void testOverlappingStrings() {
         try {
             File file = FileGenerator.create("aaaaa");
-            List<Integer> result = Controller.find(file.getPath(), "aa");
+            List<Long> result = Controller.find(file.getPath(), "aa");
 
-            Assertions.assertEquals(List.of(0, 1, 2, 3), result);
+            Assertions.assertNotNull(result);
+
+            for (long i = 0; i <= 3; i++) {
+                assert (result.contains(i));
+            }
+
+            assert (result.size() == 4);
 
         } catch (IOException e) {
 
@@ -71,19 +91,25 @@ public class TestNormalCase {
     }
 
     @Test
-    public void testLoongFile() {
+    public void testLoongFile16GB() {
         try {
-            StringBuilder sb = new StringBuilder();
-            Collection<Integer> indexes = new ArrayList<Integer>();
-            String subStr = "very loooooooooooooooooooooooooooooooong pattern";
-            for (int i = 1; i <= 200000; ++i) {
-                sb.append(subStr).append('\n');
-                indexes.add((i - 1) * (subStr.length() + 1));
-            }
-            File file = FileGenerator.create(sb.toString());
-            List<Integer> result = Controller.find(file.getPath(), subStr);
+            String subStr = "ф".repeat(100);
+            // топорно формируем содержимое файла
+            StringBuilder arg = new StringBuilder();
+            arg.append(subStr);
+            arg.append("#".repeat(100));
+            long size = 42_949_670; // размер = +- 16 ГБ
+            File file = FileGenerator.createLargeChars(size, arg.toString());
 
-            Assertions.assertTrue(result.containsAll(indexes));
+            List<Long> result = Controller.find(file.getPath(), subStr);
+
+            Assertions.assertNotNull(result);
+
+            for (long i = 0; size - i >= 100 && i < size; i += arg.length()) {
+
+                assert (result.contains(i));
+
+            }
 
         } catch (Exception e) {
 
@@ -98,20 +124,18 @@ public class TestNormalCase {
     public void testSmile() {
         try {
             StringBuilder sb = new StringBuilder();
-            int location = 0;
             for (int i = 0x1F600; i <= 0x1F604; ++i) {
-                if (i == 0x1F602) { // нам нужно зафиксировать, на какой позиции в массиве char'ов появился нужный смайл
-                    location = sb.length();
-                }
                 sb.append(Character.toChars(i)); // добавляем смайлики используя код-поинты из Unicod'а
             }
             StringBuilder pattern = new StringBuilder();
             pattern.append(Character.toChars(0x1F602));
             pattern.append(Character.toChars(0x1F603));
             File file = FileGenerator.create(sb.toString());
-            List<Integer> result = Controller.find(file.getPath(), pattern.toString());
+            List<Long> result = Controller.find(file.getPath(), pattern.toString());
 
-            Assertions.assertTrue(result.contains(location) &&
+            Assertions.assertNotNull(result);
+
+            Assertions.assertTrue(result.contains((long) 2) &&
                     result.size() == 1);
 
         } catch (Exception e) {
@@ -127,19 +151,17 @@ public class TestNormalCase {
     public void testJapanese() {
         try {
             StringBuilder sb = new StringBuilder();
-            int location = 0;
             for (int i = 0x3041; i <= 0x3049; i += 2) { // ищем среди маленьких букв
-                if (i == 0x3045) { // нам нужно зафиксировать, на какой позиции в массиве char'ов появился нужный смайл
-                    location = sb.length();
-                }
                 sb.append(Character.toChars(i)); // добавляем смайлики используя код-поинты из Unicod'а
             }
             StringBuilder pattern = new StringBuilder();
             pattern.append(Character.toChars(0x3045));
             File file = FileGenerator.create(sb.toString());
-            List<Integer> result = Controller.find(file.getPath(), pattern.toString());
+            List<Long> result = Controller.find(file.getPath(), pattern.toString());
 
-            Assertions.assertTrue(result.contains(location) &&
+            Assertions.assertNotNull(result);
+
+            Assertions.assertTrue(result.contains((long) 2) &&
                     result.size() == 1);
 
         } catch (Exception e) {

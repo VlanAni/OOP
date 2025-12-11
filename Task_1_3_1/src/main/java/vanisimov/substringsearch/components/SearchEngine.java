@@ -8,34 +8,34 @@ import java.util.List;
 
 public class SearchEngine {
 
-    private final String subString;
+    private final int[] pattern;
     private int[] prefFunc;
     private final Source fh;
 
     SearchEngine(Source resource, String subString) {
         this.fh = resource;
-        this.subString = subString;
+        this.pattern = subString.codePoints().toArray();
         this.calcPrefFunc();
     }
 
-    List<Integer> findAll() throws ReadError {
-        List<Integer> occurrences = new ArrayList<>();
-        if (subString.isEmpty()) {
+    List<Long> findAll() throws ReadError {
+        List<Long> occurrences = new ArrayList<>();
+        if (pattern.length == 0) {
             return occurrences;
         }
         int j = 0;
-        int position = 0;
+        long position = 0;
         try {
             while (true) {
-                char c = fh.getChar();
-                while (j > 0 && c != subString.charAt(j)) {
+                int c = fh.getCodePoint();
+                while (j > 0 && c != this.pattern[j]) {
                     j = prefFunc[j - 1];
                 }
-                if (c == subString.charAt(j)) {
+                if (c == this.pattern[j]) {
                     j++;
                 }
-                if (j == subString.length()) {
-                    int startPosition = position - subString.length() + 1;
+                if (j == this.pattern.length) {
+                    long startPosition = position - pattern.length + 1;
                     occurrences.add(startPosition);
                     j = prefFunc[j - 1];
                 }
@@ -49,14 +49,14 @@ public class SearchEngine {
     }
 
     private void calcPrefFunc() {
-        this.prefFunc = new int[this.subString.length()];
+        this.prefFunc = new int[this.pattern.length];
         for (int i = 1; i < this.prefFunc.length; ++i) {
             int cur = this.prefFunc[i - 1];
-            while (this.subString.charAt(i) != this.subString.charAt(cur) &&
+            while (this.pattern[i] != this.pattern[cur] &&
                     cur > 0) {
                 cur = this.prefFunc[cur - 1];
             }
-            if (this.subString.charAt(i) == this.subString.charAt(cur)) {
+            if (this.pattern[i] == this.pattern[cur]) {
                 this.prefFunc[i] = cur + 1;
             }
         }

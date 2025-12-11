@@ -15,7 +15,7 @@ public class Controller {
         if (!Controller.readUserInput()) {
             return;
         }
-        List<Integer> result = Controller.find(Controller.fileName, Controller.subString);
+        List<Long> result = Controller.find(Controller.fileName, Controller.subString);
         if (result == null) {
             StdOut.println("Errors occurs: IO-error");
         } else {
@@ -23,7 +23,7 @@ public class Controller {
         }
     }
 
-    public static List<Integer> find(String filePath, String subString) {
+    public static List<Long> find(String filePath, String subString) {
         try (Source fh = new Source(filePath)) {
             SearchEngine schEng = new SearchEngine(fh, subString);
             return schEng.findAll();

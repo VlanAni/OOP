@@ -1,10 +1,9 @@
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-import vanisimov.substringsearch.components.Controller;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import vanisimov.substringsearch.components.Controller;
 
 public class TestEmptyCase {
 
@@ -12,9 +11,15 @@ public class TestEmptyCase {
     public void testEmptyFile() throws IOException {
         try {
             File file = FileGenerator.create("");
-            List<Integer> result = Controller.find(file.getPath(), "abc");
+            List<Long> result = Controller.find(file.getPath(), "abc");
 
-            Assertions.assertTrue(result.isEmpty());
+            try {
+                Assertions.assertTrue(result.isEmpty());
+            } catch (NullPointerException e) {
+
+                assert (false);
+
+            }
 
         } catch (Exception e) {
 
@@ -27,9 +32,15 @@ public class TestEmptyCase {
     public void testEmptyPattern() throws IOException {
         try {
             File file = FileGenerator.create("some text content");
-            List<Integer> result = Controller.find(file.getPath(), "");
+            List<Long> result = Controller.find(file.getPath(), "");
 
-            Assertions.assertTrue(result.isEmpty());
+            try {
+                Assertions.assertTrue(result.isEmpty());
+            } catch (NullPointerException e) {
+
+                assert (false);
+
+            }
 
         } catch (Exception e) {
 
@@ -42,9 +53,15 @@ public class TestEmptyCase {
     public void testEmptyFileAndPattern() throws IOException {
         try {
             File file = FileGenerator.create("");
-            List<Integer> result = Controller.find(file.getPath(), "");
+            List<Long> result = Controller.find(file.getPath(), "");
 
-            Assertions.assertTrue(result.isEmpty());
+            try {
+                Assertions.assertTrue(result.isEmpty());
+            } catch (NullPointerException e) {
+
+                assert (false);
+
+            }
 
         } catch (Exception e) {
 
