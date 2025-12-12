@@ -1,5 +1,7 @@
 package vanisimov.creditbook.consts;
 
+import lombok.Getter;
+
 public enum Mark {
 
     EXCELLENT("Отлично", 5),
@@ -8,17 +10,14 @@ public enum Mark {
     CREDIT("Зачёт", 0),
     NOTEV("Неоценено", 0);
 
+    @Getter
     private String value;
 
-    private int intVal;
+    private final int intVal;
 
     private Mark(String value, int intVal) {
         this.value = value;
         this.intVal = intVal;
-    }
-
-    public String getValue() {
-        return this.value;
     }
 
     public int getIntValue() {

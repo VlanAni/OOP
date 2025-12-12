@@ -1,14 +1,14 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vanisimov.creditbook.consts.Mark;
-import vanisimov.creditbook.consts.Num;
+import vanisimov.creditbook.consts.SemesterNum;
 import vanisimov.creditbook.consts.Subject;
 import vanisimov.creditbook.implementation.Semester;
 
 public class TestSemester {
 
     private static Semester sem;
-    private static Num num = Num.III;
+    private static final SemesterNum num = SemesterNum.III;
 
     @BeforeEach
     void prepareSem() {
@@ -17,11 +17,11 @@ public class TestSemester {
 
     @Test
     void testGetSetNum() {
-        TestSemester.sem.setSemstrNum(Num.V);
+        TestSemester.sem.setSemesterNum(SemesterNum.V);
 
-        assert (TestSemester.sem.getSemstrNum().equals(Num.V));
+        assert (TestSemester.sem.getSemesterNum().equals(SemesterNum.V));
 
-        assert (!TestSemester.sem.getSemstrNum().equals(TestSemester.num));
+        assert (!TestSemester.sem.getSemesterNum().equals(TestSemester.num));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class TestSemester {
                 semInfo.contains("ДИФ-ЗАЧЁТЫ") &&
                 semInfo.contains("ЭКЗАМЕНЫ"));
 
-        assert (semInfo.contains(TestSemester.sem.getSemstrNum().name()));
+        assert (semInfo.contains(TestSemester.sem.getSemesterNum().name()));
 
         assert (semInfo.contains(Subject.LAW.getSubName() + ": " + Mark.CREDIT.getValue()));
 

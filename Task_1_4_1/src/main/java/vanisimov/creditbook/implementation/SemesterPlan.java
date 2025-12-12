@@ -1,8 +1,11 @@
 package vanisimov.creditbook.implementation;
 
 import java.util.List;
+
+import lombok.Getter;
 import vanisimov.creditbook.consts.Subject;
 
+@Getter
 public class SemesterPlan {
 
     private final List<Subject> credits;
@@ -14,8 +17,4 @@ public class SemesterPlan {
         this.diffCredits = diffCredits;
         this.exams = exams;
     }
-
-    public List<Subject> getCredits() { return credits; }
-    public List<Subject> getDiffCredits() { return diffCredits; }
-    public List<Subject> getExams() { return exams; }
 }

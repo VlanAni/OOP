@@ -2,8 +2,11 @@ package vanisimov.creditbook.implementation;
 
 import java.util.EnumMap;
 import java.util.Map;
+
+import lombok.Getter;
+import lombok.Setter;
 import vanisimov.creditbook.consts.Mark;
-import vanisimov.creditbook.consts.Num;
+import vanisimov.creditbook.consts.SemesterNum;
 import vanisimov.creditbook.consts.Subject;
 
 /**
@@ -11,13 +14,15 @@ import vanisimov.creditbook.consts.Subject;
  */
 public class Semester {
 
-    private Map<Subject, Mark> credits;
-    private Map<Subject, Mark> diffCredits;
-    private Map<Subject, Mark> exams;
-    private Num semstrNum;
+    private final Map<Subject, Mark> credits;
+    private final Map<Subject, Mark> diffCredits;
+    private final Map<Subject, Mark> exams;
+    @Getter
+    @Setter
+    private SemesterNum semesterNum;
 
-    public Semester(Num semstrNum) {
-        this.semstrNum = semstrNum;
+    public Semester(SemesterNum semestrNum) {
+        this.semesterNum = semestrNum;
         this.credits = new EnumMap<>(Subject.class);
         this.diffCredits = new EnumMap<>(Subject.class);
         this.exams = new EnumMap<>(Subject.class);
@@ -47,18 +52,10 @@ public class Semester {
         this.exams.put(sub, mark);
     }
 
-    public Num getSemstrNum() {
-        return this.semstrNum;
-    }
-
-    public void setSemstrNum(Num newNum) {
-        this.semstrNum = newNum;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("--СЕМЕСТР: ").append(this.semstrNum.name()).append(" --\n");
+        sb.append("--СЕМЕСТР: ").append(this.semesterNum.name()).append(" --\n");
         addInfo(sb);
         return sb.toString();
     }

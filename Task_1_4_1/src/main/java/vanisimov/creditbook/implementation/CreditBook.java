@@ -1,18 +1,21 @@
 package vanisimov.creditbook.implementation;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
+
+import lombok.Getter;
 import vanisimov.creditbook.consts.EdLevel;
 import vanisimov.creditbook.consts.Mark;
 import vanisimov.creditbook.consts.Subject;
 
 public class CreditBook {
 
-    private final Student student;
-    private final Curriculum curriculum;
-    private final List<Semester> semesters;
+    @Getter
+    private final Student student; // студент
+    @Getter
+    private final Curriculum curriculum; // учебный план
+    @Getter
+    private final List<Semester> semesters; // список семестров
 
     public CreditBook(Student student, Curriculum curriculum) {
         this.student = student;
@@ -24,39 +27,33 @@ public class CreditBook {
         if (semester == null) {
             return;
         }
-        if (!(this.student.getEdLevel().getValue() <= semester.getSemstrNum().getValue()) &&
+        if (!(this.student.getEdLevel().getValue() <= semester.getSemesterNum().getValue()) &&
                 !this.semesters.contains(semester)) {
             this.semesters.add(semester);
         }
     }
 
     public double calculateAverage() {
-        int totalSum = 0;
-        int count = 0;
-        int currentEdLevelValue = student.getEdLevel().getValue();
-
-        for (Semester semester : semesters) {
-            if (semester.getSemstrNum().getValue() >= currentEdLevelValue) {
-                continue;
-            }
-            List<Subject> diffCredits = curriculum.getPlanForSemester(semester.getSemstrNum()).getDiffCredits();
-            for (Subject s : diffCredits) {
-                Mark mark = semester.getDiffCreditInfo(s);
-                count++;
-                totalSum += mark.getIntValue();
-            }
-            List<Subject> exams = curriculum.getPlanForSemester(semester.getSemstrNum()).getExams();
-            for (Subject s : exams) {
-                Mark mark = semester.getExamInfo(s);
-                count++;
-                totalSum += mark.getIntValue();
+        List<Mark>grades = this.getAllGrades();
+        if (grades == null || grades.isEmpty()) {
+            return 0;
+        } else {
+            Stream<Mark> marks = grades.stream();
+            try {
+                OptionalDouble average = marks.mapToInt(Mark::getIntValue).average(); // получаем среднее значение
+                if (average.isPresent()) {
+                    return average.getAsDouble();
+                } else {
+                    return 0;
+                }
+            } catch (Exception e) {
+                return 0;
             }
         }
-        return count > 0 ? (double) totalSum / count : 0.0;
     }
 
     public boolean canTransferToBudget() {
-        if (this.student.getIsBudget()) {
+        if (this.student.isBudget()) {
             return true;
         }
         if (semesters.size() < 2 ||
@@ -67,26 +64,14 @@ public class CreditBook {
         Semester lastSem = null;
         Semester preLastSem = null;
         for (int i = 0; i < this.semesters.size(); i++) {
-            if (this.semesters.get(i).getSemstrNum().getValue() == this.student.getEdLevel().getValue() - 1) {
+            if (this.semesters.get(i).getSemesterNum().getValue() == this.student.getEdLevel().getValue() - 1) {
                 lastSem = this.semesters.get(i);
             }
-            if (this.semesters.get(i).getSemstrNum().getValue() == this.student.getEdLevel().getValue() - 2) {
+            if (this.semesters.get(i).getSemesterNum().getValue() == this.student.getEdLevel().getValue() - 2) {
                 preLastSem = this.semesters.get(i);
             }
         }
         return (successSession(lastSem) && successSession(preLastSem));
-    }
-
-    private boolean successSession(Semester semester) {
-        if (semester == null) {
-            return false;
-        }
-        for (Subject s : this.curriculum.getPlanForSemester(semester.getSemstrNum()).getExams()) {
-            if (semester.getExamInfo(s).equals(Mark.SATISFACTORY)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public boolean canGetRedDiploma(Mark vkrMark) {
@@ -101,42 +86,27 @@ public class CreditBook {
                 return false;
             }
         }
-        int excellentCount = 0;
-        int totalGradedCount = 0;
-        Map<Subject, Mark> finalGrades = getFinalGrades();
-        for (Map.Entry<Subject, Mark> entry : finalGrades.entrySet()) {
-            Mark mark = entry.getValue();
-            if (mark == Mark.SATISFACTORY) {
-                return false;
-            }
-            if (mark != Mark.CREDIT && mark != Mark.NOTEV) {
-                totalGradedCount++;
-                if (mark == Mark.EXCELLENT) {
-                    excellentCount++;
-                }
-            }
-        }
-        if (totalGradedCount == 0) {
+        List<Mark> finalGrades = getAllGrades();
+        if (finalGrades == null) {
             return false;
         }
-        return (double) excellentCount / totalGradedCount >= 0.75;
-    }
-
-    private Map<Subject, Mark> getFinalGrades() {
-        EnumMap<Subject, Mark> finalGrades = new EnumMap<>(Subject.class);
-        for (Semester sem : this.semesters) {
-            for (Subject s : this.curriculum.getPlanForSemester(sem.getSemstrNum()).getExams()) {
-                finalGrades.put(s, sem.getExamInfo(s));
+        if (finalGrades.stream().anyMatch(m -> m.equals(Mark.SATISFACTORY))) {
+            return false;
+        } else {
+            long excellentCount = finalGrades.stream().
+                    filter(m -> m.equals(Mark.EXCELLENT)).
+                    count();
+            long totalGradedCount = finalGrades.stream().
+                    filter(m -> !(m.equals(Mark.CREDIT) || m.equals(Mark.NOTEV))).count();
+            if (totalGradedCount == (long) 0) {
+                return false;
             }
-            for (Subject s : this.curriculum.getPlanForSemester(sem.getSemstrNum()).getDiffCredits()) {
-                finalGrades.put(s, sem.getDiffCreditInfo(s));
-            }
+            return (double) excellentCount / totalGradedCount >= 0.75;
         }
-        return finalGrades;
     }
 
     public boolean canGetIncreasedScholarship() { // в задании не указано, поэтому решил, что ПГАС - красный диплом
-        if (!this.student.getIsBudget()) {
+        if (!this.student.isBudget()) {
             return false;
         }
         if (!this.student.getEdLevel().equals(EdLevel.GRADUATED)) {
@@ -146,7 +116,50 @@ public class CreditBook {
         }
     }
 
-    public Student getStudent() { return student; }
-    public Curriculum getCurriculum() { return curriculum; }
-    public List<Semester> getSemesters() { return semesters; }
+    // данные по семестрам в предмете
+    private List<Mark> getAllGrades() {
+        List<Mark> finalGrades = new ArrayList<>();
+        for (Semester sem : this.semesters) {
+
+            List<Subject> planPart = this.curriculum.getPlanForSemester(sem.getSemesterNum()).getCredits();
+            List<Mark> valMarks = null;
+            if (planPart.
+                    stream().
+                    map(sem::getCreditInfo).
+                    anyMatch(Objects::isNull)) {
+                return null;
+            }
+
+            // добавляем экзамены
+            planPart = this.curriculum.getPlanForSemester(sem.getSemesterNum()).getExams();
+            if (planPart.stream().map(sem::getExamInfo).anyMatch(Objects::isNull)) {
+                return null;
+            } else {
+                valMarks = planPart.stream().map(sem::getExamInfo).toList();
+                finalGrades.addAll(valMarks);
+            }
+
+            // добавляем диф.зачёты
+            planPart = this.curriculum.getPlanForSemester(sem.getSemesterNum()).getDiffCredits();
+            if (planPart.stream().map(sem::getDiffCreditInfo).anyMatch(Objects::isNull)) {
+                return null;
+            } else {
+                valMarks = planPart.stream().map(sem::getDiffCreditInfo).toList();
+                finalGrades.addAll(valMarks);
+            }
+
+        }
+        return finalGrades;
+    }
+
+    private boolean successSession(Semester semester) {
+        if (semester == null) {
+            return false;
+        }
+        List<Subject> subjects = this.curriculum.getPlanForSemester(semester.getSemesterNum()).getExams();
+        return subjects.
+                stream().
+                map(semester::getExamInfo).
+                noneMatch(mark -> mark == null || mark.equals(Mark.SATISFACTORY));
+    }
 }

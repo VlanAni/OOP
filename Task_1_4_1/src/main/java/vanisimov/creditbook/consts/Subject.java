@@ -1,5 +1,8 @@
 package vanisimov.creditbook.consts;
 
+import lombok.Getter;
+
+@Getter
 public enum Subject {
 
     // седьмой и восьмой семестры
@@ -65,14 +68,10 @@ public enum Subject {
     // только первый семестр
     STATEHOOD("Основы российской государственности"); // диф-зачёт
 
-    private String subName;
+    private final String subName;
 
     private Subject(String subName) {
         this.subName = subName;
-    }
-
-    public String getSubName() {
-        return this.subName;
     }
 
 }

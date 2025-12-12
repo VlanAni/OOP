@@ -6,10 +6,10 @@ import vanisimov.creditbook.implementation.Student;
 public class TestStudent {
 
     private static Student student;
-    private static String name = "Анисимов Владимир Сергеевич";
-    private static String group = "24214";
-    private static EdLevel edLevel = EdLevel.GRADUATED;
-    private static boolean isBudget = true;
+    private static final String name = "Анисимов Владимир Сергеевич";
+    private static final String group = "24214";
+    private static final EdLevel edLevel = EdLevel.GRADUATED;
+    private static final boolean isBudget = true;
 
     @BeforeEach
     void prepareStudent() {
@@ -46,8 +46,8 @@ public class TestStudent {
 
     @Test
     void testGetSetIsBudget() {
-        TestStudent.student.setIsBudget(false);
+        TestStudent.student.setBudget(false);
 
-        assert (!TestStudent.student.getIsBudget());
+        assert (!TestStudent.student.isBudget());
     }
 }
