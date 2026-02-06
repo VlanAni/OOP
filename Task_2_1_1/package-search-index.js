@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"vanisimov.task2_1_1.parallelstreamsolution"},{"l":"vanisimov.task2_1_1.primechecker"},{"l":"vanisimov.task2_1_1.sequentialsolution"},{"l":"vanisimov.task2_1_1.solutioninterface"},{"l":"vanisimov.task2_1_1.threadsolution"}];updateSearchResults();
