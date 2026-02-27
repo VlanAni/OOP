@@ -59,7 +59,7 @@ public class Pizzeria {
         try {
             for (Thread t : bakers) t.join();
             for (Thread t : couriers) t.join();
-        } catch (InterruptedException _) {
+        } catch (InterruptedException e) {
         }
         Formatter.logSystem("Все сотрудники остановили работу. Собираем незавершенные заказы...");
         List<Order> unfinished = new ArrayList<>();
