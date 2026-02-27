@@ -1,0 +1,8 @@
+vovchik.pizzasimulator.application
+vovchik.pizzasimulator.baker
+vovchik.pizzasimulator.courier
+vovchik.pizzasimulator.formatter
+vovchik.pizzasimulator.jsonreader
+vovchik.pizzasimulator.order
+vovchik.pizzasimulator.pizzeria
+vovchik.pizzasimulator.threadsafequeues
