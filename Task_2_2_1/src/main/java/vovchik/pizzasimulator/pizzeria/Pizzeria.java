@@ -8,16 +8,22 @@ import vovchik.pizzasimulator.threadsafequeues.Storage;
 import vovchik.pizzasimulator.formatter.Formatter;
 import vovchik.pizzasimulator.baker.Baker;
 import vovchik.pizzasimulator.courier.Courier;
+import vovchik.pizzasimulator.threadsafequeues.ThreadSafeQueue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pizzeria {
 
-    private final OrderQueue orderQueue;
-    private final Storage storage;
-    private final List<Thread> bakers;
-    private final List<Thread> couriers;
+    private final ThreadSafeQueue orderQueue;
+    private final ThreadSafeQueue storage;
+
+    private final List<Baker> bakerWorkers;
+    private final List<Courier> courierWorkers;
+
+    private final List<Thread> bakerThreads;
+    private final List<Thread> courierThreads;
+
     private final JsonReader jsonReader;
     private final String ordersFilePath;
 
@@ -25,46 +31,77 @@ public class Pizzeria {
         jsonReader = new JsonReader();
         this.ordersFilePath = ordersFilePath;
         PizzeriaConfig config = jsonReader.readConfig(configPath);
+
         orderQueue = new OrderQueue();
         storage = new Storage(config.storageCapacity);
-        bakers = new ArrayList<>();
-        couriers = new ArrayList<>();
+
+        bakerWorkers = new ArrayList<>();
+        courierWorkers = new ArrayList<>();
+        bakerThreads = new ArrayList<>();
+        courierThreads = new ArrayList<>();
+
         int bakerId = 1;
         for (var bakerConfig : config.bakers) {
             Baker baker = new Baker(bakerId++, bakerConfig.cookingTime, orderQueue, storage);
-            bakers.add(new Thread(baker, "Baker-" + bakerId));
+            bakerWorkers.add(baker);
+            bakerThreads.add(new Thread(baker, "Baker-" + bakerId));
         }
+
         int courierId = 1;
         for (var courierConfig : config.couriers) {
             Courier courier = new Courier(courierId++, courierConfig.bagCapacity, courierConfig.deliveryTime, storage);
-            couriers.add(new Thread(courier, "Courier-" + courierId));
+            courierWorkers.add(courier);
+            courierThreads.add(new Thread(courier, "Courier-" + courierId));
         }
     }
 
     public void start() {
         Formatter.logSystem("Пиццерия открывается!...");
-        for (Thread t : bakers) t.start();
-        for (Thread t : couriers) t.start();
+        for (Thread t : bakerThreads) t.start();
+        for (Thread t : courierThreads) t.start();
+
         List<Order> pendingOrders = jsonReader.readOrders(ordersFilePath);
         Formatter.logSystem("Загружено заказов на сегодня: " + pendingOrders.size());
-        for (Order order : pendingOrders) {
-            orderQueue.put(order);
+        try {
+            for (Order order : pendingOrders) {
+                orderQueue.put(order);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
     public void shutdown() {
         Formatter.logSystem("Пиццерия закрывается...");
-        for (Thread t : bakers) t.interrupt();
-        for (Thread t : couriers) t.interrupt();
-        try {
-            for (Thread t : bakers) t.join();
-            for (Thread t : couriers) t.join();
-        } catch (InterruptedException e) {
-        }
-        Formatter.logSystem("Все сотрудники остановили работу. Собираем незавершенные заказы...");
+
+        for (Thread t : bakerThreads) t.interrupt();
+        for (Thread t : courierThreads) t.interrupt();
+
         List<Order> unfinished = new ArrayList<>();
         unfinished.addAll(orderQueue.drainOrders());
         unfinished.addAll(storage.drainOrders());
+
+        try {
+            for (Thread t : bakerThreads) t.join();
+            for (Thread t : courierThreads) t.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        for (Baker baker : bakerWorkers) {
+            Order order = baker.getOrderInWork();
+            if (order != null) {
+                unfinished.add(order);
+            }
+        }
+
+        for (Courier courier : courierWorkers) {
+            List<Order> orders = courier.getOrdersInBag();
+            if (orders != null && !orders.isEmpty()) {
+                unfinished.addAll(orders);
+            }
+        }
+
         jsonReader.writeOrders(ordersFilePath, unfinished);
         Formatter.logSystem("Пиццерия закрыта. Сохранено " + unfinished.size() + " заказов на завтра.");
     }

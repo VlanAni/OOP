@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Timeout;
 import vovchik.pizzasimulator.order.Order;
 import vovchik.pizzasimulator.order.OrderStatus;
 import vovchik.pizzasimulator.threadsafequeues.OrderQueue;
+import vovchik.pizzasimulator.threadsafequeues.ThreadSafeQueue;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestOrderQueue {
 
-    private OrderQueue queue;
+    private ThreadSafeQueue queue;
 
     @BeforeEach
     void setUp() {
@@ -32,7 +33,7 @@ class TestOrderQueue {
     }
 
     @Test
-    void testDrain() {
+    void testDrain() throws InterruptedException {
         queue.put(new Order(1, OrderStatus.PENDING));
         queue.put(new Order(2, OrderStatus.PENDING));
         List<Order> drained = queue.drainOrders();

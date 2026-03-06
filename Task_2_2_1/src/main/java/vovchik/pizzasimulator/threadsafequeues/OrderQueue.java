@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class OrderQueue {
+public class OrderQueue implements ThreadSafeQueue {
 
     private final Queue<Order> newOrders;
 
@@ -32,8 +32,10 @@ public class OrderQueue {
     public synchronized List<Order> drainOrders() {
         List<Order> copy = new ArrayList<>(newOrders);
         newOrders.clear();
-        notifyAll();
         return copy;
     }
 
+    public synchronized boolean isEmpty() {
+        return newOrders.isEmpty();
+    }
 }

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class Storage {
+public class Storage implements ThreadSafeQueue {
 
     private final Queue<Order> completedOrders;
     private final int capacity;
@@ -34,15 +34,15 @@ public class Storage {
         notifyAll();
     }
 
-    public boolean isEmpty() {
-        return completedOrders.isEmpty();
-    }
-
     public synchronized List<Order> drainOrders() {
         List<Order> copy = new ArrayList<>(completedOrders);
         completedOrders.clear();
         notifyAll();
         return copy;
+    }
+
+    public synchronized boolean isEmpty() {
+        return completedOrders.isEmpty();
     }
 
     private int getSize() {

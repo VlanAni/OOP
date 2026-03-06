@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Timeout;
 import vovchik.pizzasimulator.order.Order;
 import vovchik.pizzasimulator.order.OrderStatus;
 import vovchik.pizzasimulator.threadsafequeues.Storage;
+import vovchik.pizzasimulator.threadsafequeues.ThreadSafeQueue;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestStorage {
 
-    private Storage storage;
+    private ThreadSafeQueue storage;
 
     @BeforeEach
     void setUp() {
