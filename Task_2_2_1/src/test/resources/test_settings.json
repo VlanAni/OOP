@@ -1,0 +1,5 @@
+{
+  "storageCapacity": 2,
+  "bakers": [{"cookingTime": 2}, {"cookingTime": 2}],
+  "couriers": [{"bagCapacity": 2, "deliveryTime": 1}]
+}
