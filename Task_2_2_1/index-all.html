@@ -63,7 +63,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/baker/Baker.html" class="type-name-link" title="class in vovchik.pizzasimulator.baker">Baker</a> - Class in <a href="vovchik/pizzasimulator/baker/package-summary.html">vovchik.pizzasimulator.baker</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="vovchik/pizzasimulator/baker/Baker.html#%3Cinit%3E(int,int,vovchik.pizzasimulator.threadsafequeues.OrderQueue,vovchik.pizzasimulator.threadsafequeues.Storage)" class="member-name-link">Baker(int, int, OrderQueue, Storage)</a> - Constructor for class vovchik.pizzasimulator.baker.<a href="vovchik/pizzasimulator/baker/Baker.html" title="class in vovchik.pizzasimulator.baker">Baker</a></dt>
+<dt><a href="vovchik/pizzasimulator/baker/Baker.html#%3Cinit%3E(int,int,vovchik.pizzasimulator.threadsafequeues.ThreadSafeQueue,vovchik.pizzasimulator.threadsafequeues.ThreadSafeQueue)" class="member-name-link">Baker(int, int, ThreadSafeQueue, ThreadSafeQueue)</a> - Constructor for class vovchik.pizzasimulator.baker.<a href="vovchik/pizzasimulator/baker/Baker.html" title="class in vovchik.pizzasimulator.baker">Baker</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/jsonreader/BakerConfig.html" class="type-name-link" title="class in vovchik.pizzasimulator.jsonreader">BakerConfig</a> - Class in <a href="vovchik/pizzasimulator/jsonreader/package-summary.html">vovchik.pizzasimulator.jsonreader</a></dt>
 <dd>&nbsp;</dd>
@@ -86,7 +86,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/courier/Courier.html" class="type-name-link" title="class in vovchik.pizzasimulator.courier">Courier</a> - Class in <a href="vovchik/pizzasimulator/courier/package-summary.html">vovchik.pizzasimulator.courier</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="vovchik/pizzasimulator/courier/Courier.html#%3Cinit%3E(int,int,int,vovchik.pizzasimulator.threadsafequeues.Storage)" class="member-name-link">Courier(int, int, int, Storage)</a> - Constructor for class vovchik.pizzasimulator.courier.<a href="vovchik/pizzasimulator/courier/Courier.html" title="class in vovchik.pizzasimulator.courier">Courier</a></dt>
+<dt><a href="vovchik/pizzasimulator/courier/Courier.html#%3Cinit%3E(int,int,int,vovchik.pizzasimulator.threadsafequeues.ThreadSafeQueue)" class="member-name-link">Courier(int, int, int, ThreadSafeQueue)</a> - Constructor for class vovchik.pizzasimulator.courier.<a href="vovchik/pizzasimulator/courier/Courier.html" title="class in vovchik.pizzasimulator.courier">Courier</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/jsonreader/CourierConfig.html" class="type-name-link" title="class in vovchik.pizzasimulator.jsonreader">CourierConfig</a> - Class in <a href="vovchik/pizzasimulator/jsonreader/package-summary.html">vovchik.pizzasimulator.jsonreader</a></dt>
 <dd>&nbsp;</dd>
@@ -105,6 +105,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/threadsafequeues/Storage.html#drainOrders()" class="member-name-link">drainOrders()</a> - Method in class vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/Storage.html" title="class in vovchik.pizzasimulator.threadsafequeues">Storage</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html#drainOrders()" class="member-name-link">drainOrders()</a> - Method in interface vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
@@ -119,14 +121,24 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/threadsafequeues/Storage.html#get()" class="member-name-link">get()</a> - Method in class vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/Storage.html" title="class in vovchik.pizzasimulator.threadsafequeues">Storage</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html#get()" class="member-name-link">get()</a> - Method in interface vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/order/Order.html#getId()" class="member-name-link">getId()</a> - Method in class vovchik.pizzasimulator.order.<a href="vovchik/pizzasimulator/order/Order.html" title="class in vovchik.pizzasimulator.order">Order</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="vovchik/pizzasimulator/baker/Baker.html#getOrderInWork()" class="member-name-link">getOrderInWork()</a> - Method in class vovchik.pizzasimulator.baker.<a href="vovchik/pizzasimulator/baker/Baker.html" title="class in vovchik.pizzasimulator.baker">Baker</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="vovchik/pizzasimulator/courier/Courier.html#getOrdersInBag()" class="member-name-link">getOrdersInBag()</a> - Method in class vovchik.pizzasimulator.courier.<a href="vovchik/pizzasimulator/courier/Courier.html" title="class in vovchik.pizzasimulator.courier">Courier</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/order/Order.html#getStatus()" class="member-name-link">getStatus()</a> - Method in class vovchik.pizzasimulator.order.<a href="vovchik/pizzasimulator/order/Order.html" title="class in vovchik.pizzasimulator.order">Order</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
+<dt><a href="vovchik/pizzasimulator/threadsafequeues/OrderQueue.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/OrderQueue.html" title="class in vovchik.pizzasimulator.threadsafequeues">OrderQueue</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/threadsafequeues/Storage.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/Storage.html" title="class in vovchik.pizzasimulator.threadsafequeues">Storage</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in interface vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:J">J</h2>
@@ -179,6 +191,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/threadsafequeues/Storage.html#put(vovchik.pizzasimulator.order.Order)" class="member-name-link">put(Order)</a> - Method in class vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/Storage.html" title="class in vovchik.pizzasimulator.threadsafequeues">Storage</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html#put(vovchik.pizzasimulator.order.Order)" class="member-name-link">put(Order)</a> - Method in interface vovchik.pizzasimulator.threadsafequeues.<a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
@@ -212,6 +226,8 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
+<dt><a href="vovchik/pizzasimulator/threadsafequeues/ThreadSafeQueue.html" class="type-name-link" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a> - Interface in <a href="vovchik/pizzasimulator/threadsafequeues/package-summary.html">vovchik.pizzasimulator.threadsafequeues</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="vovchik/pizzasimulator/order/OrderStatus.html#toString()" class="member-name-link">toString()</a> - Method in enum class vovchik.pizzasimulator.order.<a href="vovchik/pizzasimulator/order/OrderStatus.html" title="enum class in vovchik.pizzasimulator.order">OrderStatus</a></dt>
 <dd>&nbsp;</dd>
 </dl>

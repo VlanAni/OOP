@@ -74,9 +74,14 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">vovchik.pizzasimulator.threadsafequeues.OrderQueue</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">OrderQueue</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -110,9 +115,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../order/Order.html" title="class in vovchik.pizzasimulator.order">Order</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get()" class="member-name-link">get</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#put(vovchik.pizzasimulator.order.Order)" class="member-name-link">put</a><wbr>(<a href="../order/Order.html" title="class in vovchik.pizzasimulator.order">Order</a>&nbsp;newOrder)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#put(vovchik.pizzasimulator.order.Order)" class="member-name-link">put</a><wbr>(<a href="../order/Order.html" title="class in vovchik.pizzasimulator.order">Order</a>&nbsp;newOrder)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -150,6 +158,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../order/Order.html" title="class in vovchik.pizzasimulator.order">Order</a></span>&nbsp;<span class="element-name">get</span>()
           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="ThreadSafeQueue.html#get()">get</a></code>&nbsp;in interface&nbsp;<code><a href="ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></code></dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
 </dl>
@@ -159,12 +169,30 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="put(vovchik.pizzasimulator.order.Order)">
 <h3>put</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="../order/Order.html" title="class in vovchik.pizzasimulator.order">Order</a>&nbsp;newOrder)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="ThreadSafeQueue.html#put(vovchik.pizzasimulator.order.Order)">put</a></code>&nbsp;in interface&nbsp;<code><a href="ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></code></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="drainOrders()">
 <h3>drainOrders</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../order/Order.html" title="class in vovchik.pizzasimulator.order">Order</a>&gt;</span>&nbsp;<span class="element-name">drainOrders</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="ThreadSafeQueue.html#drainOrders()">drainOrders</a></code>&nbsp;in interface&nbsp;<code><a href="ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isEmpty()">
+<h3>isEmpty</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="ThreadSafeQueue.html#isEmpty()">isEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="ThreadSafeQueue.html" title="interface in vovchik.pizzasimulator.threadsafequeues">ThreadSafeQueue</a></code></dd>
+</dl>
 </section>
 </li>
 </ul>
