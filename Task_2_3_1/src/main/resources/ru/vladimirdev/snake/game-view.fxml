@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+        import javafx.scene.canvas.Canvas?>
+        import javafx.scene.layout.StackPane?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="ru.vladimirdev.snake.ui.GameController"
+           style="-fx-background-color: #2B2B2B;">
+
+    <Canvas fx:id="canvas" width="500" height="500"/>
+
+</StackPane>
