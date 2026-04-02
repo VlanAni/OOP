@@ -1,22 +1,21 @@
 plugins {
     id 'java'
+    id 'jacoco'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
 }
 
 group = 'ru.vladimirdev'
 version = '1.0-SNAPSHOT'
-
-sourceCompatibility = 11
-targetCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
 dependencies {
@@ -26,15 +25,23 @@ dependencies {
 }
 
 javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
-application {
-    mainModule = 'ru.vladimirdev.snake'
-    mainClass = 'ru.vladimirdev.snake.SnakeApp'
+    version = "17.0.6"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics' ]
 }
 
 test {
     useJUnitPlatform()
+}
+
+tasks.register('checkJava') {
+    doLast {
+        println "Gradle is running on: ${System.getProperty('java.version')}"
+        println "Toolchain JDK: ${java.toolchain.languageVersion.get()}"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }

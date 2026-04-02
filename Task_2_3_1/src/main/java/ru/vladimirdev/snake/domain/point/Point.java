@@ -3,24 +3,19 @@ package ru.vladimirdev.snake.domain.point;
 import static java.util.Objects.hash;
 
 public class Point {
-    private int X;
-    private int Y;
+    private final int X;
+    private final int Y;
 
     public Point(int X, int Y) {
         this.X = X;
         this.Y = Y;
     }
 
-    public void updCoordinates(int X, int Y) {
-        this.X = X;
-        this.Y = Y;
-    }
-
-    public int shareX() {
+    public int getX() {
         return X;
     }
 
-    public int shareY() {
+    public int getY() {
         return Y;
     }
 

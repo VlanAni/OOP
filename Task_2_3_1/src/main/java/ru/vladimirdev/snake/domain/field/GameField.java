@@ -1,23 +1,22 @@
-package ru.vladimirdev.snake.domain;
+package ru.vladimirdev.snake.domain.field;
 
+import ru.vladimirdev.snake.domain.enums.Direction;
 import ru.vladimirdev.snake.domain.enums.GameState;
 import ru.vladimirdev.snake.domain.food.Apple;
 import ru.vladimirdev.snake.domain.food.Food;
 import ru.vladimirdev.snake.domain.point.Point;
 import ru.vladimirdev.snake.domain.snake.Snake;
-import ru.vladimirdev.snake.services.Judge;
+import ru.vladimirdev.snake.domain.judge.Judge;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.Random;
+import java.util.*;
 
 public class GameField {
     private final int N;
     private final int M;
     private final int foodAmount;
     private final int wallAmount;
+
+    private final Random random = new Random();
 
     private final Snake player;
     private final Map<Point, Food> foods;
@@ -26,10 +25,9 @@ public class GameField {
     private final Judge judge;
     private GameState state;
 
-    public GameField(int N, int M, int foodAmount, int wallAmount, Judge judge) {
-        if (N < 5 || M < 5 ||
-                foodAmount < 1 || wallAmount < 0 ||
-                judge == null) {
+    public GameField(int N, int M, int foodAmount,
+                     int wallAmount, Judge judge) {
+        if (N < 5 || M < 5 || judge == null) {
             throw new IllegalArgumentException("uncorrected arguments");
         }
 
@@ -48,6 +46,25 @@ public class GameField {
         genFood();
     }
 
+    public GameField(int N, int M, Judge judge,
+                     Snake player, Set<Point> walls,
+                     Map<Point, Food> foods) {
+        if (N < 5 || M < 5 || player == null) {
+            throw new IllegalArgumentException("uncorrected arguments");
+        }
+
+        this.N = N;
+        this.M = M;
+        this.judge = judge != null ? judge : field -> false;
+        this.player = player;
+        this.walls = walls != null ? walls : new HashSet<>();
+        this.foods = foods != null ? foods : new HashMap<>();
+
+        this.foodAmount = this.foods.size();
+        this.wallAmount = this.walls.size();
+        this.state = GameState.PLAYING;
+    }
+
     public void update() {
         if (state != GameState.PLAYING) return;
 
@@ -59,18 +76,32 @@ public class GameField {
         }
     }
 
+    public void changeDirection(Direction d) {
+        player.switchDirect(d);
+    }
+
     public Snake getPlayer() {
         return player;
     }
 
-    public GameState shareState() {
-        return state;
+    public int getPlayerLength() {
+        return player.getLength();
+    }
+
+    public GameState getState() { return state; }
+
+    public Map<Point, Food> getFoods() {
+        return Collections.unmodifiableMap(this.foods);
+    }
+
+    public Set<Point> getWalls() {
+        return Collections.unmodifiableSet(this.walls);
     }
 
     private void checkColl() {
-        Point head = player.myHead();
+        Point head = player.getHead();
 
-        if (head.shareX() < 0 || head.shareX() >= N || head.shareY() < 0 || head.shareY() >= M) {
+        if (head.getX() < 0 || head.getX() >= N || head.getY() < 0 || head.getY() >= M) {
             state = GameState.GAME_OVER;
             return;
         }
@@ -80,8 +111,8 @@ public class GameField {
             return;
         }
 
-        for (int i = 1; i < player.myTail().size(); i++) {
-            if (head.equals(player.myTail().get(i))) {
+        for (int i = 1; i < player.getBody().size(); i++) {
+            if (head.equals(player.getBody().get(i))) {
                 state = GameState.GAME_OVER;
                 return;
             }
@@ -96,21 +127,20 @@ public class GameField {
     }
 
     private void genWalls() {
-        Random random = new Random();
         for (int i = 0; i < wallAmount; i++) {
             Point place;
             do {
                 place = new Point(random.nextInt(N), random.nextInt(M));
             } while (walls.contains(place) ||
-                    player.myTail().contains(place) ||
+                    player.getBody().contains(place) ||
                     isNearHead(place));
             walls.add(place);
         }
     }
 
     private boolean isNearHead(Point p) {
-        Point head = player.myHead();
-        return Math.abs(p.shareX() - head.shareX()) <= 1 && Math.abs(p.shareY() - head.shareY()) <= 1;
+        Point head = player.getHead();
+        return Math.abs(p.getX() - head.getX()) <= 1 && Math.abs(p.getY() - head.getY()) <= 1;
     }
 
     private void genFood() {
@@ -120,15 +150,14 @@ public class GameField {
     }
 
     private void spawnFood() {
-        Random random = new Random();
         Point place;
         do {
             place = new Point(random.nextInt(N), random.nextInt(M));
         } while (walls.contains(place) ||
                 foods.containsKey(place) ||
-                player.myTail().contains(place));
+                player.getBody().contains(place));
 
-        Food newFood = new Apple(place);
+        Food newFood = new Apple();
         foods.put(place, newFood);
     }
 }

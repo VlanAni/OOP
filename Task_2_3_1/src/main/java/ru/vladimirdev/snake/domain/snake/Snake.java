@@ -11,7 +11,6 @@ public class Snake {
     private Direction direct;
     private boolean foodFlag;
     private int length;
-    private int velocity;
 
     public Snake(int X, int Y) {
         if (X < 0 || Y < 0) {
@@ -19,7 +18,6 @@ public class Snake {
         }
 
         length = 1;
-        velocity = 1;
         links = new LinkedList<>();
         links.add(new Point(X, Y));
         direct = Direction.UP;
@@ -37,14 +35,22 @@ public class Snake {
 
     public void move() {
         Point head = links.get(0);
-        int newX = head.shareX();
-        int newY = head.shareY();
+        int newX = head.getX();
+        int newY = head.getY();
 
         switch (direct) {
-            case UP -> newY -= velocity;
-            case DOWN -> newY += velocity;
-            case LEFT -> newX -= velocity;
-            case RIGHT -> newX += velocity;
+            case UP:
+                newY--;
+                break;
+            case DOWN:
+                newY++;
+                break;
+            case LEFT:
+                newX--;
+                break;
+            case RIGHT:
+                newX++;
+                break;
         }
 
         links.add(0, new Point(newX, newY));
@@ -53,27 +59,23 @@ public class Snake {
             links.remove(links.size() - 1);
         } else {
             foodFlag = false;
-            length++;
         }
     }
 
     public void eat() {
+        length++;
         foodFlag = true;
     }
 
-    public Point myHead() {
+    public Point getHead() {
         return links.get(0);
     }
 
-    public int myLength() {
+    public int getLength() {
         return length;
     }
 
-    public List<Point> myTail() {
+    public List<Point> getBody() {
         return links;
-    }
-
-    public void increaseVelocity() {
-        this.velocity++;
     }
 }

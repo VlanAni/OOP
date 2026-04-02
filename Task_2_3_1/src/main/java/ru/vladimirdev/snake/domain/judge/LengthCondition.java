@@ -1,6 +1,6 @@
-package ru.vladimirdev.snake.services;
+package ru.vladimirdev.snake.domain.judge;
 
-import ru.vladimirdev.snake.domain.GameField;
+import ru.vladimirdev.snake.domain.field.GameField;
 
 public class LengthCondition implements Judge {
     private final int targetLength;
@@ -11,6 +11,6 @@ public class LengthCondition implements Judge {
 
     @Override
     public boolean isVictory(GameField field) {
-        return field.getPlayer().myLength() >= targetLength;
+        return field.getPlayerLength() >= targetLength;
     }
 }
