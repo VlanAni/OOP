@@ -1,0 +1,8 @@
+ru.vladimirdev.snake
+ru.vladimirdev.snake.domain.enums
+ru.vladimirdev.snake.domain.field
+ru.vladimirdev.snake.domain.food
+ru.vladimirdev.snake.domain.judge
+ru.vladimirdev.snake.domain.point
+ru.vladimirdev.snake.domain.snake
+ru.vladimirdev.snake.managers
