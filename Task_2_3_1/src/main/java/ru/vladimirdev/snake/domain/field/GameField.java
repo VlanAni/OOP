@@ -150,14 +150,24 @@ public class GameField {
     }
 
     private void spawnFood() {
-        Point place;
-        do {
-            place = new Point(random.nextInt(N), random.nextInt(M));
-        } while (walls.contains(place) ||
-                foods.containsKey(place) ||
-                player.getBody().contains(place));
+        Point place = randomFreeCell();
+        if (place == null) return;
+        foods.put(place, new Apple());
+    }
 
-        Food newFood = new Apple();
-        foods.put(place, newFood);
+    private Point randomFreeCell() {
+        List<Point> free = new ArrayList<>(N * M);
+        for (int x = 0; x < N; x++) {
+            for (int y = 0; y < M; y++) {
+                Point p = new Point(x, y);
+                if (!walls.contains(p) &&
+                        !foods.containsKey(p) &&
+                        !player.getBody().contains(p)) {
+                    free.add(p);
+                }
+            }
+        }
+        if (free.isEmpty()) return null;
+        return free.get(random.nextInt(free.size()));
     }
 }

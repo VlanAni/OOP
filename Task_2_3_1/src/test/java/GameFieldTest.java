@@ -28,7 +28,6 @@ class GameFieldTest {
         GameField field = GameCreator.createTestField(10, 10, winCondition, snake, null, foods);
 
         field.update();
-        field.update();
 
         assertEquals(GameState.VICTORY, field.getState());
     }

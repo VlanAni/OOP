@@ -44,4 +44,33 @@ class SnakeTest {
 
         assertEquals(new Point(5, 4), snake.getHead());
     }
+
+    @Test
+    void testCannotReverseDOWNtoUP() {
+        snake.switchDirect(Direction.RIGHT);
+        snake.move();
+        snake.switchDirect(Direction.DOWN);
+        snake.move();
+        snake.switchDirect(Direction.UP);
+        snake.move();
+        assertEquals(new Point(6, 7), snake.getHead());
+    }
+
+    @Test
+    void testCannotReverseLEFTtoRIGHT() {
+        snake.switchDirect(Direction.LEFT);
+        snake.move();
+        snake.switchDirect(Direction.RIGHT);
+        snake.move();
+        assertEquals(new Point(3, 5), snake.getHead());
+    }
+
+    @Test
+    void testCannotReverseRIGHTtoLEFT() {
+        snake.switchDirect(Direction.RIGHT);
+        snake.move();
+        snake.switchDirect(Direction.LEFT);
+        snake.move();
+        assertEquals(new Point(7, 5), snake.getHead());
+    }
 }
