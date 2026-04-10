@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
+}
+
+group = 'ru.vladimirdev'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+javafx {
+    version = "17.0.6"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics' ]
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('checkJava') {
+    doLast {
+        println "Gradle is running on: ${System.getProperty('java.version')}"
+        println "Toolchain JDK: ${java.toolchain.languageVersion.get()}"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
