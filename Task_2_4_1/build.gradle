@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.apache.groovy:groovy-all:4.0.21'
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src/main/groovy', 'src/main/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'edu.taskchecker.vladimir.Main'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
