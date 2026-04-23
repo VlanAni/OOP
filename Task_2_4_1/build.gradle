@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
     id 'groovy'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
@@ -37,4 +38,10 @@ jar {
 
 test {
     useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
