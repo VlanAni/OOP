@@ -3,20 +3,20 @@ package edu.taskchecker.vladimir.domain;
 import java.util.List;
 
 public class Course {
-    private final List<Task> tasks;
+    private final List<TaskData> taskData;
     private final List<Group> groups;
     private final List<ControlPoint> controlPoints;
     private final List<CheckAssignment> assignments;
     private final GradingConfig gradingConfig;
 
     public Course(
-            List<Task> tasks,
+            List<TaskData> taskData,
             List<Group> groups,
             List<ControlPoint> checkpoints,
             List<CheckAssignment> assignments,
             GradingConfig gradingConfig
     ) {
-        if (tasks == null ||
+        if (taskData == null ||
                 groups == null ||
                 checkpoints == null ||
                 assignments == null ||
@@ -24,15 +24,15 @@ public class Course {
             throw new IllegalArgumentException("must be non null");
         }
 
-        this.tasks = tasks;
+        this.taskData = taskData;
         this.groups = groups;
         this.controlPoints = checkpoints;
         this.assignments = assignments;
         this.gradingConfig = gradingConfig;
     }
 
-    public List<Task> getTasks() {
-        return List.copyOf(tasks);
+    public List<TaskData> getTasks() {
+        return List.copyOf(taskData);
     }
 
     public List<Group> getGroups() {

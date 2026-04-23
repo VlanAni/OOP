@@ -2,14 +2,14 @@ package edu.taskchecker.vladimir.domain;
 
 import java.time.LocalDate;
 
-public class Task {
+public class TaskData {
     private final String id;
     private final String name;
     private final int maxScore;
     private final LocalDate softDeadline;
     private final LocalDate hardDeadline;
 
-    public Task(
+    public TaskData(
             String id,
             String name,
             int maxScore,

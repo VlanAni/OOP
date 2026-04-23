@@ -1,6 +1,6 @@
 package edu.taskchecker.vladimir.dsl.builders
 
-import edu.taskchecker.vladimir.domain.Task
+import edu.taskchecker.vladimir.domain.TaskData
 
 import java.time.LocalDate
 
@@ -17,7 +17,7 @@ class TaskBuilder {
     void softDeadline(String v) { softDeadline = LocalDate.parse(v) }
     void hardDeadline(String v) { hardDeadline = LocalDate.parse(v) }
 
-    Task build() {
+    TaskData build() {
         if (!id || !name || softDeadline == null || hardDeadline == null) {
             throw new IllegalStateException("empty fields")
         }
@@ -26,7 +26,7 @@ class TaskBuilder {
             throw new IllegalStateException("maxScore must be positive")
         }
 
-        return new Task(id, name, maxScore, softDeadline, hardDeadline)
+        return new TaskData(id, name, maxScore, softDeadline, hardDeadline)
     }
 }
 

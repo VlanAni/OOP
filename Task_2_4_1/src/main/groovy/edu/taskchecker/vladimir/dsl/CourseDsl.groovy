@@ -10,7 +10,7 @@ import org.codehaus.groovy.control.CompilerConfiguration
 
 abstract class CourseDsl extends Script {
 
-    protected List<Task> taskList = []
+    protected List<TaskData> taskList = []
     protected List<Group> groupList = []
     protected List<ControlPoint> checkpointList = []
     protected List<CheckAssignment> assignmentList = []
@@ -51,7 +51,7 @@ abstract class CourseDsl extends Script {
                 .collectMany { it.getStudents() }
                 .findAll { builder.studentNicknames.contains(it.getNickname()) }
 
-        List<Task> tasks = taskList
+        List<TaskData> tasks = taskList
                 .findAll { builder.taskIds.contains(it.getId()) }
 
         Set<String> foundNicknames = students.collect { it.getNickname() }.toSet()

@@ -53,10 +53,10 @@ public class Check implements Command{
                     Path repoPath;
                     try {
                         repoPath = gitService.syncRepository(student);
-                        for (Task task : assignment.getTasks()) {
-                            logger.printInfo("  checking task: " + task.getId());
+                        for (TaskData taskData : assignment.getTasks()) {
+                            logger.printInfo("  checking task: " + taskData.getId());
                             TaskResult result = checkTask(
-                                    student, task, repoPath, gitService, projectCheckService, course);
+                                    student, taskData, repoPath, gitService, projectCheckService, course);
 
                             if (result != null) {
                                 results.add(result);
@@ -92,24 +92,24 @@ public class Check implements Command{
 
     private TaskResult checkTask(
             Student student,
-            Task task,
+            TaskData taskData,
             Path repoPath,
             GitService gitService,
             ProjectCheckService buildService,
             Course course) {
 
-        Path taskDir = repoPath.resolve(task.getId());
+        Path taskDir = repoPath.resolve(taskData.getId());
 
         LocalDate commitDate;
         try {
-            commitDate = gitService.lastCommitDate(repoPath, task.getId());
+            commitDate = gitService.lastCommitDate(repoPath, taskData.getId());
         } catch (IOException | InterruptedException e) {
             logger.printError("git log failed: " + e.getMessage());
             return null;
         }
 
         if (commitDate == null) {
-            logger.printInfo("no commits found for " + task.getId());
+            logger.printInfo("no commits found for " + taskData.getId());
             return null;
         }
 
@@ -139,7 +139,7 @@ public class Check implements Command{
         }
 
         return new TaskResult(
-                task, student, compiled, style,
+                taskData, student, compiled, style,
                 tests, commitDate,
                 course.getGradingConfig()
         );

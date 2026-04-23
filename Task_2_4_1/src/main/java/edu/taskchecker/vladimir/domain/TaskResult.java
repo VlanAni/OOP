@@ -3,7 +3,7 @@ package edu.taskchecker.vladimir.domain;
 import java.time.LocalDate;
 
 public class TaskResult {
-    private final Task task;
+    private final TaskData taskData;
     private final Student student;
     private final boolean successBuild;
     private final boolean matchStyle;
@@ -12,7 +12,7 @@ public class TaskResult {
     private final double score;
 
     public TaskResult (
-            Task task,
+            TaskData taskData,
             Student student,
             boolean successBuild,
             boolean matchStyle,
@@ -20,7 +20,7 @@ public class TaskResult {
             LocalDate lastCommitDate,
             GradingConfig gconfig
     ) {
-        if (task == null ||
+        if (taskData == null ||
                 student == null ||
                 lastCommitDate == null ||
                 testStat == null ||
@@ -31,15 +31,15 @@ public class TaskResult {
 
         this.lastCommitDate = lastCommitDate;
         this.student = student;
-        this.task = task;
+        this.taskData = taskData;
         this.successBuild = successBuild;
         this.matchStyle = matchStyle;
         this.testStat = testStat;
         this.score = calcScore(gconfig);
     }
 
-    public Task getTask() {
-        return task;
+    public TaskData getTask() {
+        return taskData;
     }
 
     public Student getStudent() {
@@ -82,9 +82,9 @@ public class TaskResult {
         } else if (today.isAfter(this.getTask().getSoftDeadline())) {
             return this.getTask().getMaxScore() *
                     gconfig.getSoftDeadlinePenalty() +
-                    gconfig.getBonusFor(student.getName(), task.getId());
+                    gconfig.getBonusFor(student.getName(), taskData.getId());
         } else {
-            return this.getTask().getMaxScore() + gconfig.getBonusFor(student.getName(), task.getId());
+            return this.getTask().getMaxScore() + gconfig.getBonusFor(student.getName(), taskData.getId());
         }
     }
 }

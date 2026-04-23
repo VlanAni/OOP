@@ -1,9 +1,9 @@
 package edu.taskchecker.vladimir.dsl.builders
 
-import edu.taskchecker.vladimir.domain.Task
+import edu.taskchecker.vladimir.domain.TaskData
 
 class TasksBuilder {
-    List<Task> tasks = []
+    List<TaskData> tasks = []
 
     void task(Closure cl) {
         def tb = new TaskBuilder()
