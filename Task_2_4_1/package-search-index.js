@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"edu.taskchecker.vladimir"},{"l":"edu.taskchecker.vladimir.cmd"},{"l":"edu.taskchecker.vladimir.controller"},{"l":"edu.taskchecker.vladimir.domain"},{"l":"edu.taskchecker.vladimir.exceptions"},{"l":"edu.taskchecker.vladimir.io"},{"l":"edu.taskchecker.vladimir.services"}];updateSearchResults();

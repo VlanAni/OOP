@@ -1,0 +1,7 @@
+edu.taskchecker.vladimir
+edu.taskchecker.vladimir.cmd
+edu.taskchecker.vladimir.controller
+edu.taskchecker.vladimir.domain
+edu.taskchecker.vladimir.exceptions
+edu.taskchecker.vladimir.io
+edu.taskchecker.vladimir.services
