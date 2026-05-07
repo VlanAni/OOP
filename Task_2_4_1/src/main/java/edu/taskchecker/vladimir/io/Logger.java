@@ -11,7 +11,7 @@ public class Logger {
         this.prefix = prefix;
     }
 
-    public void printInfo(String message) {
+    public synchronized void printInfo(String message) {
         if (message == null) {
             return;
         }
@@ -19,7 +19,7 @@ public class Logger {
         System.out.println(createOut(message));
     }
 
-    public void printError(String message) {
+    public synchronized void printError(String message) {
         if (message == null) {
             return;
         }
@@ -27,7 +27,7 @@ public class Logger {
         System.err.println(createOut(message));
     }
 
-    private String createOut(String message) {
+    private synchronized String createOut(String message) {
         return new StringBuilder().append(prefix).append(message).toString();
     }
 }

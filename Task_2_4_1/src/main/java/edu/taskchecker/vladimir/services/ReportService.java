@@ -5,17 +5,13 @@ import edu.taskchecker.vladimir.domain.GradingConfig;
 import edu.taskchecker.vladimir.domain.Student;
 import edu.taskchecker.vladimir.domain.TaskResult;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportService {
 
-    public void generate(List<TaskResult> results, Course course) {
+    public String generateHtml(List<TaskResult> results, Course course) {
         if (results == null || course == null) {
             throw new IllegalArgumentException("must be non-null");
         }
@@ -30,36 +26,32 @@ public class ReportService {
                 .append("        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }\n")
                 .append("        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }\n")
                 .append("        th { background-color: #f2f2f2; }\n")
-                .append("        .pass { background-color: #d4edda; }\n")
-                .append("        .fail { background-color: #f8d7da; }\n")
-                .append("        .summary { background-color: #e9ecef; font-weight: bold; }\n")
+                .append("        .summary { font-weight: bold; background-color: #eee; }\n")
                 .append("    </style>\n")
-                .append("    </head><body>\n")
-                .append("    <h1>Report</h1>\n");
+                .append("</head><body>\n")
+                .append("<h1>Checking report</h1>\n");
 
-        for (Map.Entry<Student, List<TaskResult>> entry : byStudent.entrySet()) {
+        for (var entry : byStudent.entrySet()) {
             Student student = entry.getKey();
             List<TaskResult> studentResults = entry.getValue();
 
-            html.append("<table>\n");
-            html.append("<thead><tr>")
-                    .append("<th>Student</th>")
-                    .append("<th>Task ID</th>")
-                    .append("<th>Tests</th>")
-                    .append("<th>Checkstyle</th>")
-                    .append("<th>Points</th>")
+            html.append("<h2>Student: ").append(student.getName()).append(" (").append(student.getNickname()).append(")</h2>\n")
+                    .append("<table><thead><tr>\n")
+                    .append("    <th>Task-Id</th><th>Task-Name</th><th>Building</th><th>Tests</th><th>Style</th><th>Points</th>\n")
                     .append("</tr></thead><tbody>\n");
 
             for (TaskResult r : studentResults) {
-                String tests = r.getTestStat().getPassedTests() + " / " + r.getTestStat().getFailedTests();
-                String checkstyle = r.isMatchStyle() ? "OK" : "Fail";
-                String rowClass = r.getScore() > 0 ? "pass" : "fail";
+                String build = r.isSuccessBuild() ? "OK" : "FAILED";
+                String style = r.isMatchStyle() ? "OK" : "FAILED";
+                String tests = r.getTestStat().getPassedTests() + "/" +
+                        (r.getTestStat().getPassedTests() + r.getTestStat().getFailedTests());
 
-                html.append("<tr class=\"").append(rowClass).append("\">")
-                        .append("<td>").append(student.getName()).append("</td>")
+                html.append("<tr>")
                         .append("<td>").append(r.getTask().getId()).append("</td>")
+                        .append("<td>").append(r.getTask().getName()).append("</td>")
+                        .append("<td>").append(build).append("</td>")
                         .append("<td>").append(tests).append("</td>")
-                        .append("<td>").append(checkstyle).append("</td>")
+                        .append("<td>").append(style).append("</td>")
                         .append("<td>").append(r.getScore()).append("</td>")
                         .append("</tr>\n");
             }
@@ -68,8 +60,7 @@ public class ReportService {
             String grade = calcGrade(totalScore, course.getGradingConfig());
 
             html.append("<tr class=\"summary\">")
-                    .append("<td colspan=\"3\">ИТОГО</td>")
-                    .append("<td>Mark: ").append(grade).append("</td>")
+                    .append("<td colspan=\"4\">FINAL (Grade: ").append(grade).append(")</td>")
                     .append("<td>").append(totalScore).append("</td>")
                     .append("</tr>\n");
 
@@ -77,19 +68,13 @@ public class ReportService {
         }
 
         html.append("</body></html>");
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("report.html", StandardCharsets.UTF_8))) {
-            writer.write(html.toString());
-            System.out.println("successfully save to report.html");
-        } catch (IOException e) {
-            System.err.println("error during writing into file: " + e.getMessage());
-        }
+        return html.toString();
     }
 
     private String calcGrade(double score, GradingConfig config) {
         if (score >= config.getExcellentThreshold()) return "Excellent";
         if (score >= config.getGoodThreshold())      return "Good";
-        if (score >= config.getPassThreshold())      return "Троечка";
-        return "ДВА!";
+        if (score >= config.getPassThreshold())      return "Satisfactory";
+        return "Unsatisfactory";
     }
 }

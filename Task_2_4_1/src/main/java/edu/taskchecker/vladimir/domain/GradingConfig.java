@@ -21,16 +21,19 @@ public class GradingConfig {
         if (bonusPoints == null) {
             throw new IllegalArgumentException("bonusPoints must be non-null");
         }
+
         if (excellentThreshold <= goodThreshold
                 || goodThreshold <= passThreshold
                 || passThreshold < 0) {
             throw new IllegalArgumentException(
                     "thresholds must be: excellent > good > pass >= 0");
         }
+
         if (softDeadlinePenalty < 0 || softDeadlinePenalty > 1) {
             throw new IllegalArgumentException(
                     "softDeadlinePenalty must be between 0 and 1");
         }
+
         if (testTimeoutSeconds < 1) {
             throw new IllegalArgumentException(
                     "testTimeoutSeconds must be positive");

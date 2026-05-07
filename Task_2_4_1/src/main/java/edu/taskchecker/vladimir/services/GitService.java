@@ -13,7 +13,8 @@ import java.util.concurrent.*;
 
 public class GitService implements Closeable {
     private final Path repoStorage;
-    private final ExecutorService gitOutReader = Executors.newSingleThreadExecutor();
+    private final ExecutorService gitOutReader = Executors.newCachedThreadPool();
+    private final ConcurrentHashMap<String, Object> pathLocks = new ConcurrentHashMap<>();
 
     public GitService(Path repoStorage) {
         if (repoStorage == null) {
@@ -35,15 +36,19 @@ public class GitService implements Closeable {
             throw new IllegalArgumentException("student must be non-null");
         }
 
-        Path studentRepoPath = repoStorage.resolve(student.getNickname());
+        Path repoPath = repoStorage.
+                resolve(student.getNickname()).
+                toAbsolutePath();
 
-        if (studentRepoPath.toFile().exists()) {
-            run(studentRepoPath, "git", "pull");
-        } else {
-            run(repoStorage, "git", "clone", student.getRepoURL(), student.getNickname());
+        synchronized (getLock(repoPath)) {
+            if (repoPath.toFile().exists()) {
+                run(repoPath, "git", "pull");
+            } else {
+                run(repoStorage, "git", "clone", student.getRepoURL(), student.getNickname());
+            }
+
+            return repoPath;
         }
-
-        return studentRepoPath;
     }
 
     public LocalDate lastCommitDate(
@@ -59,18 +64,28 @@ public class GitService implements Closeable {
             throw new IllegalArgumentException("taskId must be non-empty");
         }
 
-        String cmdOut = run(repoPath, "git", "log", "-1", "--format=%as", "--", taskId);
+        synchronized (getLock(repoPath)) {
+            String cmdOut = run(repoPath, "git", "log", "-1", "--format=%as", "--", taskId);
 
-        if (cmdOut.isBlank()) {
-            return null;
+            if (cmdOut.isBlank()) {
+                return null;
+            }
+
+            return LocalDate.parse(cmdOut.trim().substring(0, 10));
         }
-
-        return LocalDate.parse(cmdOut.trim().substring(0, 10));
     }
 
     @Override
     public void close() {
         gitOutReader.shutdown();
+        try {
+            if (!gitOutReader.awaitTermination(5, TimeUnit.SECONDS)) {
+                gitOutReader.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            gitOutReader.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 
     private String run(Path dir, String... args) throws NonExistentDirException, GitCommandFailedException,
@@ -119,5 +134,9 @@ public class GitService implements Closeable {
         } catch (ExecutionException | TimeoutException e) {
             throw new IOException("Failed to read process output", e);
         }
+    }
+
+    private Object getLock(Path path) {
+        return pathLocks.computeIfAbsent(path.toAbsolutePath().normalize().toString(), k -> new Object());
     }
 }

@@ -85,7 +85,28 @@ abstract class CourseDsl extends Script {
         cfg.scriptBaseClass = 'edu.taskchecker.vladimir.dsl.CourseDsl'
 
         def shell = new GroovyShell(this.class.classLoader, new Binding(), cfg)
-        CourseDsl sub = (CourseDsl) shell.parse(new File(path))
+
+        def scriptFile = new File(path)
+
+        if (!scriptFile.isAbsolute()) {
+            try {
+                def location = this.class.protectionDomain.codeSource.location
+                if (location != null && location.protocol == "file") {
+                    def currentScriptFile = new File(location.toURI())
+                    scriptFile = new File(currentScriptFile.parentFile, path)
+                } else {
+                    scriptFile = new File(System.getProperty("user.dir"), path)
+                }
+            } catch (Exception e) {
+                scriptFile = new File(System.getProperty("user.dir"), path)
+            }
+        }
+
+        if (!scriptFile.exists()) {
+            throw new FileNotFoundException("Config file not found at: ${scriptFile.absolutePath}")
+        }
+
+        CourseDsl sub = (CourseDsl) shell.parse(scriptFile)
         sub.run()
 
         taskList.addAll(sub.taskList)
@@ -94,7 +115,7 @@ abstract class CourseDsl extends Script {
         assignmentList.addAll(sub.assignmentList)
 
         if (sub.gradingConfigSet) {
-            gradingConfig = sub.gradingConfig
+            this.gradingConfig = sub.gradingConfig
         }
     }
 

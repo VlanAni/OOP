@@ -37,9 +37,9 @@ public class ProjectCheckService {
             throw new IllegalArgumentException("taskDir must be non-null");
         }
 
-        File gradlew = new File(taskDir.resolve("/gradlew").toUri());
+        File gradlew = new File(taskDir.resolve("gradlew").toUri());
 
-        if (gradlew.exists()) {
+        if (!gradlew.exists()) {
             throw new IOException("builder doesn't exists");
         }
 

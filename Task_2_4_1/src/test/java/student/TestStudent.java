@@ -1,43 +1,82 @@
 package student;
 
 import edu.taskchecker.vladimir.domain.Student;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class TestStudent {
-    @Test
-    void testSafety() {
-        try {
-            Student student = new Student(null, null, null);
-        } catch (Exception e) {
-            assert (true);
 
-            return;
+    private static final String name     = "Анисимов Вовка";
+    private static final String repoURL = "https://github.com/VlanAni/OOP";
+    private static final String nickname = "VlanAni";
+
+    @Nested
+    class Construction {
+
+        @Test
+        void success() {
+            assertDoesNotThrow(() ->
+                    new Student(nickname, repoURL, nickname));
         }
 
-        assert (false);
-    }
-
-    @Test
-    void testBlank() {
-        try {
-            Student student = new Student("", " ", "   ");
-        } catch (Exception e) {
-            assert (true);
-
-            return;
+        @Test
+        void nullName() {
+            assertThrows(IllegalArgumentException.class, () ->
+                    new Student(null, repoURL, nickname));
         }
 
-        assert (false);
+        @Test
+        void blankName() {
+            assertThrows(IllegalArgumentException.class, () ->
+                    new Student("  ", repoURL, nickname));
+        }
+
+        @Test
+        void nullRepoUrl() {
+            assertThrows(IllegalArgumentException.class, () ->
+                    new Student(name, null, nickname));
+        }
+
+        @Test
+        void blankRepoUrl() {
+            assertThrows(IllegalArgumentException.class, () ->
+                    new Student(name, "  ", nickname));
+        }
+
+        @Test
+        void nullNickname() {
+            assertThrows(IllegalArgumentException.class, () ->
+                    new Student(name, repoURL, null));
+        }
+
+        @Test
+        void blankNickname() {
+            assertThrows(IllegalArgumentException.class, () ->
+                    new Student(name, repoURL, "  "));
+        }
     }
 
-    @Test
-    void testGetters() {
-        Student student = new Student("студент", "rep", "vlanani");
+    @Nested
+    class Getters {
 
-        assert (student.getName().equals("студент"));
+        private final Student student =
+                new Student(name, repoURL, nickname);
 
-        assert (student.getRepoURL().equals("rep"));
+        @Test
+        void getName() {
+            assertEquals(name, student.getName());
+        }
 
-        assert (student.getNickname().equals("vlanani"));
+        @Test
+        void getRepoUrl() {
+            assertEquals(repoURL, student.getRepoURL());
+        }
+
+        @Test
+        void getNickname() {
+            assertEquals(nickname, student.getNickname());
+        }
     }
 }

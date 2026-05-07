@@ -5,6 +5,7 @@ import edu.taskchecker.vladimir.cmd.Command;
 import edu.taskchecker.vladimir.cmd.CommandMapper;
 import edu.taskchecker.vladimir.io.Logger;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,11 @@ public class Controller {
         }
 
         CommandMapper cmdMap = new CommandMapper();
-        cmdMap.addCommand("check", new Check("config.groovy", logger));
+        cmdMap.addCommand("check", new Check(
+                "config.groovy",
+                Path.of("student-repo"),
+                logger
+        ));
 
         Command cmd = cmdMap.getCommand(args[0].trim());
         if (cmd == null) {
