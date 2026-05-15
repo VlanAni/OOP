@@ -1,0 +1,7 @@
+edu.vladimir.primesocket
+edu.vladimir.primesocket.controller
+edu.vladimir.primesocket.domain.message
+edu.vladimir.primesocket.domain.task
+edu.vladimir.primesocket.master
+edu.vladimir.primesocket.services
+edu.vladimir.primesocket.slave
