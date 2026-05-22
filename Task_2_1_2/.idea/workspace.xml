@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="48c6b425-b33c-455b-b6e1-c4fb8d6a2b37" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Task_2_1_1/src/main/java/vanisimov/task2_1_1/parallelstreamsolution/ParallelStreamSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task_2_1_1/src/main/java/vanisimov/task2_1_1/parallelstreamsolution/ParallelStreamSolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/master/MasterNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/master/MasterNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/PrimeChecker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/SlaveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/SlaveHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/slave/SlaveNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/slave/SlaveNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PrimeCheckerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PrimeCheckerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,26 +62,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.IntegrationTests.bigIntegrationTest.executor": "Run",
-    "Gradle.IntegrationTests.executor": "Run",
-    "Gradle.IntegrationTests.testNonPrime.executor": "Run",
-    "Gradle.IntegrationTests.testPrime.executor": "Run",
-    "Gradle.PrimeCheckerTest.executor": "Run",
-    "Gradle.PrimeCheckerTest.testIsPrimeLogic.executor": "Run",
-    "Gradle.Task_2_1_2 [jar].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "task-2-1-2",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "/Users/waldemar/studying/oop/OOP/Task_2_1_2/src/main/java/org/example/Main.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.IntegrationTests.bigIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.IntegrationTests.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.IntegrationTests.testNonPrime.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.IntegrationTests.testPrime.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PrimeCheckerTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PrimeCheckerTest.testIsPrimeLogic.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Task_2_1_2 [jar].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;task-2-1-2&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/waldemar/studying/oop/OOP/Task_2_1_2/src/main/java/org/example/Main.java&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Gradle.IntegrationTests">
     <configuration name="IntegrationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -224,10 +221,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.IntegrationTests" />
-        <item itemvalue="Gradle.IntegrationTests.testNonPrime" />
-        <item itemvalue="Gradle.IntegrationTests.testPrime" />
-        <item itemvalue="Gradle.IntegrationTests.bigIntegrationTest" />
         <item itemvalue="Gradle.PrimeCheckerTest" />
+        <item itemvalue="Gradle.IntegrationTests.testPrime" />
+        <item itemvalue="Gradle.IntegrationTests.testNonPrime" />
+        <item itemvalue="Gradle.IntegrationTests.bigIntegrationTest" />
       </list>
     </recent_temporary>
   </component>

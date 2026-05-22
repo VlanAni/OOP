@@ -39,7 +39,6 @@ public class SlaveNode {
             output.flush();
             input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
             loop(input, output);
-            input.close();
         } catch (IOException e) {
             logger.info("connection error happened");
         } catch (ClassNotFoundException e) {
@@ -47,6 +46,7 @@ public class SlaveNode {
         } finally {
             try {
                 if (output != null) output.close();
+                if (input != null) input.close();
             } catch (IOException e) {
                 logger.info("error closing streams");
             } finally {
