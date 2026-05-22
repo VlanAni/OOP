@@ -30,10 +30,13 @@ public class SlaveHandler implements Runnable {
 
     @Override
     public void run() {
+        ObjectOutputStream output = null;
+        ObjectInputStream input = null;
+
         try {
-            ObjectOutputStream output = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            output = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             output.flush();
-            ObjectInputStream input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+            input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
             while (!foundNonPrime.get()) {
                 Task task = taskQueue.poll();
 
@@ -65,7 +68,13 @@ public class SlaveHandler implements Runnable {
         } catch (IOException e) {
             logger.info("io-errors " + e.getMessage());
         } finally {
-            closeSocket();
+            try {
+                if (output != null) output.close();
+            } catch (IOException e) {
+                logger.info("error closing streams");
+            } finally {
+                closeSocket();
+            }
         }
     }
 

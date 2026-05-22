@@ -20,6 +20,8 @@ jar {
     manifest {
         attributes 'Main-Class': 'edu.vladimir.primesocket.Main'
     }
+
+    archiveFileName = 'primeChecker.jar'
 }
 
 test {

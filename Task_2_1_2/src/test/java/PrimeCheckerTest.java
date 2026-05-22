@@ -1,30 +1,39 @@
-import edu.vladimir.primesocket.services.PrimeChecker;
+import edu.vladimir.primesocket.exceptions.NotPrimeNumberException;
+import edu.vladimir.primesocket.services.CachingPrimeChecker;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PrimeCheckerTest {
+    private CachingPrimeChecker primeChecker;
+
+    @BeforeEach
+    void initCachingChecker() {
+        this.primeChecker = new CachingPrimeChecker();
+    }
 
     @Test
     void testIsPrimeLogic() {
-        assertTrue(PrimeChecker.isPrime(2));
-        assertTrue(PrimeChecker.isPrime(3));
-        assertTrue(PrimeChecker.isPrime(7));
-        assertTrue(PrimeChecker.isPrime(13));
-        assertTrue(PrimeChecker.isPrime(20165149));
+        assertDoesNotThrow(() -> {
+            primeChecker.put(2);
+            primeChecker.put(3);
+            primeChecker.put(7);
+            primeChecker.put(13);
+            primeChecker.put(20165149);
+        });
 
-        assertFalse(PrimeChecker.isPrime(4));
-        assertFalse(PrimeChecker.isPrime(6));
-        assertFalse(PrimeChecker.isPrime(9));
-        assertFalse(PrimeChecker.isPrime(1));
-        assertFalse(PrimeChecker.isPrime(-5));
+        assertThrows(NotPrimeNumberException.class, () -> primeChecker.put(4));
+        assertThrows(NotPrimeNumberException.class, () -> primeChecker.put(6));
+        assertThrows(NotPrimeNumberException.class, () -> primeChecker.put(9));
+        assertThrows(NotPrimeNumberException.class, () -> primeChecker.put(1));
+        assertThrows(NotPrimeNumberException.class, () -> primeChecker.put(-5));
     }
 
     @Test
     void testCheckArrayWithNonPrime() {
         int[] input = {6, 8, 7, 13, 5, 9, 4};
-        assertTrue(PrimeChecker.checkArray(input));
+        assertTrue(primeChecker.isArrayHasNonPrime(input));
     }
 
     @Test
@@ -35,6 +44,6 @@ class PrimeCheckerTest {
                 6998051, 6998053
         };
 
-        assertFalse(PrimeChecker.checkArray(input));
+        assertFalse(primeChecker.isArrayHasNonPrime(input));
     }
 }

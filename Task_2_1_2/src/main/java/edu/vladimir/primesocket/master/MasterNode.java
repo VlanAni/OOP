@@ -34,7 +34,7 @@ public class MasterNode {
         this.tasksCompletedLatch = new CountDownLatch(taskId);
     }
 
-    public void run() {
+    public boolean run() {
         logger.info("server is ready: " + tasksCompletedLatch.getCount());
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
@@ -55,6 +55,8 @@ public class MasterNode {
         } finally {
             shutdown();
         }
+
+        return foundNonPrime.get();
     }
 
     private void startCompletionMonitor(ServerSocket serverSocket) {

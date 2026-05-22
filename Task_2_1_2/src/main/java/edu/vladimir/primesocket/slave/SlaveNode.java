@@ -2,8 +2,8 @@ package edu.vladimir.primesocket.slave;
 
 import edu.vladimir.primesocket.domain.message.Message;
 import edu.vladimir.primesocket.domain.task.Task;
+import edu.vladimir.primesocket.services.CachingPrimeChecker;
 import edu.vladimir.primesocket.services.Logger;
-import edu.vladimir.primesocket.services.PrimeChecker;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,6 +12,7 @@ public class SlaveNode {
     private final String masterHost;
     private final int masterPort;
     private final Logger logger;
+    private final CachingPrimeChecker cachingChecker;
 
     public SlaveNode(String masterHost, int masterPort) {
         if (masterHost == null) {
@@ -20,6 +21,7 @@ public class SlaveNode {
 
         this.masterHost = masterHost;
         this.masterPort = masterPort;
+        this.cachingChecker = new CachingPrimeChecker();
         this.logger = new Logger("slave >>> ");
     }
 
@@ -27,16 +29,31 @@ public class SlaveNode {
         logger.info("start working...");
         logger.info("open connection");
 
-        try (Socket socket = new Socket(this.masterHost, this.masterPort)) {
-            ObjectOutputStream output = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+        Socket socket = null;
+        ObjectOutputStream output = null;
+        ObjectInputStream input = null;
+
+        try {
+            socket = new Socket(this.masterHost, this.masterPort);
+            output = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             output.flush();
-            ObjectInputStream input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+            input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
             loop(input, output);
             input.close();
         } catch (IOException e) {
             logger.info("connection error happened");
         } catch (ClassNotFoundException e) {
             logger.info("class exception happened");
+        } finally {
+            try {
+                if (output != null) output.close();
+            } catch (IOException e) {
+                logger.info("error closing streams");
+            } finally {
+                try {
+                    if (socket != null && !socket.isClosed()) socket.close();
+                } catch (IOException ignored) {}
+            }
         }
 
         logger.info("finish");
@@ -48,11 +65,13 @@ public class SlaveNode {
 
             switch (inputMessage.type()) {
                 case SHUTDOWN:
-                    logger.info("shotdown...");
+                    logger.info("shutdown...");
                     return;
                 case NEWTASK:
                     Task task = inputMessage.task();
-                    boolean hasNonPrime = PrimeChecker.checkArray(task.chunk());
+
+                    boolean hasNonPrime = cachingChecker.isArrayHasNonPrime(task.chunk());
+
                     logger.info("result of the task [" + task.ID() + "]: hasNonPrime=" + hasNonPrime);
                     sendMessage(output, new Message(hasNonPrime));
                     break;
