@@ -7,9 +7,6 @@
     <list default="true" id="48c6b425-b33c-455b-b6e1-c4fb8d6a2b37" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Task_2_1_1/src/main/java/vanisimov/task2_1_1/parallelstreamsolution/ParallelStreamSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task_2_1_1/src/main/java/vanisimov/task2_1_1/parallelstreamsolution/ParallelStreamSolution.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/CachingPrimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/CachingPrimeChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/SlaveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/SlaveHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/slave/SlaveNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/slave/SlaveNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,27 +60,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.IntegrationTests.bigIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.IntegrationTests.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.IntegrationTests.testNonPrime.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.IntegrationTests.testPrime.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PrimeCheckerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PrimeCheckerTest.testIsPrimeLogic.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Task_2_1_2 [jar].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;task-2-1-2&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/waldemar/studying/oop/OOP/Task_2_1_2/src/main/java/org/example/Main.java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.IntegrationTests.bigIntegrationTest.executor": "Run",
+    "Gradle.IntegrationTests.executor": "Run",
+    "Gradle.IntegrationTests.testNonPrime.executor": "Run",
+    "Gradle.IntegrationTests.testPrime.executor": "Run",
+    "Gradle.PrimeCheckerTest.executor": "Run",
+    "Gradle.PrimeCheckerTest.testIsPrimeLogic.executor": "Run",
+    "Gradle.TaskIDTest.executor": "Run",
+    "Gradle.Task_2_1_2 [jar].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "task-2-1-2",
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "/Users/waldemar/studying/oop/OOP/Task_2_1_2/src/main/java/org/example/Main.java"
   }
-}</component>
-  <component name="RunManager" selected="Gradle.IntegrationTests">
+}]]></component>
+  <component name="RunManager" selected="Gradle.MessageTest">
     <configuration name="IntegrationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -111,7 +109,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="IntegrationTests.bigIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MessageTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -124,61 +122,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;IntegrationTests.bigIntegrationTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <GradleProfilingDisabled>false</GradleProfilingDisabled>
-      <GradleCoverageDisabled>false</GradleCoverageDisabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="IntegrationTests.testNonPrime" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;IntegrationTests.testNonPrime&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <GradleProfilingDisabled>false</GradleProfilingDisabled>
-      <GradleCoverageDisabled>false</GradleCoverageDisabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="IntegrationTests.testPrime" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;IntegrationTests.testPrime&quot;" />
+            <option value="&quot;MessageTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -219,13 +163,67 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
+    <configuration name="TaskIDTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;TaskIDTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TaskTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;TaskTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MessageTest" />
+        <item itemvalue="Gradle.TaskTest" />
+        <item itemvalue="Gradle.TaskIDTest" />
         <item itemvalue="Gradle.IntegrationTests" />
         <item itemvalue="Gradle.PrimeCheckerTest" />
-        <item itemvalue="Gradle.IntegrationTests.testPrime" />
-        <item itemvalue="Gradle.IntegrationTests.testNonPrime" />
-        <item itemvalue="Gradle.IntegrationTests.bigIntegrationTest" />
       </list>
     </recent_temporary>
   </component>
