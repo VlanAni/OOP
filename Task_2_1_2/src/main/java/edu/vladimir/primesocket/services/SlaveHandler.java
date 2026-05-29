@@ -6,6 +6,7 @@ import edu.vladimir.primesocket.domain.task.Task;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -34,6 +35,8 @@ public class SlaveHandler implements Runnable {
         ObjectInputStream input = null;
 
         try {
+            socket.setSoTimeout(200);
+
             output = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             output.flush();
             input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
@@ -48,10 +51,16 @@ public class SlaveHandler implements Runnable {
                 try {
                     sendMessage(output, new Message(task));
 
-                    Message response = (Message) input.readObject();
-
-                    if (response.type() == MessageType.TASKRESULT) {
-                        handleResult(response.result());
+                    boolean taskDone = false;
+                    while (!taskDone && !foundNonPrime.get()) {
+                        try {
+                            Message response = (Message) input.readObject();
+                            if (response.type() == MessageType.TASKRESULT) {
+                                handleResult(response.result());
+                                taskDone = true;
+                            }
+                        } catch (SocketTimeoutException ignored) {
+                        }
                     }
                 } catch (IOException | ClassNotFoundException e) {
                     if (!foundNonPrime.get()) {

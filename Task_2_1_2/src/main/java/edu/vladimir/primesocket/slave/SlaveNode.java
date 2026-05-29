@@ -7,12 +7,18 @@ import edu.vladimir.primesocket.services.Logger;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class SlaveNode {
     private final String masterHost;
     private final int masterPort;
     private final Logger logger;
     private final CachingPrimeChecker cachingChecker;
+
+    private final ExecutorService computer = Executors.newSingleThreadExecutor();
+    private Future<?> localComputation = null;
 
     public SlaveNode(String masterHost, int masterPort) {
         if (masterHost == null) {
@@ -66,14 +72,29 @@ public class SlaveNode {
             switch (inputMessage.type()) {
                 case SHUTDOWN:
                     logger.info("shutdown...");
+
+                    if (localComputation != null) {
+                        localComputation.cancel(true);
+                    }
+
+                    computer.shutdownNow();
+
                     return;
                 case NEWTASK:
                     Task task = inputMessage.task();
 
-                    boolean hasNonPrime = cachingChecker.isArrayHasNonPrime(task.chunk());
+                    localComputation = computer.submit(() -> {
+                        boolean hasNonPrime = cachingChecker.isArrayHasNonPrime(task.chunk());
 
-                    logger.info("result of the task [" + task.ID() + "]: hasNonPrime=" + hasNonPrime);
-                    sendMessage(output, new Message(hasNonPrime));
+                        if (!Thread.currentThread().isInterrupted()) {
+                            logger.info("result of the task [" + task.ID() + "]: hasNonPrime=" + hasNonPrime);
+                            try {
+                                sendMessage(output, new Message(hasNonPrime));
+                            } catch (IOException e) {
+                                logger.info("failed to send result");
+                            }
+                        }
+                    });
                     break;
                 default:
                     logger.info("unknown message type");
@@ -81,7 +102,7 @@ public class SlaveNode {
         }
     }
 
-    private void sendMessage(ObjectOutputStream oos, Message msg) throws IOException {
+    private synchronized void sendMessage(ObjectOutputStream oos, Message msg) throws IOException {
         oos.writeObject(msg);
         oos.flush();
     }

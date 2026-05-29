@@ -12,19 +12,21 @@ public class CachingPrimeChecker {
     }
 
     public boolean isArrayHasNonPrime(int[] array) {
-        boolean hasNonPrime = false;
-
         for (int number : array) {
+            if (Thread.currentThread().isInterrupted()) {
+                return false;
+            }
+
             if (!this.get(number)) {
                 try {
                     this.put(number);
                 } catch (NotPrimeNumberException e) {
-                    hasNonPrime = true;
+                    return true;
                 }
             }
         }
 
-        return hasNonPrime;
+        return false;
     }
 
     public boolean get(int number) {

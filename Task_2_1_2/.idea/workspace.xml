@@ -7,6 +7,7 @@
     <list default="true" id="48c6b425-b33c-455b-b6e1-c4fb8d6a2b37" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Task_2_1_1/src/main/java/vanisimov/task2_1_1/parallelstreamsolution/ParallelStreamSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task_2_1_1/src/main/java/vanisimov/task2_1_1/parallelstreamsolution/ParallelStreamSolution.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/CachingPrimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/CachingPrimeChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/SlaveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/services/SlaveHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/slave/SlaveNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/vladimir/primesocket/slave/SlaveNode.java" afterDir="false" />
     </list>
